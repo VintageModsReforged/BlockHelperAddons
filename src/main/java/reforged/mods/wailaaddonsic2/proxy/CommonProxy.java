@@ -23,7 +23,6 @@ public class CommonProxy {
 
     public void loadPost() {
         BlockHelperCommonProxy.ic2Integration = false;
-
         INFO_PROVIDERS.add(new EUStorageInfoProvider());
         INFO_PROVIDERS.add(new CableInfoProvider());
         INFO_PROVIDERS.add(new BaseMachineInfoProvider());

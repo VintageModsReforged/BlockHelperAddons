@@ -5,8 +5,7 @@ import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
-import ic2.core.block.generator.tileentity.TileEntityBaseGenerator;
-import ic2.core.block.generator.tileentity.TileEntityNuclearReactor;
+import ic2.core.block.generator.tileentity.*;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.wailaaddonsic2.Helper;
 import reforged.mods.wailaaddonsic2.TextColor;
@@ -20,11 +19,19 @@ public class GeneratorInfoProvider implements BlockHelperBlockProvider {
         if (tile instanceof TileEntityBaseGenerator) {
             TileEntityBaseGenerator gen = (TileEntityBaseGenerator) tile;
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(1))));
-            int production = 0;
-            if (gen.gainEnergy()) {
+            double production = 0;
+            if (gen instanceof TileEntityGenerator || gen instanceof TileEntityGeoGenerator) {
+                if (gen.isConverting()) {
+                    production = gen.production; // return production only when converting fuel
+                }
+            } else if (gen instanceof TileEntitySolarGenerator) { // special case for solar gen
+                if (((TileEntitySolarGenerator) gen).sunIsVisible) {
+                    production = 1;
+                }
+            } else {
                 production = gen.production;
             }
-            if (production > 0) {
+            if (production > 0) { // blame windmill
                 infoHolder.add(TextColor.WHITE.format(I18n.format("info.generator.output", production)));
             }
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.generator.max_output", gen.getMaxEnergyOutput())));
@@ -42,7 +49,7 @@ public class GeneratorInfoProvider implements BlockHelperBlockProvider {
             TileEntityNuclearReactor reactor = (TileEntityNuclearReactor) reactorRelated;
             int heat = reactor.heat;
             int maxHeat = reactor.maxHeat;
-            int production = reactor.getOutput();
+            int production = reactor.getOutput() * 5;
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.generator.output", production)));
             infoHolder.add(TextColor.WHITE.format( I18n.format("info.heat") + " " + getReactorColor(heat, maxHeat).format("" + heat) + TextColor.WHITE.format("/") + getReactorColor(maxHeat, maxHeat).format("" + maxHeat)));
         }
