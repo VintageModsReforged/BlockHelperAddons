@@ -16,7 +16,7 @@ public class TeleporterInfoProvider implements BlockHelperBlockProvider {
         if (tile instanceof TileEntityTeleporter) {
             TileEntityTeleporter tp = (TileEntityTeleporter) tile;
             boolean hasTarget = tp.targetSet;
-            infoHolder.add(TextColor.GOLD.format(I18n.format("info.teleporter.target.set", hasTarget ? TextColor.GREEN.format(I18n.format(true)) : TextColor.RED.format(I18n.format(false)))));
+            infoHolder.add(TextColor.GOLD.format(I18n.format("info.teleporter.target.set", hasTarget ? TextColor.GREEN.format(String.valueOf(true)) : TextColor.RED.format(String.valueOf(false)))));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.teleporter.target", tp.targetX, tp.targetY, tp.targetZ)));
         }
     }

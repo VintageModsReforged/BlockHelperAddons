@@ -17,7 +17,7 @@ public class TransformerInfoProvider implements BlockHelperBlockProvider {
             TileEntityTransformer transformer = (TileEntityTransformer) tile;
             boolean inverted = transformer.redstone;
 
-            infoHolder.add(TextColor.GOLD.format(I18n.format("info.transformer.inverted", inverted ? TextColor.GREEN.format(I18n.format(true)) : TextColor.RED.format(I18n.format(false)))));
+            infoHolder.add(TextColor.GOLD.format(I18n.format("info.transformer.inverted", inverted ? TextColor.GREEN.format(String.valueOf(true)) : TextColor.RED.format(String.valueOf(false)))));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", inverted ? transformer.lowOutput : transformer.highOutput)));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.storage.output", inverted ? transformer.highOutput : transformer.lowOutput)));
         }

@@ -39,10 +39,13 @@ public class CommonProxy {
         if (Loader.isModLoaded("AdvancedPowerManagement")) {
             INFO_PROVIDERS.add(new AdvancedPowerManagementInfoProvider());
         }
+        INFO_PROVIDERS.add(new CropInfoProvider());
         INFO_PROVIDERS.add(new WrenchableInfoProvider());
+
 
         for (BlockHelperBlockProvider infoProvider : INFO_PROVIDERS) {
             BlockHelperModSupport.registerBlockProvider(infoProvider);
         }
+        BlockHelperModSupport.registerItemStackFixer(new CropInfoProvider());
     }
 }

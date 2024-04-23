@@ -7,6 +7,7 @@ import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
 import ic2.core.block.generator.tileentity.*;
 import net.minecraft.tileentity.TileEntity;
+import reforged.mods.wailaaddonsic2.BarElement;
 import reforged.mods.wailaaddonsic2.Helper;
 import reforged.mods.wailaaddonsic2.TextColor;
 import reforged.mods.wailaaddonsic2.i18n.I18n;
@@ -51,7 +52,7 @@ public class GeneratorInfoProvider implements BlockHelperBlockProvider {
             int maxHeat = reactor.maxHeat;
             int production = reactor.getOutput() * 5;
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.generator.output", production)));
-            infoHolder.add(TextColor.WHITE.format( I18n.format("info.heat") + " " + getReactorColor(heat, maxHeat).format("" + heat) + TextColor.WHITE.format("/") + getReactorColor(maxHeat, maxHeat).format("" + maxHeat)));
+            infoHolder.add(TextColor.DARK_GRAY.format(I18n.format("info.heat") + " " + BarElement.bar(heat, maxHeat, getReactorColor(heat, maxHeat), String.format("%s/%s", heat, maxHeat))));
         }
     }
 

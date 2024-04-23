@@ -60,10 +60,6 @@ public final class I18n {
         }
     }
 
-    public static String format(boolean b) {
-        return format(null, b);
-    }
-
     public static String format(StringTranslate translator, boolean b) {
         return format(translator, b ? "true" : "false");
     }
