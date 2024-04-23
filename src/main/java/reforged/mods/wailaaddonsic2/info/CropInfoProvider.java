@@ -80,7 +80,7 @@ public class CropInfoProvider extends BlockHelperInfoProvider {
             infoHolder.add(TextColor.YELLOW.format("#### Storage ####"));
             infoHolder.add(BarElement.bar(fertilizer, 200, TextColor.GOLD, I18n.format("crop.fertilizer", fertilizer, 200)));
             infoHolder.add(BarElement.bar(water, 200, TextColor.BLUE, I18n.format("crop.water", water, 200)));
-            infoHolder.add(BarElement.bar(weedex, 100, TextColor.DARK_PURPLE, I18n.format("crop.weedex", weedex, 100)));
+            infoHolder.add(BarElement.bar(weedex, 100, TextColor.LIGHT_PURPLE, I18n.format("crop.weedex", weedex, 100)));
 
             infoHolder.add("");
             infoHolder.add(TextColor.YELLOW.format("#### Environment ####"));
