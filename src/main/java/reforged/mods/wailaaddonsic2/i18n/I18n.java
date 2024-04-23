@@ -23,7 +23,6 @@ public final class I18n {
         for (String lang : LANGUAGES) {
             loadLanguage(lang);
         }
-        LanguageRegistry.reloadLanguageTable();
     }
 
     public static void loadLanguage(String lang) {

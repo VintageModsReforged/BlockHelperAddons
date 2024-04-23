@@ -54,23 +54,23 @@ public class IndividualInfoProvider implements BlockHelperBlockProvider {
             }
         } else if (tile instanceof TileEntityMiner) {
             TileEntityMiner miner = (TileEntityMiner) tile;
-            ItemStack drill = miner.drillSlot.get();
+            ItemStack drill = miner.inventory[3];
             int progress;
             int usage;
             if (StackUtil.isStackEqual(drill, Ic2Items.miningDrill)) {
-                usage = 6;
-                progress = 20;
+                usage = 1;
+                progress = 200;
             } else if (StackUtil.isStackEqual(drill, Ic2Items.diamondDrill)) {
-                usage = 200;
-                progress = 50;
+                usage = 14;
+                progress = 200;
             } else {
-                usage = 3;
+                usage = 2;
                 progress = 20;
             }
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.usage", usage)));
             infoHolder.add(TextColor.WHITE.format(getMiningMode(miner)));
             infoHolder.add(TextColor.GOLD.format(I18n.format("info.miner.level", getOperationHeight(miner))));
-            int displayProgress = miner.progress * 100 / progress;
+            int displayProgress = miner.miningTicker * 100 / progress;
             if (displayProgress > 0) {
                 infoHolder.add(TextColor.DARK_GREEN.format(I18n.format("info.progress", displayProgress)  + "%"));
             }
@@ -91,7 +91,7 @@ public class IndividualInfoProvider implements BlockHelperBlockProvider {
 
     public static String getMiningMode(TileEntityMiner miner) {
         int operationHeight = getOperationHeight(miner);
-        if (miner.drillSlot.isEmpty()) {
+        if (miner.inventory[3] == null) {
             return I18n.format("info.miner.retracting");
         } else if (operationHeight >= 0) {
             int blockId = miner.worldObj.getBlockId(miner.xCoord, operationHeight, miner.zCoord);

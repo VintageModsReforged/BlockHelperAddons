@@ -6,7 +6,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import reforged.mods.wailaaddonsic2.proxy.CommonProxy;
 
-@Mod(modid = "blockhelperaddonsic2", name = "Block Helper Addons - IC2", version = "1.5.2-1.0.0", acceptedMinecraftVersions = "[1.5.2]", dependencies =
+@Mod(modid = "blockhelperaddonsic2", name = "Block Helper Addons - IC2", version = "1.4.7-1.0.1", acceptedMinecraftVersions = "[1.4.7]", dependencies =
         "required-after:IC2;required-after:mod_BlockHelper;after:AdvancedMachines;after:AdvancedPowerManagement;after:ChargePads;after:GregTech_Addon;after:AdvancedSolarPanel;after:AdvancedMachines;after:AdvancedPowerManagement")
 public class BlockHelperAddonsIC2 {
 

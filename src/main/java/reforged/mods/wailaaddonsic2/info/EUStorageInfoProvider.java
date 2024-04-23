@@ -6,7 +6,7 @@ import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.core.block.generator.tileentity.TileEntityBaseGenerator;
 import ic2.core.block.generator.tileentity.TileEntityGenerator;
 import ic2.core.block.generator.tileentity.TileEntityGeoGenerator;
-import ic2.core.block.machine.tileentity.TileEntityElectricMachine;
+import ic2.core.block.machine.tileentity.TileEntityElecMachine;
 import ic2.core.block.wiring.TileEntityElectricBlock;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.wailaaddonsic2.Helper;
@@ -18,8 +18,8 @@ public class EUStorageInfoProvider implements BlockHelperBlockProvider {
     @Override
     public void addInformation(BlockHelperBlockState blockHelperBlockState, InfoHolder infoHolder) {
         TileEntity tile = blockHelperBlockState.te;
-        if (tile instanceof TileEntityElectricMachine) {
-            TileEntityElectricMachine machine = (TileEntityElectricMachine) tile;
+        if (tile instanceof TileEntityElecMachine) {
+            TileEntityElecMachine machine = (TileEntityElecMachine) tile;
             infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", machine.energy, machine.maxEnergy)));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromMaxInput(machine.maxInput)))));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", machine.maxInput)));

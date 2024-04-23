@@ -3,7 +3,7 @@ package reforged.mods.wailaaddonsic2.info;
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
-import ic2.api.tile.IWrenchable;
+import ic2.api.IWrenchable;
 import ic2.core.item.tool.ItemToolWrench;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
