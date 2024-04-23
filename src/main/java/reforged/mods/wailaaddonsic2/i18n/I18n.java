@@ -1,13 +1,13 @@
 package reforged.mods.wailaaddonsic2.i18n;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.StringTranslate;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
-
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.StringTranslate;
 
 public final class I18n {
 

@@ -9,7 +9,6 @@ import ic2.core.block.generator.tileentity.TileEntityGeoGenerator;
 import ic2.core.block.machine.tileentity.TileEntityElectricMachine;
 import ic2.core.block.wiring.TileEntityElectricBlock;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.wailaaddonsic2.BarElement;
 import reforged.mods.wailaaddonsic2.Helper;
 import reforged.mods.wailaaddonsic2.TextColor;
 import reforged.mods.wailaaddonsic2.i18n.I18n;
