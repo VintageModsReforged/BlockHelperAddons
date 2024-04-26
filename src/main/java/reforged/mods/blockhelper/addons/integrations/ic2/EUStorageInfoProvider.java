@@ -39,6 +39,7 @@ public class EUStorageInfoProvider implements BlockHelperBlockProvider {
                 maxFuel = ((TileEntityGenerator) generator).itemFuelTime;
             } else if (generator instanceof TileEntityGeoGenerator) {
                 maxFuel = ((TileEntityGeoGenerator) generator).maxLava;
+//                Helper.addTankInfo(blockHelperBlockState, infoHolder, generator);
             }
             if (maxFuel > 0) {
                 infoHolder.add(TextColor.DARK_AQUA.format(I18n.format("info.fuel", generator.fuel, maxFuel)));
