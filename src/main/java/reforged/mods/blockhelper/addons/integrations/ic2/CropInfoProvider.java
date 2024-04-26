@@ -1,4 +1,4 @@
-package reforged.mods.blockhelper.addons.info;
+package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.BlockHelperInfoProvider;

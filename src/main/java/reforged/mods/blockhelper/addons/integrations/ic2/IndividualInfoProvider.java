@@ -1,4 +1,4 @@
-package reforged.mods.blockhelper.addons.info;
+package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
@@ -75,11 +75,11 @@ public class IndividualInfoProvider implements BlockHelperBlockProvider {
                 infoHolder.add(TextColor.DARK_GREEN.format(I18n.format("info.progress", displayProgress)  + "%"));
             }
         } else if (tile instanceof TileEntityCropmatron) {
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromMaxInput(TileEntityCropmatron.maxInput)))));
+            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(TileEntityCropmatron.maxInput)))));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", TileEntityCropmatron.maxInput)));
         } else if (tile instanceof TileEntityTesla) {
             TileEntityTesla tesla = (TileEntityTesla) tile;
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromMaxInput(tesla.maxInput)))));
+            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(tesla.maxInput)))));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", tesla.maxInput)));
         }
     }

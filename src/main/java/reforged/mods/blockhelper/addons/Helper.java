@@ -1,15 +1,36 @@
 package reforged.mods.blockhelper.addons;
 
+import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
+import de.thexxturboxx.blockhelper.api.InfoHolder;
+import de.thexxturboxx.blockhelper.integration.ForgeIntegration;
 import ic2.core.util.StackUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.liquids.ILiquidTank;
+import net.minecraftforge.liquids.ITankContainer;
+import net.minecraftforge.liquids.LiquidStack;
 import reforged.mods.blockhelper.addons.i18n.I18n;
 
 public class Helper {
 
+    public static void addTankInfo(BlockHelperBlockState state, InfoHolder info, TileEntity tile) {
+        if (tile instanceof ITankContainer) {
+            ITankContainer fluidHandler = (ITankContainer) tile;
+            ILiquidTank tank = fluidHandler.getTanks(ForgeDirection.getOrientation(state.mop.sideHit))[0];
+            LiquidStack fluid = tank.getLiquid();
+            if (tank.getCapacity() != 0 && fluid != null && fluid.amount > 0) {
+                info.add(I18n.format("info.liquid", ForgeIntegration.getLiquidName(fluid), fluid.amount, tank.getCapacity()));
+            }
+        }
+    }
+
     public static String getTierForDisplay(int tier) {
         switch (tier) {
+            case 0:
+                return I18n.format("info.tier.ulv");
             case 1:
                 return I18n.format("info.tier.lv");
             case 2:
@@ -22,28 +43,29 @@ public class Helper {
                 return I18n.format("info.tier.iv");
             case 6:
                 return I18n.format("info.tier.luv");
+            case 7:
+                return I18n.format("info.tier.zpm");
+            case 8:
+                return I18n.format("info.tier.uv");
+            case 9:
+                return I18n.format("info.tier.uhv");
+            case 10:
+                return I18n.format("info.tier.uev");
+            case 11:
+                return I18n.format("info.tier.uiv");
+            case 12:
+                return I18n.format("info.tier.umv");
+            case 13:
+                return I18n.format("info.tier.uxv");
+            case 14:
+                return I18n.format("info.tier.max");
             default:
                 return TextColor.RED.format("ERROR, please report!");
         }
     }
 
-    public static int getTierFromMaxInput(int maxInput) {
-        switch (maxInput) {
-            case 32:
-                return 1;
-            case 128:
-                return 2;
-            case 512:
-                return 3;
-            case 2048:
-                return 4;
-            case 8192:
-                return 5;
-            case 32768:
-                return 6;
-            default:
-                return 0;
-        }
+    public static int getTierFromEU(int value) {
+        return value <= 8 ? 0 : (int)Math.ceil(Math.log((double)value * 0.125) * (1.0 / Math.log(4.0)));
     }
 
     public static int getMaxInputFromTier(int tier) {

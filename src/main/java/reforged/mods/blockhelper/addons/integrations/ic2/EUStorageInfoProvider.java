@@ -1,4 +1,4 @@
-package reforged.mods.blockhelper.addons.info;
+package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
@@ -21,12 +21,12 @@ public class EUStorageInfoProvider implements BlockHelperBlockProvider {
         if (tile instanceof TileEntityElecMachine) {
             TileEntityElecMachine machine = (TileEntityElecMachine) tile;
             infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", machine.energy, machine.maxEnergy)));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromMaxInput(machine.maxInput)))));
+            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(machine.maxInput)))));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", machine.maxInput)));
         } else if (tile instanceof TileEntityElectricBlock) {
             TileEntityElectricBlock storage = (TileEntityElectricBlock) tile;
             infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", storage.getStored(), storage.getCapacity())));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromMaxInput(storage.getOutput())))));
+            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(storage.getOutput())))));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", storage.getOutput())));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.storage.output", storage.getOutput())));
         } else if (tile instanceof TileEntityBaseGenerator) {
