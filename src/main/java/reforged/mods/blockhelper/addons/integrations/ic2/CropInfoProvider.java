@@ -1,4 +1,4 @@
-package reforged.mods.wailaaddonsic2.info;
+package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.BlockHelperInfoProvider;
@@ -8,9 +8,9 @@ import ic2.api.crops.ICropTile;
 import ic2.core.block.crop.IC2Crops;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.wailaaddonsic2.BarElement;
-import reforged.mods.wailaaddonsic2.TextColor;
-import reforged.mods.wailaaddonsic2.i18n.I18n;
+import reforged.mods.blockhelper.addons.BarElement;
+import reforged.mods.blockhelper.addons.i18n.I18n;
+import reforged.mods.blockhelper.addons.TextColor;
 
 public class CropInfoProvider extends BlockHelperInfoProvider {
 

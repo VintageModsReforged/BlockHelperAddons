@@ -1,4 +1,4 @@
-package reforged.mods.wailaaddonsic2.info.addons;
+package reforged.mods.blockhelper.addons.integrations;
 
 import com.kaijin.AdvPowerMan.TEAdjustableTransformer;
 import com.kaijin.AdvPowerMan.TEBatteryStation;
@@ -8,9 +8,9 @@ import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.wailaaddonsic2.Helper;
-import reforged.mods.wailaaddonsic2.TextColor;
-import reforged.mods.wailaaddonsic2.i18n.I18n;
+import reforged.mods.blockhelper.addons.Helper;
+import reforged.mods.blockhelper.addons.i18n.I18n;
+import reforged.mods.blockhelper.addons.TextColor;
 
 public class AdvancedPowerManagementInfoProvider implements BlockHelperBlockProvider {
 

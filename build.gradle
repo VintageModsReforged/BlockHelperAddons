@@ -36,6 +36,12 @@ volde {
 	}
 }
 
+repositories {
+	maven {
+		url("https://mvnrepository.com/artifact/it.unimi.dsi/fastutil")
+	}
+}
+
 dependencies {
 	minecraft "com.mojang:minecraft:${minecraftVersion}"
 	forge "net.minecraftforge:forge:${forgeVersion}:universal@zip"
@@ -47,6 +53,9 @@ dependencies {
 	modImplementation files("libs/chargepads-1.5.2-universal-2.7.1.89-deobf.jar")
 	modImplementation files("libs/AdvancedPowerManagement-1.2.68-IC2-1.115.jar")
 	modImplementation files("libs/advancedmachines-1.5.2-4.9.4-forge.jar")
+	modImplementation files("libs/gregtechmod311.zip")
+
+	implementation group: 'it.unimi.dsi', name: 'fastutil', version: '8.2.1'
 }
 
 sourceSets {

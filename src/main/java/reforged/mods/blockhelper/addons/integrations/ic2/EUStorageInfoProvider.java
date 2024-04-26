@@ -1,4 +1,4 @@
-package reforged.mods.wailaaddonsic2.info;
+package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
@@ -9,9 +9,9 @@ import ic2.core.block.generator.tileentity.TileEntityGeoGenerator;
 import ic2.core.block.machine.tileentity.TileEntityElectricMachine;
 import ic2.core.block.wiring.TileEntityElectricBlock;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.wailaaddonsic2.Helper;
-import reforged.mods.wailaaddonsic2.TextColor;
-import reforged.mods.wailaaddonsic2.i18n.I18n;
+import reforged.mods.blockhelper.addons.Helper;
+import reforged.mods.blockhelper.addons.TextColor;
+import reforged.mods.blockhelper.addons.i18n.I18n;
 
 public class EUStorageInfoProvider implements BlockHelperBlockProvider {
 
@@ -21,12 +21,12 @@ public class EUStorageInfoProvider implements BlockHelperBlockProvider {
         if (tile instanceof TileEntityElectricMachine) {
             TileEntityElectricMachine machine = (TileEntityElectricMachine) tile;
             infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", machine.energy, machine.maxEnergy)));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromMaxInput(machine.maxInput)))));
+            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEUValue(machine.maxInput)))));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", machine.maxInput)));
         } else if (tile instanceof TileEntityElectricBlock) {
             TileEntityElectricBlock storage = (TileEntityElectricBlock) tile;
             infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", storage.getStored(), storage.getCapacity())));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromMaxInput(storage.getOutput())))));
+            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEUValue(storage.getOutput())))));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", storage.getOutput())));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.storage.output", storage.getOutput())));
         } else if (tile instanceof TileEntityBaseGenerator) {
@@ -38,12 +38,14 @@ public class EUStorageInfoProvider implements BlockHelperBlockProvider {
             if (generator instanceof TileEntityGenerator) {
                 maxFuel = ((TileEntityGenerator) generator).itemFuelTime;
             } else if (generator instanceof TileEntityGeoGenerator) {
-                maxFuel = ((TileEntityGeoGenerator) generator).maxLava;
+                TileEntityGeoGenerator geo = (TileEntityGeoGenerator) generator;
+                Helper.addTankInfo(blockHelperBlockState, infoHolder, geo);
             }
             if (maxFuel > 0) {
                 infoHolder.add(TextColor.DARK_AQUA.format(I18n.format("info.fuel", generator.fuel, maxFuel)));
             }
         }
+        Helper.addTankInfo(blockHelperBlockState, infoHolder, blockHelperBlockState.te);
     }
 
     @Override
