@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="11">
+      <module name="Block_Helper_Addons_IC2_-_1.4.7.main" target="1.6" />
       <module name="Block_Helper_Addons_IC2_-_1.5.2.main" target="1.6" />
       <module name="modid-1.4.7.main" target="1.6" />
       <module name="modid.main" target="1.6" />

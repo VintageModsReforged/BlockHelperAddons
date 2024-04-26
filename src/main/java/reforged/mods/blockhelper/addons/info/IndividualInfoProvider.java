@@ -1,4 +1,4 @@
-package reforged.mods.wailaaddonsic2.info;
+package reforged.mods.blockhelper.addons.info;
 
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
@@ -8,9 +8,9 @@ import ic2.core.block.machine.tileentity.*;
 import ic2.core.util.StackUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.wailaaddonsic2.Helper;
-import reforged.mods.wailaaddonsic2.TextColor;
-import reforged.mods.wailaaddonsic2.i18n.I18n;
+import reforged.mods.blockhelper.addons.Helper;
+import reforged.mods.blockhelper.addons.TextColor;
+import reforged.mods.blockhelper.addons.i18n.I18n;
 
 public class IndividualInfoProvider implements BlockHelperBlockProvider {
 

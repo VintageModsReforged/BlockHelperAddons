@@ -50,6 +50,7 @@ dependencies {
 	modImplementation files("libs/blockhelper-1.4.7-1.0.0-voldeloom-dev.jar")
 	modImplementation files("libs/advancedmachines-1.4.7-1.0.0-voldeloom.jar")
 	modImplementation files("libs/industrialcraft-2_1.115.207-lf.jar")
+	modImplementation files("libs/gregtechmod290h.zip")
 }
 
 sourceSets {

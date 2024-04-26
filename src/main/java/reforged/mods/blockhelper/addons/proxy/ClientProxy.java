@@ -1,6 +1,6 @@
-package reforged.mods.wailaaddonsic2.proxy;
+package reforged.mods.blockhelper.addons.proxy;
 
-import reforged.mods.wailaaddonsic2.i18n.I18n;
+import reforged.mods.blockhelper.addons.i18n.I18n;
 
 public class ClientProxy extends CommonProxy {
 

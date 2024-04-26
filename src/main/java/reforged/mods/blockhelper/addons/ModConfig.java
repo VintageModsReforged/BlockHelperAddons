@@ -1,4 +1,4 @@
-package reforged.mods.wailaaddonsic2;
+package reforged.mods.blockhelper.addons;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.Configuration;

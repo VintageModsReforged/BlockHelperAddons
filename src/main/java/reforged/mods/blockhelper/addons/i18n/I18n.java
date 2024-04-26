@@ -1,4 +1,4 @@
-package reforged.mods.wailaaddonsic2.i18n;
+package reforged.mods.blockhelper.addons.i18n;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import java.io.IOException;
@@ -29,7 +29,7 @@ public final class I18n {
         InputStream stream = null;
         InputStreamReader reader = null;
         try {
-            stream = I18n.class.getResourceAsStream("/reforged/mods/wailaaddonsic2/i18n/" + lang + ".properties");
+            stream = I18n.class.getResourceAsStream("/reforged/mods/blockhelper/addons/i18n/" + lang + ".properties");
             if (stream == null) {
                 throw new IOException("Couldn't load language file.");
             }

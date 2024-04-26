@@ -1,4 +1,4 @@
-package reforged.mods.wailaaddonsic2;
+package reforged.mods.blockhelper.addons;
 
 public enum TextColor {
     BLACK("0"),

@@ -1,10 +1,10 @@
-package reforged.mods.wailaaddonsic2;
+package reforged.mods.blockhelper.addons;
 
 import ic2.core.util.StackUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
-import reforged.mods.wailaaddonsic2.i18n.I18n;
+import reforged.mods.blockhelper.addons.i18n.I18n;
 
 public class Helper {
 

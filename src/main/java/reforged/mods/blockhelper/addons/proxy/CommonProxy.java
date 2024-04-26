@@ -1,10 +1,10 @@
-package reforged.mods.wailaaddonsic2.proxy;
+package reforged.mods.blockhelper.addons.proxy;
 
 import de.thexxturboxx.blockhelper.BlockHelperCommonProxy;
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
 import de.thexxturboxx.blockhelper.api.BlockHelperModSupport;
-import reforged.mods.wailaaddonsic2.ModConfig;
-import reforged.mods.wailaaddonsic2.info.*;
+import reforged.mods.blockhelper.addons.ModConfig;
+import reforged.mods.blockhelper.addons.info.*;
 
 import java.util.ArrayList;
 import java.util.List;
