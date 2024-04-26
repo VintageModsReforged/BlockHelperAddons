@@ -1,10 +1,9 @@
 package reforged.mods.blockhelper.addons.integrations.gregtech;
 
 import cpw.mods.fml.common.Loader;
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
-import de.thexxturboxx.blockhelper.api.BlockHelperModSupport;
+import reforged.mods.blockhelper.addons.integrations.BasePlugin;
 
-public class GregTechPlugin {
+public class GregTechPlugin extends BasePlugin {
 
     public static final String MODID = "GregTech_Addon";
 
@@ -15,9 +14,5 @@ public class GregTechPlugin {
             add(new GT_IndividualMachineInfoProvider());
             add(new GT_WrenchableInfoProvider());
         }
-    }
-
-    public static void add(BlockHelperBlockProvider provider) {
-        BlockHelperModSupport.registerBlockProvider(provider);
     }
 }

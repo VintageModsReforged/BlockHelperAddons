@@ -2,15 +2,14 @@ package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import cpw.mods.fml.common.Loader;
 import de.thexxturboxx.blockhelper.BlockHelperCommonProxy;
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
-import de.thexxturboxx.blockhelper.api.BlockHelperModSupport;
 import reforged.mods.blockhelper.addons.ModConfig;
 import reforged.mods.blockhelper.addons.integrations.AdvancedMachinesInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.AdvancedPowerManagementInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.AdvancedSolarPanelInfoProvider;
+import reforged.mods.blockhelper.addons.integrations.BasePlugin;
 import reforged.mods.blockhelper.addons.integrations.gregtech.GregTechPlugin;
 
-public class IC2Plugin {
+public class IC2Plugin extends BasePlugin {
 
     public static final String MODID = "IC2";
 
@@ -24,7 +23,7 @@ public class IC2Plugin {
             add(new GeneratorInfoProvider());
             add(new TransformerInfoProvider());
             add(new TeleporterInfoProvider());
-            BlockHelperModSupport.registerItemStackFixer(new CropInfoProvider());
+            addIconProvider(new CropInfoProvider());
             add(new CropInfoProvider());
             if (Loader.isModLoaded("AdvancedSolarPanel")) {
                 add(new AdvancedSolarPanelInfoProvider());
@@ -38,9 +37,5 @@ public class IC2Plugin {
             add(new WrenchableInfoProvider());
             GregTechPlugin.init();
         }
-    }
-
-    public static void add(BlockHelperBlockProvider provider) {
-        BlockHelperModSupport.registerBlockProvider(provider);
     }
 }
