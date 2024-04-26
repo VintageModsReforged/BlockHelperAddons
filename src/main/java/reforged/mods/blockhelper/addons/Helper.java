@@ -65,39 +65,7 @@ public class Helper {
     }
 
     public static int getTierFromEU(int value) {
-        if (value > 0 && value <= 8) {
-            return 0;
-        } else if (value > 8 && value <= 32) {
-            return 1;
-        } else if (value > 32 && value <= 128) {
-            return 2;
-        } else if (value > 128 && value <= 512) {
-            return 3;
-        } else if (value > 512 && value <= 2048) {
-            return 4;
-        } else if (value > 2048 && value <= 8192) {
-            return 5;
-        } else if (value > 8192 && value <= 32768) {
-            return 6;
-        } else if (value > 32768 && value <= 131072) {
-            return 7;
-        } else if (value > 131072 && value <= 524288) {
-            return 8;
-        } else if (value > 524288 && value <= 2097152) {
-            return 9;
-        } else if (value > 2097152 && value <= 8388608) {
-            return 10;
-        } else if (value > 8388608 && value <= 33554432) {
-            return 11;
-        } else if (value > 33554432 && value <= 134217728) {
-            return 12;
-        } else if (value > 134217728 && value <= 536870912) {
-            return 13;
-        } else if (value > 536870912) {
-            return 14;
-        } else {
-            return 0;
-        }
+        return value <= 8 ? 0 : (int)Math.ceil(Math.log((double)value * 0.125) * (1.0 / Math.log(4.0)));
     }
 
     public static int getMaxInputFromTier(int tier) {
