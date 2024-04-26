@@ -45,7 +45,7 @@ public class EUStorageInfoProvider implements BlockHelperBlockProvider {
                 infoHolder.add(TextColor.DARK_AQUA.format(I18n.format("info.fuel", generator.fuel, maxFuel)));
             }
         }
-        Helper.addTankInfo(blockHelperBlockState, infoHolder, blockHelperBlockState.te);
+//        Helper.addTankInfo(blockHelperBlockState, infoHolder, blockHelperBlockState.te);
     }
 
     @Override
