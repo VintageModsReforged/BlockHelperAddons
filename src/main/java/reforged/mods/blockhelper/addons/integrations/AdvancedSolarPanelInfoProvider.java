@@ -18,7 +18,7 @@ public class AdvancedSolarPanelInfoProvider implements BlockHelperBlockProvider 
         if (tile instanceof TileEntitySolarPanel) {
             TileEntitySolarPanel panel = (TileEntitySolarPanel) tile;
             infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", panel.storage, panel.maxStorage)));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEUValue(panel.getMaxEnergyOutput())))));
+            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(panel.getMaxEnergyOutput())))));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.generator.output", panel.gainFuel())));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.generator.max_output", panel.getMaxEnergyOutput())));
         }

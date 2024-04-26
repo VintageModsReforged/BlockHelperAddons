@@ -64,7 +64,7 @@ public class Helper {
         }
     }
 
-    public static int getTierFromEUValue(int value) {
+    public static int getTierFromEU(int value) {
         if (value > 0 && value <= 8) {
             return 0;
         } else if (value > 8 && value <= 32) {

@@ -26,7 +26,7 @@ public class GT_BaseMetaMachineInfoProvider implements BlockHelperBlockProvider 
                 }
                 int maxInput = metaTileEntity.maxEUInput();
                 if (maxInput > 0) {
-                    infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEUValue(metaTileEntity.maxEUInput())))));
+                    infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(metaTileEntity.maxEUInput())))));
                     infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", metaTileEntity.maxEUInput())));
                 }
                 int maxOut = metaTileEntity.maxEUOutput();

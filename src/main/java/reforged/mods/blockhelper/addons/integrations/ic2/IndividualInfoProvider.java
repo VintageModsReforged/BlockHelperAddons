@@ -75,11 +75,11 @@ public class IndividualInfoProvider implements BlockHelperBlockProvider {
                 infoHolder.add(TextColor.DARK_GREEN.format(I18n.format("info.progress", displayProgress)  + "%"));
             }
         } else if (tile instanceof TileEntityCropmatron) {
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEUValue(TileEntityCropmatron.maxInput)))));
+            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(TileEntityCropmatron.maxInput)))));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", TileEntityCropmatron.maxInput)));
         } else if (tile instanceof TileEntityTesla) {
             TileEntityTesla tesla = (TileEntityTesla) tile;
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEUValue(tesla.maxInput)))));
+            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(tesla.maxInput)))));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", tesla.maxInput)));
         }
     }
