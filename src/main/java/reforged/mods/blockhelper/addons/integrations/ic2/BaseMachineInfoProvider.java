@@ -5,6 +5,7 @@ import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.core.block.machine.tileentity.TileEntityStandardMachine;
 import net.minecraft.tileentity.TileEntity;
+import reforged.mods.blockhelper.addons.Helper;
 import reforged.mods.blockhelper.addons.i18n.I18n;
 import reforged.mods.blockhelper.addons.TextColor;
 

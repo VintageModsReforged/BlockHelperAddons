@@ -18,21 +18,34 @@ public class EUStorageInfoProvider implements BlockHelperBlockProvider {
     @Override
     public void addInformation(BlockHelperBlockState blockHelperBlockState, InfoHolder infoHolder) {
         TileEntity tile = blockHelperBlockState.te;
+        int energy;
         if (tile instanceof TileEntityElectricMachine) {
             TileEntityElectricMachine machine = (TileEntityElectricMachine) tile;
-            infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", machine.energy, machine.maxEnergy)));
+            energy = machine.energy;
+            if (energy > machine.maxEnergy) {
+                energy = machine.maxEnergy;
+            }
+            infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", energy, machine.maxEnergy)));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(machine.maxInput)))));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", machine.maxInput)));
         } else if (tile instanceof TileEntityElectricBlock) {
             TileEntityElectricBlock storage = (TileEntityElectricBlock) tile;
-            infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", storage.getStored(), storage.getCapacity())));
+            energy = storage.energy;
+            if (energy > storage.getCapacity()) {
+                energy = storage.getCapacity();
+            }
+            infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", energy, storage.getCapacity())));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(storage.getOutput())))));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", storage.getOutput())));
             infoHolder.add(TextColor.WHITE.format(I18n.format("info.storage.output", storage.getOutput())));
         } else if (tile instanceof TileEntityBaseGenerator) {
             TileEntityBaseGenerator generator = (TileEntityBaseGenerator) tile;
             if (generator.storage >= 0) { // exclude negative values, blame windmill
-                infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", generator.storage, generator.maxStorage)));
+                energy = generator.storage;
+                if (energy > generator.maxStorage) {
+                    energy = generator.maxStorage;
+                }
+                infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", energy, generator.maxStorage)));
             }
             int maxFuel = 0;
             if (generator instanceof TileEntityGenerator) {

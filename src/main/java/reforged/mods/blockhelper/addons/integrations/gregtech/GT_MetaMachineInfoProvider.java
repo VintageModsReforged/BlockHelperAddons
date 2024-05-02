@@ -20,7 +20,11 @@ public class GT_MetaMachineInfoProvider implements BlockHelperBlockProvider {
             if (baseTile instanceof GT_TileEntityMetaID_Machine) {
                 GT_TileEntityMetaID_Machine machine = (GT_TileEntityMetaID_Machine) tile;
                 if (machine.getEnergyCapacity() > 0) {
-                    infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", machine.getEnergyStored(), machine.getEnergyCapacity())));
+                    int storage = machine.getEnergyStored();
+                    if (storage > machine.getEnergyCapacity()) {
+                        storage = machine.getEnergyCapacity();
+                    }
+                    infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", storage, machine.getEnergyCapacity())));
                 }
                 if (machine.maxEUInput() > 0) {
                     infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(machine.maxEUInput())))));

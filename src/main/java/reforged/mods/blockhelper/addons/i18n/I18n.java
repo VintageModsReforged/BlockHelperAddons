@@ -1,9 +1,12 @@
 package reforged.mods.blockhelper.addons.i18n;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.StringTranslate;
+import reforged.mods.blockhelper.addons.ModConfig;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -13,15 +16,22 @@ public final class I18n {
 
     private static final String PREFIX = "probe.";
 
-    private static final String[] LANGUAGES = {"en_US"};
-
     private I18n() {
         throw new UnsupportedOperationException();
     }
 
     public static void init() {
-        for (String lang : LANGUAGES) {
-            loadLanguage(lang);
+        if (!ModConfig.additional_languages.isEmpty()) {
+            String[] LANGS = ModConfig.additional_languages.split(",");
+            if (LANGS.length == 1) {
+                loadLanguage(ModConfig.additional_languages);
+            } else {
+                for (String lang : LANGS) {
+                    loadLanguage(lang);
+                }
+            }
+        } else {
+            loadLanguage(ModConfig.default_language);
         }
         LanguageRegistry.reloadLanguageTable();
     }
@@ -30,7 +40,11 @@ public final class I18n {
         InputStream stream = null;
         InputStreamReader reader = null;
         try {
-            stream = I18n.class.getResourceAsStream("/reforged/mods/blockhelper/addons/i18n/" + lang + ".properties");
+            if (ModConfig.additional_languages.isEmpty()) {
+                stream = I18n.class.getResourceAsStream("/mods/blockhelper/addons/lang/" + lang + ".properties"); // use the default .lang file from modJar
+            } else {
+                stream = new FileInputStream(Minecraft.getMinecraftDir() + "/config/langs/blockhelperaddons/" + lang + ".properties"); // use the lang files from config/langs/blockhelperaddons folder
+            }
             if (stream == null) {
                 throw new IOException("Couldn't load language file.");
             }

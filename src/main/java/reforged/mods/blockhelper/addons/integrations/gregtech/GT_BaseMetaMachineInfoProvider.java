@@ -22,7 +22,11 @@ public class GT_BaseMetaMachineInfoProvider implements BlockHelperBlockProvider 
             MetaTileEntity metaTileEntity = baseMetaTileEntity.getMetaTileEntity();
             if (metaTileEntity != null) {
                 if (metaTileEntity.maxEUStore() > 0) {
-                    infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", metaTileEntity.getEUVar(), metaTileEntity.maxEUStore())));
+                    int storage = metaTileEntity.getEUVar();
+                    if (storage > metaTileEntity.maxEUStore()) {
+                        storage = metaTileEntity.maxEUStore();
+                    }
+                    infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", storage, metaTileEntity.maxEUStore())));
                 }
                 int maxInput = metaTileEntity.maxEUInput();
                 if (maxInput > 0) {

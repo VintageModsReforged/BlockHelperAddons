@@ -1,5 +1,7 @@
 package reforged.mods.blockhelper.addons;
 
+import reforged.mods.blockhelper.addons.i18n.I18n;
+
 public enum TextColor {
     BLACK("0"),
     DARK_BLUE("1"),
@@ -18,13 +20,26 @@ public enum TextColor {
     YELLOW("e"),
     WHITE("f");
 
-    String colorCode;
+    final String colorCode;
 
     TextColor(String colorIndex) {
         this.colorCode = "\247" + colorIndex;
     }
 
-    public String format(String text) {
+    public String literal(String text) {
         return this.colorCode + text;
+    }
+
+    public String format(String text) {
+        return this.colorCode + I18n.format(text);
+    }
+
+    public String format(String text, Object... args) {
+        return this.colorCode + I18n.format(text, args);
+    }
+
+    @Override
+    public String toString() {
+        return this.colorCode;
     }
 }
