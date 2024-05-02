@@ -22,13 +22,11 @@ public class ModConfig {
         main_config.load();
 
         default_language = getString("general", "default_language", "en_US", "Default Language. DO NOT CHANGE THIS! Use additional_languages field instead!");
-        additional_languages = getString("general", "additional_languages", "", "Additional supported localizations. Place your <name>.lang file in config/langs/blockhelperaddons folder and list <name> here. Format: no spaces, comma separated. Ex: <name>,<name>");
+        additional_languages = getString("general", "additional_languages", "", "Additional supported localizations. Place your <lang_code>.properties file in config/langs/blockhelperaddons folder and list <lang_code> here. Format: no spaces, comma separated. Ex: ko_KR,de_DE,ru_RU");
 
         advanced_machines = getBoolean("compat", "advanced_machines", advanced_machines, "Enable AdvancedMachines Compat. THIS WILL CRASH YOUR GAME WHEN ENABLED! KEEP IT DISABLED FOR NOW!");
 
         if (main_config.hasChanged()) main_config.save();
-
-        info = new File(Minecraft.getMinecraftDir(), "/config/gravisuite/langs.md");
     }
 
     private static boolean getBoolean(String cat, String tag, boolean defaultValue, String comment) {
