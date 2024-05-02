@@ -8,7 +8,6 @@ import de.thexxturboxx.blockhelper.api.InfoHolder;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.Helper;
 import reforged.mods.blockhelper.addons.TextColor;
-import reforged.mods.blockhelper.addons.i18n.I18n;
 
 public class AdvancedSolarPanelInfoProvider implements BlockHelperBlockProvider {
 
@@ -17,10 +16,10 @@ public class AdvancedSolarPanelInfoProvider implements BlockHelperBlockProvider 
         TileEntity tile = blockHelperBlockState.te;
         if (tile instanceof TileEntitySolarPanel) {
             TileEntitySolarPanel panel = (TileEntitySolarPanel) tile;
-            infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", panel.storage, panel.maxStorage)));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(panel.getMaxEnergyOutput())))));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.generator.output", panel.gainFuel())));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.generator.max_output", panel.getMaxEnergyOutput())));
+            infoHolder.add(TextColor.AQUA.format("info.energy", panel.storage, panel.maxStorage));
+            infoHolder.add(TextColor.WHITE.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(panel.getMaxEnergyOutput()))));
+            infoHolder.add(TextColor.WHITE.format("info.generator.output", panel.gainFuel()));
+            infoHolder.add(TextColor.WHITE.format("info.generator.max_output", panel.getMaxEnergyOutput()));
         }
     }
 

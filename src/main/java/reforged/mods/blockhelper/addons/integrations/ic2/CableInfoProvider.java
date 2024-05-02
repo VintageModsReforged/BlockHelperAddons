@@ -5,7 +5,6 @@ import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.core.block.wiring.TileEntityCable;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.blockhelper.addons.i18n.I18n;
 import reforged.mods.blockhelper.addons.TextColor;
 
 public class CableInfoProvider implements BlockHelperBlockProvider {
@@ -15,8 +14,8 @@ public class CableInfoProvider implements BlockHelperBlockProvider {
         TileEntity tile = blockHelperBlockState.te;
         if (tile instanceof TileEntityCable) {
             TileEntityCable cable = (TileEntityCable) tile;
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.cable_limit", cable.getConductorBreakdownEnergy() - 1)));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.cable_loss", cable.getConductionLoss())));
+            infoHolder.add(TextColor.WHITE.format("info.eu_reader.cable_limit", cable.getConductorBreakdownEnergy() - 1));
+            infoHolder.add(TextColor.WHITE.format("info.eu_reader.cable_loss", cable.getConductionLoss()));
         }
     }
 

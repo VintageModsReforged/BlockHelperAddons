@@ -8,7 +8,6 @@ import gregtechmod.api.metatileentity.MetaTileEntity;
 import gregtechmod.common.tileentities.*;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.TextColor;
-import reforged.mods.blockhelper.addons.i18n.I18n;
 
 public class GT_IndividualMachineInfoProvider implements BlockHelperBlockProvider {
 
@@ -22,36 +21,36 @@ public class GT_IndividualMachineInfoProvider implements BlockHelperBlockProvide
                 if (metaTile instanceof GT_MetaTileEntity_BlastFurnace) {
                     GT_MetaTileEntity_BlastFurnace blast = (GT_MetaTileEntity_BlastFurnace) metaTile;
                     if (blast.mMachine) {
-                        infoHolder.add(TextColor.DARK_GREEN.format(I18n.format("info.heat") + " " + blast.mHeatCapacity + " K"));
+                        infoHolder.add(TextColor.DARK_GREEN.format("info.heat") + " " + blast.mHeatCapacity + " K");
                     } else {
-                        infoHolder.add(TextColor.RED.format(I18n.format("info.gt.invalid")));
+                        infoHolder.add(TextColor.RED.format("info.gt.invalid"));
                     }
                 } else if (metaTile instanceof GT_MetaTileEntity_Grinder) {
                     GT_MetaTileEntity_Grinder grinder = (GT_MetaTileEntity_Grinder) metaTile;
                     if (!grinder.mMachine) {
-                        infoHolder.add(TextColor.RED.format(I18n.format("info.gt.invalid")));
+                        infoHolder.add(TextColor.RED.format("info.gt.invalid"));
                     }
                 } else if (metaTile instanceof GT_MetaTileEntity_Sawmill) {
                     GT_MetaTileEntity_Sawmill sawmill = (GT_MetaTileEntity_Sawmill) metaTile;
                     if (!sawmill.mMachine) {
-                        infoHolder.add(TextColor.RED.format(I18n.format("info.gt.invalid")));
+                        infoHolder.add(TextColor.RED.format("info.gt.invalid"));
                     }
                 } else if (metaTile instanceof GT_MetaTileEntity_ImplosionCompressor) {
                     GT_MetaTileEntity_ImplosionCompressor compressor = (GT_MetaTileEntity_ImplosionCompressor) metaTile;
                     if (!compressor.mMachine) {
-                        infoHolder.add(TextColor.RED.format(I18n.format("info.gt.invalid")));
+                        infoHolder.add(TextColor.RED.format("info.gt.invalid"));
                     }
                 } else if (metaTile instanceof GT_MetaTileEntity_DistillationTower) {
                     GT_MetaTileEntity_DistillationTower tower = (GT_MetaTileEntity_DistillationTower) metaTile;
                     if (!tower.mMachine) {
-                        infoHolder.add(TextColor.RED.format(I18n.format("info.gt.invalid")));
+                        infoHolder.add(TextColor.RED.format("info.gt.invalid"));
                     }
                 }
             }
             if (baseTile instanceof GT_TileEntity_Matterfabricator) {
                 GT_TileEntity_Matterfabricator matter = (GT_TileEntity_Matterfabricator) baseTile;
                 int progress = (int) Math.max(0L, (long) matter.getProgresstime() / Math.max(1L, (long) matter.maxProgresstime() / 100L));
-                infoHolder.add(TextColor.LIGHT_PURPLE.format(I18n.format("info.progress", progress)) + "%");
+                infoHolder.add(TextColor.LIGHT_PURPLE.format("info.progress", progress) + "%");
             } else if (baseTile instanceof GT_TileEntity_PlayerDetector) {
                 GT_TileEntity_PlayerDetector detector = (GT_TileEntity_PlayerDetector) baseTile;
                 byte mode = detector.mMode;

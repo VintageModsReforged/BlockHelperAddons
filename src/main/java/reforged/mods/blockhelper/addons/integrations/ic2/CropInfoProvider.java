@@ -65,7 +65,7 @@ public class CropInfoProvider extends BlockHelperInfoProvider {
                 }
                 if (scanLevel >= 4) {
                     infoHolder.add("");
-                    infoHolder.add(TextColor.YELLOW.format("#### Stats ####"));
+                    infoHolder.add(TextColor.YELLOW.literal("#### Stats ####"));
                     infoHolder.add(BarElement.bar(growth, 31, TextColor.DARK_GREEN, I18n.format("crop.growth", growth, 31)));
                     infoHolder.add(BarElement.bar(gain, 31, TextColor.GOLD, I18n.format("crop.gain", gain, 31)));;
                     infoHolder.add(BarElement.bar(resistance, 31, TextColor.DARK_AQUA, I18n.format("crop.resistance", resistance, 31)));
@@ -77,13 +77,13 @@ public class CropInfoProvider extends BlockHelperInfoProvider {
             }
 
             infoHolder.add("");
-            infoHolder.add(TextColor.YELLOW.format("#### Storage ####"));
+            infoHolder.add(TextColor.YELLOW.literal("#### Storage ####"));
             infoHolder.add(BarElement.bar(fertilizer, 200, TextColor.GOLD, I18n.format("crop.fertilizer", fertilizer, 100)));
             infoHolder.add(BarElement.bar(water, 200, TextColor.BLUE, I18n.format("crop.water", water, 200)));
             infoHolder.add(BarElement.bar(weedex, 100, TextColor.LIGHT_PURPLE, I18n.format("crop.weedex", weedex, 150)));
 
             infoHolder.add("");
-            infoHolder.add(TextColor.YELLOW.format("#### Environment ####"));
+            infoHolder.add(TextColor.YELLOW.literal("#### Environment ####"));
             infoHolder.add(BarElement.bar(nutrients, 20, TextColor.GREEN, I18n.format("crop.nutrients", nutrients, 20)));
             infoHolder.add(BarElement.bar(humidity, 20, TextColor.DARK_AQUA, I18n.format("crop.humidity", humidity, 20)));
             infoHolder.add(BarElement.bar(env, 10, TextColor.AQUA, I18n.format("crop.env", env, 10)));

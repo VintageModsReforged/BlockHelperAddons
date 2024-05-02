@@ -31,17 +31,17 @@ public class BarElement {
 
         char defaultChar = '\u25AF';
         String icon = "\u25AE";
-        String bare = new String(new char[maxBarSize]).replace('\0', defaultChar);
-        StringBuilder bareDone = new StringBuilder();
+        String bar = new String(new char[maxBarSize]).replace('\0', defaultChar);
+        StringBuilder barDone = new StringBuilder();
         for (int i = 0; i < remainPercent; i++) {
-            bareDone.append(icon);
+            barDone.append(icon);
         }
-        String bareRemain = bare.substring(remainPercent);
-        String finalString = bareDone + bareRemain;
+        String barRemain = bar.substring(remainPercent);
+        String finalString = barDone + barRemain;
         int mid = finalString.length() / 2;
         String firstHalf = finalString.substring(0, mid - textLength / 2);
         String secondHalf = finalString.substring(mid + textLength / 2);
-        String finalBar = TextColor.WHITE.format("[") + COLOR.format(firstHalf + TEXT + secondHalf) + TextColor.WHITE.format("]");
+        String finalBar = TextColor.WHITE.literal("[") + COLOR.literal(firstHalf + TEXT + secondHalf) + TextColor.WHITE.literal("]");
         return finalBar;
     }
 

@@ -6,7 +6,6 @@ import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.core.block.wiring.TileEntityTransformer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.TextColor;
-import reforged.mods.blockhelper.addons.i18n.I18n;
 
 public class TransformerInfoProvider implements BlockHelperBlockProvider {
 
@@ -17,9 +16,9 @@ public class TransformerInfoProvider implements BlockHelperBlockProvider {
             TileEntityTransformer transformer = (TileEntityTransformer) tile;
             boolean inverted = transformer.redstone;
 
-            infoHolder.add(TextColor.GOLD.format(I18n.format("info.transformer.inverted", inverted ? TextColor.GREEN.format(String.valueOf(true)) : TextColor.RED.format(String.valueOf(false)))));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", inverted ? transformer.lowOutput : transformer.highOutput)));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.storage.output", inverted ? transformer.highOutput : transformer.lowOutput)));
+            infoHolder.add(TextColor.GOLD.format("info.transformer.inverted", inverted ? TextColor.GREEN.format(String.valueOf(true)) : TextColor.RED.format(String.valueOf(false))));
+            infoHolder.add(TextColor.WHITE.format("info.eu_reader.max_in", inverted ? transformer.lowOutput : transformer.highOutput));
+            infoHolder.add(TextColor.WHITE.format("info.storage.output", inverted ? transformer.highOutput : transformer.lowOutput));
         }
     }
 

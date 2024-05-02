@@ -10,7 +10,6 @@ import gregtechmod.common.tileentities.GT_MetaTileEntity_TesseractTerminal;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.Helper;
 import reforged.mods.blockhelper.addons.TextColor;
-import reforged.mods.blockhelper.addons.i18n.I18n;
 
 public class GT_BaseMetaMachineInfoProvider implements BlockHelperBlockProvider {
 
@@ -26,16 +25,16 @@ public class GT_BaseMetaMachineInfoProvider implements BlockHelperBlockProvider 
                     if (storage > metaTileEntity.maxEUStore()) {
                         storage = metaTileEntity.maxEUStore();
                     }
-                    infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", storage, metaTileEntity.maxEUStore())));
+                    infoHolder.add(TextColor.AQUA.format("info.energy", storage, metaTileEntity.maxEUStore()));
                 }
                 int maxInput = metaTileEntity.maxEUInput();
                 if (maxInput > 0) {
-                    infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(metaTileEntity.maxEUInput())))));
-                    infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", metaTileEntity.maxEUInput())));
+                    infoHolder.add(TextColor.WHITE.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(metaTileEntity.maxEUInput()))));
+                    infoHolder.add(TextColor.WHITE.format("info.eu_reader.max_in", metaTileEntity.maxEUInput()));
                 }
                 int maxOut = metaTileEntity.maxEUOutput();
                 if (maxOut > 0) {
-                    infoHolder.add(TextColor.WHITE.format(I18n.format("info.generator.max_output", maxOut)));
+                    infoHolder.add(TextColor.WHITE.format("info.generator.max_output", maxOut));
                 }
                 if (metaTileEntity instanceof GT_MetaTileEntity_TesseractGenerator) {
                     GT_MetaTileEntity_TesseractGenerator tesseract = (GT_MetaTileEntity_TesseractGenerator) metaTileEntity;
@@ -51,7 +50,7 @@ public class GT_BaseMetaMachineInfoProvider implements BlockHelperBlockProvider 
 
             String possibleUpgrades = getPossibleUpgrades(baseMetaTileEntity);
             if (!possibleUpgrades.isEmpty()) {
-                infoHolder.add(TextColor.GREEN.format(I18n.format("info.gt.possible_upgrades") + " " + TextColor.WHITE.format(possibleUpgrades)));
+                infoHolder.add(TextColor.GREEN.format("info.gt.possible_upgrades") + " " + TextColor.WHITE.literal(possibleUpgrades));
             }
             addUpgradesInfo(infoHolder, baseMetaTileEntity);
         }
@@ -68,21 +67,21 @@ public class GT_BaseMetaMachineInfoProvider implements BlockHelperBlockProvider 
     public static void addUpgradesInfo(InfoHolder info, IGregTechTileEntity metatileEntity) {
         byte overclockers = metatileEntity.getOverclockerUpgradeCount();
         if (overclockers > 0) {
-            info.add(TextColor.WHITE.format(I18n.format("info.gt.overclockers", overclockers)));
+            info.add(TextColor.WHITE.format("info.gt.overclockers", overclockers));
         }
         byte transformers = metatileEntity.getTransformerUpgradeCount();
         if (transformers > 0) {
-            info.add(TextColor.WHITE.format(I18n.format("info.gt.transformers", transformers)));
+            info.add(TextColor.WHITE.format("info.gt.transformers", transformers));
         }
         int storage = metatileEntity.getUpgradeStorageVolume();
         if (storage > 0) {
-            info.add(TextColor.WHITE.format(I18n.format("info.gt.batteries", storage)));
+            info.add(TextColor.WHITE.format("info.gt.batteries", storage));
         }
         if (metatileEntity.hasMJConverterUpgrade()) {
-            info.add(TextColor.WHITE.format(I18n.format("info.gt.mj", 1)));
+            info.add(TextColor.WHITE.format("info.gt.mj", 1));
         }
         if (metatileEntity.hasSteamEngineUpgrade()) {
-            info.add(TextColor.WHITE.format(I18n.format("info.gt.steam", 1)));
+            info.add(TextColor.WHITE.format("info.gt.steam", 1));
         }
     }
 

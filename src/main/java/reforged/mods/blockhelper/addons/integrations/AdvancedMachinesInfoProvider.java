@@ -8,7 +8,6 @@ import ic2.advancedmachines.common.*;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.Helper;
 import reforged.mods.blockhelper.addons.TextColor;
-import reforged.mods.blockhelper.addons.i18n.I18n;
 
 public class AdvancedMachinesInfoProvider implements BlockHelperBlockProvider {
 
@@ -17,10 +16,10 @@ public class AdvancedMachinesInfoProvider implements BlockHelperBlockProvider {
         TileEntity tile = blockHelperBlockState.te;
         if (tile instanceof TileEntityAdvancedMachine) {
             TileEntityAdvancedMachine advMachine = (TileEntityAdvancedMachine) tile;
-            infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", advMachine.energy, advMachine.maxEnergy)));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(2))));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", advMachine.maxInput)));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.usage", advMachine.energyConsume)));
+            infoHolder.add(TextColor.AQUA.format("info.energy", advMachine.energy, advMachine.maxEnergy));
+            infoHolder.add(TextColor.WHITE.format("info.eu_reader.tier", Helper.getTierForDisplay(2)));
+            infoHolder.add(TextColor.WHITE.format("info.eu_reader.max_in", advMachine.maxInput));
+            infoHolder.add(TextColor.WHITE.format("info.eu_reader.usage", advMachine.energyConsume));
             String speedName = "";
             if (advMachine instanceof TileEntityRotaryMacerator) {
                 speedName = "info.rotary.speed";
@@ -33,10 +32,10 @@ public class AdvancedMachinesInfoProvider implements BlockHelperBlockProvider {
             }
             int speed = advMachine.speed;
             int maxSpeed = advMachine.maxSpeed;
-            infoHolder.add(TextColor.YELLOW.format(I18n.format(speedName, speed * 100 / maxSpeed) + "%"));
+            infoHolder.add(TextColor.YELLOW.format(speedName, speed * 100 / maxSpeed) + "%");
             int progress = advMachine.gaugeProgressScaled(100);
             if (progress > 0) {
-                infoHolder.add(TextColor.DARK_GREEN.format(I18n.format("info.progress", progress) + "%"));
+                infoHolder.add(TextColor.DARK_GREEN.format("info.progress", progress) + "%");
             }
         }
     }

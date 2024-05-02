@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.Helper;
 import reforged.mods.blockhelper.addons.TextColor;
-import reforged.mods.blockhelper.addons.i18n.I18n;
 
 public class WrenchableInfoProvider implements BlockHelperBlockProvider {
 
@@ -27,12 +26,12 @@ public class WrenchableInfoProvider implements BlockHelperBlockProvider {
                 if (heldStack != null) {
                     if (heldStack.getItem() instanceof ItemToolWrench) {
                         int actualDrop = ((ItemToolWrench) heldStack.getItem()).overrideWrenchSuccessRate(heldStack) ? 100 : (int) (dropRate * 100);
-                        infoHolder.add(TextColor.GOLD.format(Helper.getTextColor(actualDrop) + actualDrop + "% " + "\2476" + I18n.format("info.wrenchable.rate")));
+                        infoHolder.add(TextColor.GOLD.format(Helper.getTextColor(actualDrop) + actualDrop) + "% " + TextColor.YELLOW.format("info.wrenchable.rate"));
                     } else {
-                        infoHolder.add(TextColor.GOLD.format(I18n.format("info.wrenchable")));
+                        infoHolder.add(TextColor.GOLD.format("info.wrenchable"));
                     }
                 } else {
-                    infoHolder.add(TextColor.GOLD.format(I18n.format("info.wrenchable")));
+                    infoHolder.add(TextColor.GOLD.format("info.wrenchable"));
                 }
             }
         }
