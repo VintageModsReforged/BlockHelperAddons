@@ -48,6 +48,11 @@ public class GT_BaseMetaMachineInfoProvider implements BlockHelperBlockProvider 
                 }
             }
 
+            float progress = metaTileEntity.getProgresstime();
+            if (progress > 0) {
+                infoHolder.add(TextColor.DARK_GREEN.format("info.progress", (int) (progress * 100)) + "%");
+            }
+
             String possibleUpgrades = getPossibleUpgrades(baseMetaTileEntity);
             if (!possibleUpgrades.isEmpty()) {
                 infoHolder.add(TextColor.GREEN.format("info.gt.possible_upgrades") + " " + TextColor.WHITE.literal(possibleUpgrades));
