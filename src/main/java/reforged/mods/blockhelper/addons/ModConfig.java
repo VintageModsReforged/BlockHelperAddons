@@ -1,6 +1,6 @@
 package reforged.mods.blockhelper.addons;
 
-import net.minecraft.client.Minecraft;
+import cpw.mods.fml.relauncher.FMLInjectionData;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 
@@ -17,8 +17,7 @@ public class ModConfig {
     public static boolean advanced_machines = false;
 
     public static void initConfig() {
-
-        main_config = new Configuration(new File(Minecraft.getMinecraftDir(), "/config/BlockHelperAddonsConfig.cfg"));
+        main_config = new Configuration(new File((File) FMLInjectionData.data()[6], "config/BlockHelperAddonsConfig.cfg"));
         main_config.load();
 
         default_language = getString("general", "default_language", "en_US", "Default Language. DO NOT CHANGE THIS! Use additional_languages field instead!");
