@@ -22,13 +22,13 @@ public class AdvancedMachinesInfoProvider implements BlockHelperBlockProvider {
             infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.usage", advMachine.energyConsume));
             String speedName = "";
             if (advMachine instanceof TileEntityRotaryMacerator) {
-                speedName = "iprobe.nfo.rotary.speed";
+                speedName = "probe.info.rotary.speed";
             } else if (advMachine instanceof TileEntitySingularityCompressor) {
-                speedName = "iprobe.nfo.singularity.speed";
+                speedName = "probe.info.singularity.speed";
             } else if (advMachine instanceof TileEntityCentrifugeExtractor) {
-                speedName = "iprobe.nfo.centrifuge.speed";
+                speedName = "probe.info.centrifuge.speed";
             } else if (advMachine instanceof TileAdvancedInduction) {
-                speedName = "iprobe.nfo.induction.heat";
+                speedName = "probe.info.induction.heat";
             }
             int speed = advMachine.speed;
             int maxSpeed = advMachine.maxSpeed;
