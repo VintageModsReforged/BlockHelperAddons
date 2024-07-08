@@ -1,7 +1,7 @@
 package reforged.mods.blockhelper.addons.i18n;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import net.minecraft.client.Minecraft;
+import cpw.mods.fml.relauncher.FMLInjectionData;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.StringTranslate;
 import reforged.mods.blockhelper.addons.ModConfig;
@@ -13,8 +13,6 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 
 public final class I18n {
-
-    private static final String PREFIX = "probe.";
 
     private I18n() {
         throw new UnsupportedOperationException();
@@ -43,7 +41,7 @@ public final class I18n {
             if (ModConfig.additional_languages.isEmpty()) {
                 stream = I18n.class.getResourceAsStream("/mods/blockhelper/addons/lang/" + lang + ".properties"); // use the default .lang file from modJar
             } else {
-                stream = new FileInputStream(Minecraft.getMinecraftDir() + "/config/langs/blockhelperaddons/" + lang + ".properties"); // use the lang files from config/langs/blockhelperaddons folder
+                stream = new FileInputStream(FMLInjectionData.data()[6] + "/config/langs/blockhelperaddons/" + lang + ".properties"); // use the lang files from config/langs/blockhelperaddons folder
             }
             if (stream == null) {
                 throw new IOException("Couldn't load language file.");
@@ -83,8 +81,7 @@ public final class I18n {
     }
 
     public static String format(StringTranslate translator, String key, Object... args) {
-        if (translator == null) return StatCollector.translateToLocalFormatted(PREFIX + key, args);
-        return translator.translateKeyFormat(PREFIX + key, args);
+        if (translator == null) return StatCollector.translateToLocalFormatted(key, args);
+        return translator.translateKeyFormat(key, args);
     }
-
 }

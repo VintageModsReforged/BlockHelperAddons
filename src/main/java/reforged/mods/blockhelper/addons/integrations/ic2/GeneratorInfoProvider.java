@@ -10,7 +10,6 @@ import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.BarElement;
 import reforged.mods.blockhelper.addons.Helper;
 import reforged.mods.blockhelper.addons.TextColor;
-import reforged.mods.blockhelper.addons.i18n.I18n;
 
 public class GeneratorInfoProvider implements BlockHelperBlockProvider {
 
@@ -19,7 +18,7 @@ public class GeneratorInfoProvider implements BlockHelperBlockProvider {
         TileEntity tile = blockHelperBlockState.te;
         if (tile instanceof TileEntityBaseGenerator) {
             TileEntityBaseGenerator gen = (TileEntityBaseGenerator) tile;
-            infoHolder.add(TextColor.WHITE.format("info.eu_reader.tier", Helper.getTierForDisplay(1)));
+            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.tier", Helper.getTierForDisplay(1)));
             double production = 0;
             if (gen instanceof TileEntityGenerator || gen instanceof TileEntityGeoGenerator) {
                 if (gen.isConverting()) {
@@ -33,9 +32,9 @@ public class GeneratorInfoProvider implements BlockHelperBlockProvider {
                 production = gen.production;
             }
             if (production > 0) { // blame windmill
-                infoHolder.add(TextColor.WHITE.format("info.generator.output", production));
+                infoHolder.add(TextColor.WHITE.format("probe.info.generator.output", production));
             }
-            infoHolder.add(TextColor.WHITE.format("info.generator.max_output", gen.getMaxEnergyOutput()));
+            infoHolder.add(TextColor.WHITE.format("probe.info.generator.max_output", gen.getMaxEnergyOutput()));
         }
         if (tile instanceof IReactor) {
             addReactorInfo(infoHolder, tile);
@@ -51,8 +50,8 @@ public class GeneratorInfoProvider implements BlockHelperBlockProvider {
             int heat = reactor.heat;
             int maxHeat = reactor.maxHeat;
             int production = reactor.getOutput() * 5;
-            infoHolder.add(TextColor.WHITE.format("info.generator.output", production));
-            infoHolder.add(TextColor.DARK_GRAY.format("info.heat") + " " + BarElement.bar(heat, maxHeat, getReactorColor(heat, maxHeat), String.format("%s/%s", heat, maxHeat)));
+            infoHolder.add(TextColor.WHITE.format("probe.info.generator.output", production));
+            infoHolder.add(TextColor.DARK_GRAY.format("probe.info.heat") + " " + BarElement.bar(heat, maxHeat, getReactorColor(heat, maxHeat), String.format("%s/%s", heat, maxHeat)));
         }
     }
 

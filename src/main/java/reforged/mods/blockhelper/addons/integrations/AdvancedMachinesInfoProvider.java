@@ -16,26 +16,26 @@ public class AdvancedMachinesInfoProvider implements BlockHelperBlockProvider {
         TileEntity tile = blockHelperBlockState.te;
         if (tile instanceof TileEntityAdvancedMachine) {
             TileEntityAdvancedMachine advMachine = (TileEntityAdvancedMachine) tile;
-            infoHolder.add(TextColor.AQUA.format("info.energy", advMachine.energy, advMachine.maxEnergy));
-            infoHolder.add(TextColor.WHITE.format("info.eu_reader.tier", Helper.getTierForDisplay(2)));
-            infoHolder.add(TextColor.WHITE.format("info.eu_reader.max_in", advMachine.maxInput));
-            infoHolder.add(TextColor.WHITE.format("info.eu_reader.usage", advMachine.energyConsume));
+            infoHolder.add(TextColor.AQUA.format("probe.info.energy", advMachine.energy, advMachine.maxEnergy));
+            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.tier", Helper.getTierForDisplay(2)));
+            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.max_in", advMachine.maxInput));
+            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.usage", advMachine.energyConsume));
             String speedName = "";
             if (advMachine instanceof TileEntityRotaryMacerator) {
-                speedName = "info.rotary.speed";
+                speedName = "iprobe.nfo.rotary.speed";
             } else if (advMachine instanceof TileEntitySingularityCompressor) {
-                speedName = "info.singularity.speed";
+                speedName = "iprobe.nfo.singularity.speed";
             } else if (advMachine instanceof TileEntityCentrifugeExtractor) {
-                speedName = "info.centrifuge.speed";
+                speedName = "iprobe.nfo.centrifuge.speed";
             } else if (advMachine instanceof TileAdvancedInduction) {
-                speedName = "info.induction.heat";
+                speedName = "iprobe.nfo.induction.heat";
             }
             int speed = advMachine.speed;
             int maxSpeed = advMachine.maxSpeed;
             infoHolder.add(TextColor.YELLOW.format(speedName, speed * 100 / maxSpeed) + "%");
             int progress = advMachine.gaugeProgressScaled(100);
             if (progress > 0) {
-                infoHolder.add(TextColor.DARK_GREEN.format("info.progress", progress) + "%");
+                infoHolder.add(TextColor.DARK_GREEN.format("probe.info.progress", progress) + "%");
             }
         }
     }

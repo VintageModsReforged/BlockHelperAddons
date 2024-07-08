@@ -14,11 +14,11 @@ public class BaseMachineInfoProvider implements BlockHelperBlockProvider {
         TileEntity tile = blockHelperBlockState.te;
         if (tile instanceof TileEntityStandardMachine) {
             TileEntityStandardMachine machine = (TileEntityStandardMachine) tile;
-            infoHolder.add(TextColor.WHITE.format("info.eu_reader.usage", machine.energyConsume));
+            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.usage", machine.energyConsume));
 
             float progress = machine.getProgress();
             if (progress > 0) {
-                infoHolder.add(TextColor.DARK_GREEN.format("info.progress", (int) (progress * 100)) + "%");
+                infoHolder.add(TextColor.DARK_GREEN.format("probe.info.progress", (int) (progress * 100)) + "%");
             }
         }
     }

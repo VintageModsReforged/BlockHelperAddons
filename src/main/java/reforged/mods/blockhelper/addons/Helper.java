@@ -11,35 +11,35 @@ public class Helper {
     public static String getTierForDisplay(int tier) {
         switch (tier) {
             case 0:
-                return I18n.format("info.tier.ulv");
+                return I18n.format("probe.info.tier.ulv");
             case 1:
-                return I18n.format("info.tier.lv");
+                return I18n.format("probe.info.tier.lv");
             case 2:
-                return I18n.format("info.tier.mv");
+                return I18n.format("probe.info.tier.mv");
             case 3:
-                return I18n.format("info.tier.hv");
+                return I18n.format("probe.info.tier.hv");
             case 4:
-                return I18n.format("info.tier.ev");
+                return I18n.format("probe.info.tier.ev");
             case 5:
-                return I18n.format("info.tier.iv");
+                return I18n.format("probe.info.tier.iv");
             case 6:
-                return I18n.format("info.tier.luv");
+                return I18n.format("probe.info.tier.luv");
             case 7:
-                return I18n.format("info.tier.zpm");
+                return I18n.format("probe.info.tier.zpm");
             case 8:
-                return I18n.format("info.tier.uv");
+                return I18n.format("probe.info.tier.uv");
             case 9:
-                return I18n.format("info.tier.uhv");
+                return I18n.format("probe.info.tier.uhv");
             case 10:
-                return I18n.format("info.tier.uev");
+                return I18n.format("probe.info.tier.uev");
             case 11:
-                return I18n.format("info.tier.uiv");
+                return I18n.format("probe.info.tier.uiv");
             case 12:
-                return I18n.format("info.tier.umv");
+                return I18n.format("probe.info.tier.umv");
             case 13:
-                return I18n.format("info.tier.uxv");
+                return I18n.format("probe.info.tier.uxv");
             case 14:
-                return I18n.format("info.tier.max");
+                return I18n.format("probe.info.tier.max");
             default:
                 return TextColor.RED.format("ERROR, please report!");
         }

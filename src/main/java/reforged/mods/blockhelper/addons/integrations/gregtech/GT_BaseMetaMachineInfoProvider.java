@@ -25,16 +25,16 @@ public class GT_BaseMetaMachineInfoProvider implements BlockHelperBlockProvider 
                     if (storage > metaTileEntity.maxEUStore()) {
                         storage = metaTileEntity.maxEUStore();
                     }
-                    infoHolder.add(TextColor.AQUA.format("info.energy", storage, metaTileEntity.maxEUStore()));
+                    infoHolder.add(TextColor.AQUA.format("probe.info.energy", storage, metaTileEntity.maxEUStore()));
                 }
                 int maxInput = metaTileEntity.maxEUInput();
                 if (maxInput > 0) {
-                    infoHolder.add(TextColor.WHITE.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(metaTileEntity.maxEUInput()))));
-                    infoHolder.add(TextColor.WHITE.format("info.eu_reader.max_in", metaTileEntity.maxEUInput()));
+                    infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(metaTileEntity.maxEUInput()))));
+                    infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.max_in", metaTileEntity.maxEUInput()));
                 }
                 int maxOut = metaTileEntity.maxEUOutput();
                 if (maxOut > 0) {
-                    infoHolder.add(TextColor.WHITE.format("info.generator.max_output", maxOut));
+                    infoHolder.add(TextColor.WHITE.format("probe.info.generator.max_output", maxOut));
                 }
                 if (metaTileEntity instanceof GT_MetaTileEntity_TesseractGenerator) {
                     GT_MetaTileEntity_TesseractGenerator tesseract = (GT_MetaTileEntity_TesseractGenerator) metaTileEntity;
@@ -48,14 +48,14 @@ public class GT_BaseMetaMachineInfoProvider implements BlockHelperBlockProvider 
                 }
             }
 
-            float progress = metaTileEntity.getProgresstime();
-            if (progress > 0) {
-                infoHolder.add(TextColor.DARK_GREEN.format("info.progress", (int) (progress * 100)) + "%");
-            }
+//            float progress = metaTileEntity.getProgresstime();
+//            if (progress > 0) {
+//                infoHolder.add(TextColor.DARK_GREEN.format("probe.info.progress", (int) (progress * 100)) + "%");
+//            }
 
             String possibleUpgrades = getPossibleUpgrades(baseMetaTileEntity);
             if (!possibleUpgrades.isEmpty()) {
-                infoHolder.add(TextColor.GREEN.format("info.gt.possible_upgrades") + " " + TextColor.WHITE.literal(possibleUpgrades));
+                infoHolder.add(TextColor.GREEN.format("probe.info.gt.possible_upgrades") + " " + TextColor.WHITE.literal(possibleUpgrades));
             }
             addUpgradesInfo(infoHolder, baseMetaTileEntity);
         }
@@ -72,21 +72,21 @@ public class GT_BaseMetaMachineInfoProvider implements BlockHelperBlockProvider 
     public static void addUpgradesInfo(InfoHolder info, IGregTechTileEntity metatileEntity) {
         byte overclockers = metatileEntity.getOverclockerUpgradeCount();
         if (overclockers > 0) {
-            info.add(TextColor.WHITE.format("info.gt.overclockers", overclockers));
+            info.add(TextColor.WHITE.format("probe.info.gt.overclockers", overclockers));
         }
         byte transformers = metatileEntity.getTransformerUpgradeCount();
         if (transformers > 0) {
-            info.add(TextColor.WHITE.format("info.gt.transformers", transformers));
+            info.add(TextColor.WHITE.format("probe.info.gt.transformers", transformers));
         }
         int storage = metatileEntity.getUpgradeStorageVolume();
         if (storage > 0) {
-            info.add(TextColor.WHITE.format("info.gt.batteries", storage));
+            info.add(TextColor.WHITE.format("probe.info.gt.batteries", storage));
         }
         if (metatileEntity.hasMJConverterUpgrade()) {
-            info.add(TextColor.WHITE.format("info.gt.mj", 1));
+            info.add(TextColor.WHITE.format("probe.info.gt.mj", 1));
         }
         if (metatileEntity.hasSteamEngineUpgrade()) {
-            info.add(TextColor.WHITE.format("info.gt.steam", 1));
+            info.add(TextColor.WHITE.format("probe.info.gt.steam", 1));
         }
     }
 

@@ -9,8 +9,8 @@ import ic2.core.block.crop.IC2Crops;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.BarElement;
-import reforged.mods.blockhelper.addons.i18n.I18n;
 import reforged.mods.blockhelper.addons.TextColor;
+import reforged.mods.blockhelper.addons.i18n.I18n;
 
 public class CropInfoProvider extends BlockHelperInfoProvider {
 
@@ -61,33 +61,34 @@ public class CropInfoProvider extends BlockHelperInfoProvider {
                 }
                 if (scanLevel < 4) {
                     infoHolder.add("");
-                    infoHolder.add(BarElement.bar(scanLevel, 4, TextColor.GREEN, I18n.format("crop.scan", scanLevel, 4)));
+                    infoHolder.add(BarElement.bar(scanLevel, 4, TextColor.GREEN, I18n.format("probe.crop.scan", scanLevel, 4)));
                 }
                 if (scanLevel >= 4) {
                     infoHolder.add("");
                     infoHolder.add(TextColor.YELLOW.literal("#### Stats ####"));
-                    infoHolder.add(BarElement.bar(growth, 31, TextColor.DARK_GREEN, I18n.format("crop.growth", growth, 31)));
-                    infoHolder.add(BarElement.bar(gain, 31, TextColor.GOLD, I18n.format("crop.gain", gain, 31)));;
-                    infoHolder.add(BarElement.bar(resistance, 31, TextColor.DARK_AQUA, I18n.format("crop.resistance", resistance, 31)));
+                    infoHolder.add(BarElement.bar(growth, 31, TextColor.DARK_GREEN, I18n.format("probe.crop.growth", growth, 31)));
+                    infoHolder.add(BarElement.bar(gain, 31, TextColor.GOLD, I18n.format("probe.crop.gain", gain, 31)));
+                    ;
+                    infoHolder.add(BarElement.bar(resistance, 31, TextColor.DARK_AQUA, I18n.format("probe.crop.resistance", resistance, 31)));
 
                     int stress = (crop.tier() - 1) * 4 + growth + gain + resistance;
                     int maxStress = crop.weightInfluences(cropTile, humidity, nutrients, env) * 5;
-                    infoHolder.add(BarElement.bar(stress, maxStress, TextColor.DARK_PURPLE, I18n.format("crop.stress", stress, maxStress)));
+                    infoHolder.add(BarElement.bar(stress, maxStress, TextColor.DARK_PURPLE, I18n.format("probe.crop.stress", stress, maxStress)));
                 }
             }
 
             infoHolder.add("");
             infoHolder.add(TextColor.YELLOW.literal("#### Storage ####"));
-            infoHolder.add(BarElement.bar(fertilizer, 200, TextColor.GOLD, I18n.format("crop.fertilizer", fertilizer, 100)));
-            infoHolder.add(BarElement.bar(water, 200, TextColor.BLUE, I18n.format("crop.water", water, 200)));
-            infoHolder.add(BarElement.bar(weedex, 100, TextColor.LIGHT_PURPLE, I18n.format("crop.weedex", weedex, 150)));
+            infoHolder.add(BarElement.bar(fertilizer, 200, TextColor.GOLD, I18n.format("probe.crop.fertilizer", fertilizer, 100)));
+            infoHolder.add(BarElement.bar(water, 200, TextColor.BLUE, I18n.format("probe.crop.water", water, 200)));
+            infoHolder.add(BarElement.bar(weedex, 100, TextColor.LIGHT_PURPLE, I18n.format("probe.crop.weedex", weedex, 150)));
 
             infoHolder.add("");
             infoHolder.add(TextColor.YELLOW.literal("#### Environment ####"));
-            infoHolder.add(BarElement.bar(nutrients, 20, TextColor.GREEN, I18n.format("crop.nutrients", nutrients, 20)));
-            infoHolder.add(BarElement.bar(humidity, 20, TextColor.DARK_AQUA, I18n.format("crop.humidity", humidity, 20)));
-            infoHolder.add(BarElement.bar(env, 10, TextColor.AQUA, I18n.format("crop.env", env, 10)));
-            infoHolder.add(BarElement.bar(light, 15, TextColor.YELLOW, I18n.format("crop.light", light, 15)));
+            infoHolder.add(BarElement.bar(nutrients, 20, TextColor.GREEN, I18n.format("probe.crop.nutrients", nutrients, 20)));
+            infoHolder.add(BarElement.bar(humidity, 20, TextColor.DARK_AQUA, I18n.format("probe.crop.humidity", humidity, 20)));
+            infoHolder.add(BarElement.bar(env, 10, TextColor.AQUA, I18n.format("probe.crop.env", env, 10)));
+            infoHolder.add(BarElement.bar(light, 15, TextColor.YELLOW, I18n.format("probe.crop.light", light, 15)));
         }
     }
 

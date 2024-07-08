@@ -18,22 +18,22 @@ public class AdvancedPowerManagementInfoProvider implements BlockHelperBlockProv
         TileEntity tile = blockHelperBlockState.te;
         if (tile instanceof TEChargingBench) {
             TEChargingBench bench = (TEChargingBench) tile;
-            infoHolder.add(TextColor.AQUA.format("info.energy", bench.getStored(), bench.getCapacity()));
-            infoHolder.add(TextColor.WHITE.format("info.eu_reader.tier", Helper.getTierForDisplay(bench.baseTier)));
-            infoHolder.add(TextColor.WHITE.format("info.eu_reader.max_in", Helper.getMaxInputFromTier(bench.baseTier)));
-            infoHolder.add(TextColor.WHITE.format("info.storage.output", Helper.getMaxInputFromTier(bench.baseTier)));
+            infoHolder.add(TextColor.AQUA.format("probe.info.energy", bench.getStored(), bench.getCapacity()));
+            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.tier", Helper.getTierForDisplay(bench.baseTier)));
+            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.max_in", Helper.getMaxInputFromTier(bench.baseTier)));
+            infoHolder.add(TextColor.WHITE.format("probe.info.storage.output", Helper.getMaxInputFromTier(bench.baseTier)));
         }
         if (tile instanceof TEBatteryStation) {
             TEBatteryStation station = (TEBatteryStation) tile;
-            infoHolder.add(TextColor.WHITE.format("info.eu_reader.tier", Helper.getTierForDisplay(station.baseTier)));
-            infoHolder.add(TextColor.WHITE.format("info.eu_reader.max_in", Helper.getMaxInputFromTier(station.baseTier)));
-            infoHolder.add(TextColor.WHITE.format("info.storage.output", Helper.getMaxInputFromTier(station.baseTier)));
+            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.tier", Helper.getTierForDisplay(station.baseTier)));
+            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.max_in", Helper.getMaxInputFromTier(station.baseTier)));
+            infoHolder.add(TextColor.WHITE.format("probe.info.storage.output", Helper.getMaxInputFromTier(station.baseTier)));
         }
         if (tile instanceof TEAdjustableTransformer) {
             TEAdjustableTransformer adj = (TEAdjustableTransformer) tile;
-            infoHolder.add(TextColor.WHITE.format("info.eu_reader.max_in", adj.getMaxSafeInput()));
-            infoHolder.add(TextColor.WHITE.format("info.storage.output", adj.outputRate));
-            infoHolder.add(TextColor.WHITE.format("info.eu_reader.packets.out", adj.packetSize));
+            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.max_in", adj.getMaxSafeInput()));
+            infoHolder.add(TextColor.WHITE.format("probe.info.storage.output", adj.outputRate));
+            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.packets.out", adj.packetSize));
         }
     }
 

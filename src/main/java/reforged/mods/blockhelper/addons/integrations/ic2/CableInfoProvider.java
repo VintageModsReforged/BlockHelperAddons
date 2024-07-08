@@ -14,8 +14,8 @@ public class CableInfoProvider implements BlockHelperBlockProvider {
         TileEntity tile = blockHelperBlockState.te;
         if (tile instanceof TileEntityCable) {
             TileEntityCable cable = (TileEntityCable) tile;
-            infoHolder.add(TextColor.WHITE.format("info.eu_reader.cable_limit", cable.getConductorBreakdownEnergy() - 1));
-            infoHolder.add(TextColor.WHITE.format("info.eu_reader.cable_loss", cable.getConductionLoss()));
+            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.cable_limit", cable.getConductorBreakdownEnergy() - 1));
+            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.cable_loss", cable.getConductionLoss()));
         }
     }
 
