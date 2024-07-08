@@ -33,10 +33,10 @@ public class GT_WrenchableInfoProvider implements BlockHelperBlockProvider {
                     actualDrop = ((ItemToolWrench) heldStack.getItem()).overrideWrenchSuccessRate(heldStack) ? 100 : (int) (dropRate * 100);
                     infoHolder.add(TextColor.GOLD.format(Helper.getTextColor(actualDrop) + actualDrop) + "% " + TextColor.YELLOW.format("probe.info.wrenchable.rate"));
                 } else {
-                    infoHolder.add(TextColor.GOLD.format("probe.probe.info.wrenchable"));
+                    infoHolder.add(TextColor.GOLD.format("probe.info.wrenchable"));
                 }
             } else {
-                infoHolder.add(TextColor.GOLD.format("probe.probe.info.wrenchable"));
+                infoHolder.add(TextColor.GOLD.format("probe.info.wrenchable"));
             }
         } else if (machine instanceof BaseTileEntity) {
             if (heldStack != null) {
