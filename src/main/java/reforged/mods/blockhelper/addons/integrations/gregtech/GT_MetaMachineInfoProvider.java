@@ -14,8 +14,8 @@ public class GT_MetaMachineInfoProvider extends InfoProvider {
     public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof GT_TileEntityMetaID_Machine) {
             GT_TileEntityMetaID_Machine machine = (GT_TileEntityMetaID_Machine) blockEntity;
-            if (machine.maxEUStore() > 0) {
-                helper.add(FormattedTranslator.AQUA.format("info.energy", machine.getEnergyVar(), machine.maxEUStore()));
+            if (machine.getCapacity() > 0) {
+                helper.add(FormattedTranslator.AQUA.format("info.energy", machine.getStored(), machine.getCapacity()));
             }
             if (machine.maxEUInput() > 0) {
                 helper.add(tier(Helper.getTierFromEU(machine.maxEUInput())));

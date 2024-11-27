@@ -17,6 +17,11 @@ import reforged.mods.blockhelper.addons.utils.InfoProvider;
 public class CropInfoProvider extends InfoProvider implements BlockHelperItemStackFixer {
 
     @Override
+    public IFilter getFilter() {
+        return ANALYZER;
+    }
+
+    @Override
     public ItemStack getItemStack(BlockHelperBlockState state) {
         TileEntity tile = state.te;
         if (tile instanceof TECrop) {

@@ -4,7 +4,6 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import mods.vintage.core.Refs;
 import mods.vintage.core.platform.lang.ILangProvider;
 import mods.vintage.core.platform.lang.LangManager;
 import reforged.mods.blockhelper.addons.proxy.CommonProxy;
@@ -12,8 +11,16 @@ import reforged.mods.blockhelper.addons.proxy.CommonProxy;
 import java.util.Arrays;
 import java.util.List;
 
-@Mod(modid = "BlockHelperAddons", name = "Block Helper Addons", version = "1.4.7-1.0.2", acceptedMinecraftVersions = "[1.4.7]", dependencies =
-        "required-after:IC2;required-after:mod_BlockHelper;after:AdvancedMachines;after:AdvancedPowerManagement;after:ChargePads;after:GregTech_Addon;after:AdvancedSolarPanel;after:AdvancedMachines;after:AdvancedPowerManagement")
+@Mod(modid = "BlockHelperAddons", name = "Block Helper Addons", version = "1.4.7-1.0.4", acceptedMinecraftVersions = "[1.4.7]", dependencies =
+        "required-after:VintageCore;" +
+                "required-after:mod_BlockHelper;" +
+                "required-after:IC2;" +
+                "after:AdvancedMachines;" +
+                "after:AdvancedPowerManagement;" +
+                "after:ChargePads;" +
+                "after:GregTech_Addon;" +
+                "after:AdvancedSolarPanel;"
+)
 public class BlockHelperAddons implements ILangProvider {
 
     @SidedProxy(clientSide = "reforged.mods.blockhelper.addons.proxy.ClientProxy", serverSide = "reforged.mods.blockhelper.addons.proxy.CommonProxy")

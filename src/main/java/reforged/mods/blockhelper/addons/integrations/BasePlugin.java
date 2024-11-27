@@ -1,7 +1,6 @@
 package reforged.mods.blockhelper.addons.integrations;
 
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
-import de.thexxturboxx.blockhelper.api.BlockHelperInfoProvider;
 import de.thexxturboxx.blockhelper.api.BlockHelperItemStackFixer;
 import de.thexxturboxx.blockhelper.api.BlockHelperModSupport;
 

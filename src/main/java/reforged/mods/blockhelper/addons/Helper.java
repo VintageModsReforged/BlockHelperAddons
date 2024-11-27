@@ -1,28 +1,9 @@
 package reforged.mods.blockhelper.addons;
 
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
-import de.thexxturboxx.blockhelper.api.InfoHolder;
-import de.thexxturboxx.blockhelper.integration.ForgeIntegration;
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import mods.vintage.core.platform.lang.Translator;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.liquids.ILiquidTank;
-import net.minecraftforge.liquids.ITankContainer;
-import net.minecraftforge.liquids.LiquidStack;
 
 public class Helper {
-
-    public static void addTankInfo(BlockHelperBlockState state, InfoHolder info, TileEntity tile) {
-        if (tile instanceof ITankContainer) {
-            ITankContainer fluidHandler = (ITankContainer) tile;
-            ILiquidTank tank = fluidHandler.getTanks(ForgeDirection.getOrientation(state.mop.sideHit))[0];
-            LiquidStack fluid = tank.getLiquid();
-            if (tank.getCapacity() != 0 && fluid != null && fluid.amount > 0) {
-                info.add(Translator.format("info.liquid", ForgeIntegration.getLiquidName(fluid), fluid.amount, tank.getCapacity()));
-            }
-        }
-    }
 
     public static String getTierForDisplay(int tier) {
         switch (tier) {

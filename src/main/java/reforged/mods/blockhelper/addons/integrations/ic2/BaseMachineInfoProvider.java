@@ -1,6 +1,5 @@
 package reforged.mods.blockhelper.addons.integrations.ic2;
 
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.core.block.machine.tileentity.TileEntityElectricMachine;
 import mods.vintage.core.platform.lang.FormattedTranslator;
@@ -9,12 +8,6 @@ import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class BaseMachineInfoProvider extends InfoProvider {
-
-    @Override
-    public void addInformation(BlockHelperBlockState blockHelperBlockState, InfoHolder infoHolder) {
-        TileEntity tile = blockHelperBlockState.te;
-
-    }
 
     @Override
     public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
