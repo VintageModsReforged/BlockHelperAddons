@@ -1,14 +1,16 @@
 package reforged.mods.blockhelper.addons;
 
+import mods.vintage.core.platform.lang.FormattedTranslator;
+
 public class BarElement {
 
     String TEXT;
-    TextColor COLOR;
+    FormattedTranslator COLOR;
     int CURRENT;
     int MAX;
     int SIZE = 25; // default
 
-    public BarElement(int current, int max, TextColor color, String text) {
+    public BarElement(int current, int max, FormattedTranslator color, String text) {
         this.CURRENT = current;
         this.MAX = max;
         this.COLOR = color;
@@ -41,15 +43,14 @@ public class BarElement {
         int mid = finalString.length() / 2;
         String firstHalf = finalString.substring(0, mid - textLength / 2);
         String secondHalf = finalString.substring(mid + textLength / 2);
-        String finalBar = TextColor.WHITE.literal("[") + COLOR.literal(firstHalf + TEXT + secondHalf) + TextColor.WHITE.literal("]");
-        return finalBar;
+        return FormattedTranslator.WHITE.format("info.bar", COLOR.literal(firstHalf + TEXT + secondHalf));
     }
 
-    public static String bar(int current, int total, TextColor color, String text) {
+    public static String bar(int current, int total, FormattedTranslator color, String text) {
         return new BarElement(current, total, color, text).toString();
     }
 
-    public static String bar(int current, int total, TextColor color, String text, int sizeExtra) {
+    public static String bar(int current, int total, FormattedTranslator color, String text, int sizeExtra) {
         return new BarElement(current, total, color, text).size(sizeExtra).toString();
     }
 }

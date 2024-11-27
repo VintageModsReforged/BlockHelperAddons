@@ -2,7 +2,7 @@ package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import cpw.mods.fml.common.Loader;
 import de.thexxturboxx.blockhelper.BlockHelperCommonProxy;
-import reforged.mods.blockhelper.addons.ModConfig;
+import mods.vintage.core.VintageCore;
 import reforged.mods.blockhelper.addons.integrations.AdvancedMachinesInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.AdvancedPowerManagementInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.AdvancedSolarPanelInfoProvider;
@@ -28,7 +28,7 @@ public class IC2Plugin extends BasePlugin {
             if (Loader.isModLoaded("AdvancedSolarPanel")) {
                 add(new AdvancedSolarPanelInfoProvider());
             }
-            if (Loader.isModLoaded("AdvancedMachines") && ModConfig.advanced_machines) {
+            if (Loader.isModLoaded("AdvancedMachines")) {
                 add(new AdvancedMachinesInfoProvider());
             }
             if (Loader.isModLoaded("AdvancedPowerManagement")) {

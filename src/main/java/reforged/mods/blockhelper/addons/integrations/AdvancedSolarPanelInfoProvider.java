@@ -1,30 +1,23 @@
 package reforged.mods.blockhelper.addons.integrations;
 
 import advsolar.TileEntitySolarPanel;
-import cpw.mods.fml.common.Loader;
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
+import mods.vintage.core.platform.lang.FormattedTranslator;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.Helper;
-import reforged.mods.blockhelper.addons.TextColor;
+import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
-public class AdvancedSolarPanelInfoProvider implements BlockHelperBlockProvider {
+public class AdvancedSolarPanelInfoProvider extends InfoProvider {
 
     @Override
-    public void addInformation(BlockHelperBlockState blockHelperBlockState, InfoHolder infoHolder) {
-        TileEntity tile = blockHelperBlockState.te;
-        if (tile instanceof TileEntitySolarPanel) {
-            TileEntitySolarPanel panel = (TileEntitySolarPanel) tile;
-            infoHolder.add(TextColor.AQUA.format("probe.info.energy", panel.storage, panel.maxStorage));
-            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(panel.getMaxEnergyOutput()))));
-            infoHolder.add(TextColor.WHITE.format("probe.info.generator.output", panel.gainFuel()));
-            infoHolder.add(TextColor.WHITE.format("probe.info.generator.max_output", panel.getMaxEnergyOutput()));
+    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
+        if (blockEntity instanceof TileEntitySolarPanel) {
+            TileEntitySolarPanel panel = (TileEntitySolarPanel) blockEntity;
+            helper.add(FormattedTranslator.AQUA.format("info.energy", panel.storage, panel.maxStorage));
+            helper.add(tier(Helper.getTierFromEU(panel.getMaxEnergyOutput())));
+            helper.add(translate("info.generator.output", panel.generating));
+            helper.add(translate("info.generator.max_output", panel.getMaxEnergyOutput()));
         }
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return Loader.isModLoaded("AdvancedSolarPanel");
     }
 }

@@ -1,44 +1,43 @@
 package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import cpw.mods.fml.common.Loader;
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.api.tile.IWrenchable;
-import ic2.core.IC2;
 import ic2.core.item.tool.ItemToolWrench;
+import mods.vintage.core.platform.lang.FormattedTranslator;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import reforged.mods.blockhelper.addons.BlockHelperAddons;
 import reforged.mods.blockhelper.addons.Helper;
-import reforged.mods.blockhelper.addons.TextColor;
+import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
-public class WrenchableInfoProvider implements BlockHelperBlockProvider {
+public class WrenchableInfoProvider extends InfoProvider {
 
     @Override
-    public void addInformation(BlockHelperBlockState blockHelperBlockState, InfoHolder infoHolder) {
-        TileEntity machine = blockHelperBlockState.te;
-        ItemStack heldStack = IC2.platform.getPlayerInstance().getHeldItem();
+    public boolean isEnabled() {
+        return !Loader.isModLoaded("GregTech_Addon"); // if GT is loaded, use GT InfoProvider instead
+    }
+
+    @Override
+    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
+        ItemStack heldStack = BlockHelperAddons.PROXY.getPlayer().getHeldItem();
         float dropRate;
-        if (machine instanceof IWrenchable) {
-            IWrenchable wrenchable = (IWrenchable) machine;
+        if (blockEntity instanceof IWrenchable) {
+            IWrenchable wrenchable = (IWrenchable) blockEntity;
             dropRate = wrenchable.getWrenchDropRate();
             if (dropRate > 0) {
                 if (heldStack != null) {
                     if (heldStack.getItem() instanceof ItemToolWrench) {
                         int actualDrop = ((ItemToolWrench) heldStack.getItem()).overrideWrenchSuccessRate(heldStack) ? 100 : (int) (dropRate * 100);
-                        infoHolder.add(TextColor.GOLD.format(Helper.getTextColor(actualDrop) + actualDrop) + "% " + TextColor.YELLOW.format("probe.info.wrenchable.rate"));
+                        helper.add(translate(FormattedTranslator.GOLD, "probe.info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")));
                     } else {
-                        infoHolder.add(TextColor.GOLD.format("probe.info.wrenchable"));
+                        helper.add(translate(FormattedTranslator.GOLD, "info.wrenchable"));
                     }
                 } else {
-                    infoHolder.add(TextColor.GOLD.format("probe.info.wrenchable"));
+                    helper.add(translate(FormattedTranslator.GOLD, "info.wrenchable"));
                 }
             }
         }
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return !Loader.isModLoaded("GregTech_Addon"); // if GT is loaded, use GT InfoProvider instead
     }
 }

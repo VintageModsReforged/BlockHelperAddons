@@ -1,47 +1,37 @@
 package reforged.mods.blockhelper.addons.integrations;
 
-import cpw.mods.fml.common.Loader;
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
-import ic2.advancedmachines.common.*;
+import ic2.advancedmachines.blocks.tiles.base.TileEntityAdvancedMachine;
+import ic2.advancedmachines.blocks.tiles.machines.*;
+import mods.vintage.core.platform.lang.FormattedTranslator;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.blockhelper.addons.Helper;
-import reforged.mods.blockhelper.addons.TextColor;
+import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
-public class AdvancedMachinesInfoProvider implements BlockHelperBlockProvider {
+public class AdvancedMachinesInfoProvider extends InfoProvider {
 
     @Override
-    public void addInformation(BlockHelperBlockState blockHelperBlockState, InfoHolder infoHolder) {
-        TileEntity tile = blockHelperBlockState.te;
-        if (tile instanceof TileEntityAdvancedMachine) {
-            TileEntityAdvancedMachine advMachine = (TileEntityAdvancedMachine) tile;
-            infoHolder.add(TextColor.AQUA.format("probe.info.energy", advMachine.energy, advMachine.maxEnergy));
-            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.tier", Helper.getTierForDisplay(2)));
-            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.max_in", advMachine.maxInput));
-            infoHolder.add(TextColor.WHITE.format("probe.info.eu_reader.usage", advMachine.energyConsume));
-            String speedName = "";
+    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
+        if (blockEntity instanceof TileEntityAdvancedMachine) {
+            TileEntityAdvancedMachine advMachine = (TileEntityAdvancedMachine) blockEntity;
+            helper.add(usage(advMachine.energyUsage));
+            String speedName;
             if (advMachine instanceof TileEntityRotaryMacerator) {
-                speedName = "probe.info.rotary.speed";
+                speedName = "probe.speed.rotation";
             } else if (advMachine instanceof TileEntitySingularityCompressor) {
-                speedName = "probe.info.singularity.speed";
-            } else if (advMachine instanceof TileEntityCentrifugeExtractor) {
-                speedName = "probe.info.centrifuge.speed";
-            } else if (advMachine instanceof TileAdvancedInduction) {
-                speedName = "probe.info.induction.heat";
+                speedName = "probe.speed.pressure";
+            } else if (advMachine instanceof TileEntityCentrifugeExtractor || advMachine instanceof TileEntityCompactingRecycler) {
+                speedName = "probe.speed.speed";
+            } else {
+                speedName = "probe.speed.heat";
             }
             int speed = advMachine.speed;
             int maxSpeed = advMachine.maxSpeed;
-            infoHolder.add(TextColor.YELLOW.format(speedName, speed * 100 / maxSpeed) + "%");
+            helper.add(FormattedTranslator.YELLOW.format(speedName, speed * 100 / maxSpeed));
             int progress = advMachine.gaugeProgressScaled(100);
             if (progress > 0) {
-                infoHolder.add(TextColor.DARK_GREEN.format("probe.info.progress", progress) + "%");
+                helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", progress));
             }
         }
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return Loader.isModLoaded("AdvancedMachines");
     }
 }
