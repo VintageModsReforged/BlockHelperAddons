@@ -2,6 +2,7 @@ package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import cpw.mods.fml.common.Loader;
 import de.thexxturboxx.blockhelper.BlockHelperCommonProxy;
+import reforged.mods.blockhelper.addons.integrations.AdvancedMachinesInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.BasePlugin;
 import reforged.mods.blockhelper.addons.integrations.gregtech.GregTechPlugin;
 
@@ -22,6 +23,9 @@ public class IC2Plugin extends BasePlugin {
             add(new TeleporterInfoProvider());
             addIconProvider(new CropInfoProvider());
             add(new CropInfoProvider());
+            if (Loader.isModLoaded("AdvancedMachines")) {
+                add(new AdvancedMachinesInfoProvider());
+            }
             add(new WrenchableInfoProvider());
         }
     }
