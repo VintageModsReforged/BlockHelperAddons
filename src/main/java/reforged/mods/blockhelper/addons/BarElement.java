@@ -1,14 +1,16 @@
 package reforged.mods.blockhelper.addons;
 
+import mods.vintage.core.platform.lang.FormattedTranslator;
+
 public class BarElement {
 
     String TEXT;
-    TextColor COLOR;
+    FormattedTranslator COLOR;
     int CURRENT;
     int MAX;
     int SIZE = 25; // default
 
-    public BarElement(int current, int max, TextColor color, String text) {
+    public BarElement(int current, int max, FormattedTranslator color, String text) {
         this.CURRENT = current;
         this.MAX = max;
         this.COLOR = color;
@@ -31,25 +33,24 @@ public class BarElement {
 
         char defaultChar = '\u25AF';
         String icon = "\u25AE";
-        String bare = new String(new char[maxBarSize]).replace('\0', defaultChar);
-        StringBuilder bareDone = new StringBuilder();
+        String bar = new String(new char[maxBarSize]).replace('\0', defaultChar);
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < remainPercent; i++) {
-            bareDone.append(icon);
+            builder.append(icon);
         }
-        String bareRemain = bare.substring(remainPercent);
-        String finalString = bareDone + bareRemain;
+        String substring = bar.substring(remainPercent);
+        String finalString = builder + substring;
         int mid = finalString.length() / 2;
         String firstHalf = finalString.substring(0, mid - textLength / 2);
         String secondHalf = finalString.substring(mid + textLength / 2);
-        String finalBar = TextColor.WHITE.format("[") + COLOR.format(firstHalf + TEXT + secondHalf) + TextColor.WHITE.format("]");
-        return finalBar;
+        return FormattedTranslator.WHITE.format("info.bar", COLOR.literal(firstHalf + TEXT + secondHalf));
     }
 
-    public static String bar(int current, int total, TextColor color, String text) {
+    public static String bar(int current, int total, FormattedTranslator color, String text) {
         return new BarElement(current, total, color, text).toString();
     }
 
-    public static String bar(int current, int total, TextColor color, String text, int sizeExtra) {
+    public static String bar(int current, int total, FormattedTranslator color, String text, int sizeExtra) {
         return new BarElement(current, total, color, text).size(sizeExtra).toString();
     }
 }

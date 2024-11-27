@@ -1,42 +1,30 @@
 package reforged.mods.blockhelper.addons.integrations.gregtech;
 
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
-import gregtechmod.api.BaseMetaTileEntity;
 import gregtechmod.common.tileentities.GT_TileEntityMetaID_Machine;
+import mods.vintage.core.platform.lang.FormattedTranslator;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.Helper;
-import reforged.mods.blockhelper.addons.TextColor;
-import reforged.mods.blockhelper.addons.i18n.I18n;
+import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
-public class GT_MetaMachineInfoProvider implements BlockHelperBlockProvider {
+public class GT_MetaMachineInfoProvider extends InfoProvider {
 
     @Override
-    public void addInformation(BlockHelperBlockState blockHelperBlockState, InfoHolder infoHolder) {
-        TileEntity tile = blockHelperBlockState.te;
-        if (tile instanceof BaseMetaTileEntity) {
-            BaseMetaTileEntity baseTile = (BaseMetaTileEntity) tile;
-
-        }
-        if (tile instanceof GT_TileEntityMetaID_Machine) {
-            GT_TileEntityMetaID_Machine machine = (GT_TileEntityMetaID_Machine) tile;
+    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
+        if (blockEntity instanceof GT_TileEntityMetaID_Machine) {
+            GT_TileEntityMetaID_Machine machine = (GT_TileEntityMetaID_Machine) blockEntity;
             if (machine.maxEUStore() > 0) {
-                infoHolder.add(TextColor.AQUA.format(I18n.format("info.energy", machine.getEnergyVar(), machine.maxEUStore())));
+                helper.add(FormattedTranslator.AQUA.format("info.energy", machine.getEnergyVar(), machine.maxEUStore()));
             }
             if (machine.maxEUInput() > 0) {
-                infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(machine.maxEUInput())))));
-                infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", machine.maxEUInput())));
+                helper.add(tier(Helper.getTierFromEU(machine.maxEUInput())));
+                helper.add(maxIn(machine.maxEUInput()));
             }
             int maxOut = machine.maxEUOutput();
             if (maxOut > 0) {
-                infoHolder.add(TextColor.WHITE.format(I18n.format("info.generator.max_output", maxOut)));
+                helper.add(translate("info.generator.max_output", maxOut));
             }
         }
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 }

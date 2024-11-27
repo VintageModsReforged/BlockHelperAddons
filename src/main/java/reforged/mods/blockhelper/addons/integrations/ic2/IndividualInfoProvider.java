@@ -1,59 +1,57 @@
 package reforged.mods.blockhelper.addons.integrations.ic2;
 
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.core.Ic2Items;
 import ic2.core.block.machine.tileentity.*;
 import ic2.core.util.StackUtil;
+import mods.vintage.core.platform.lang.FormattedTranslator;
+import mods.vintage.core.platform.lang.Translator;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.Helper;
-import reforged.mods.blockhelper.addons.TextColor;
-import reforged.mods.blockhelper.addons.i18n.I18n;
+import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
-public class IndividualInfoProvider implements BlockHelperBlockProvider {
+public class IndividualInfoProvider extends InfoProvider {
 
     @Override
-    public void addInformation(BlockHelperBlockState blockHelperBlockState, InfoHolder infoHolder) {
-        TileEntity tile = blockHelperBlockState.te;
-        if (tile instanceof TileEntityCanner) {
-            TileEntityCanner canner = (TileEntityCanner) tile;
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.usage", canner.energyconsume)));
-
+    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
+        if (blockEntity instanceof TileEntityCanner) {
+            TileEntityCanner canner = (TileEntityCanner) blockEntity;
+            helper.add(usage(canner.energyconsume));
             int progress = canner.gaugeProgressScaled(100);
             if (progress > 0) {
-                infoHolder.add(TextColor.DARK_GREEN.format(I18n.format("info.progress", progress) + "%"));
+                helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", progress));
             }
-        } else if (tile instanceof TileEntityInduction) {
-            TileEntityInduction induction = (TileEntityInduction) tile;
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.usage", 15)));
+        } else if (blockEntity instanceof TileEntityInduction) {
+            TileEntityInduction induction = (TileEntityInduction) blockEntity;
+            helper.add(usage(15));
             int heat = induction.heat;
             int maxHeat = 10000;
-            infoHolder.add(TextColor.YELLOW.format(I18n.format("info.induction.heat", heat * 100 / maxHeat) + "%"));
+            helper.add(FormattedTranslator.YELLOW.format("info.induction.heat", heat * 100 / maxHeat));
             int progress = induction.gaugeProgressScaled(100);
             if (progress > 0) {
-                infoHolder.add(TextColor.DARK_GREEN.format(I18n.format("info.progress", progress) + "%"));
+                helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", progress));
             }
-        } else if (tile instanceof TileEntityPump) {
-            TileEntityPump pump = (TileEntityPump) tile;
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.usage", 1)));
+        } else if (blockEntity instanceof TileEntityPump) {
+            TileEntityPump pump = (TileEntityPump) blockEntity;
+            helper.add(usage(1));
             int progress = (pump.energy * 100) / 200;
             if (progress > 0) {
-                infoHolder.add(TextColor.DARK_GREEN.format(I18n.format("info.progress", progress) + "%"));
+                helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", progress));
             }
-        } else if (tile instanceof TileEntityMatter) {
-            TileEntityMatter massFab = (TileEntityMatter) tile;
+        } else if (blockEntity instanceof TileEntityMatter) {
+            TileEntityMatter massFab = (TileEntityMatter) blockEntity;
             String progress = massFab.getProgressAsString();
             if (!progress.isEmpty()) {
-                infoHolder.add(TextColor.LIGHT_PURPLE.format(I18n.format("info.progress", progress)));
+                helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", progress));
             }
             int scrap = massFab.scrap;
             if (scrap > 0) {
-                infoHolder.add(TextColor.DARK_AQUA.format(I18n.format("info.matter.amplifier", massFab.scrap)));
+                helper.add(FormattedTranslator.DARK_AQUA.format("info.matter.amplifier", massFab.scrap));
             }
-        } else if (tile instanceof TileEntityMiner) {
-            TileEntityMiner miner = (TileEntityMiner) tile;
+        } else if (blockEntity instanceof TileEntityMiner) {
+            TileEntityMiner miner = (TileEntityMiner) blockEntity;
             ItemStack drill = miner.inventory[3];
             int progress;
             int usage;
@@ -67,41 +65,36 @@ public class IndividualInfoProvider implements BlockHelperBlockProvider {
                 usage = 2;
                 progress = 20;
             }
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.usage", usage)));
-            infoHolder.add(TextColor.WHITE.format(getMiningMode(miner)));
-            infoHolder.add(TextColor.GOLD.format(I18n.format("info.miner.level", getOperationHeight(miner))));
+            helper.add(usage(usage));
+            helper.add(translate(getMiningMode(miner)));
+            helper.add(FormattedTranslator.GOLD.format("info.miner.level", getOperationHeight(miner)));
             int displayProgress = miner.miningTicker * 100 / progress;
             if (displayProgress > 0) {
-                infoHolder.add(TextColor.DARK_GREEN.format(I18n.format("info.progress", displayProgress)  + "%"));
+                helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", progress));
             }
-        } else if (tile instanceof TileEntityCropmatron) {
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(TileEntityCropmatron.maxInput)))));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", TileEntityCropmatron.maxInput)));
-        } else if (tile instanceof TileEntityTesla) {
-            TileEntityTesla tesla = (TileEntityTesla) tile;
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.tier", Helper.getTierForDisplay(Helper.getTierFromEU(tesla.maxInput)))));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.eu_reader.max_in", tesla.maxInput)));
+        } else if (blockEntity instanceof TileEntityCropmatron) {
+            helper.add(tier(Helper.getTierFromEU(TileEntityCropmatron.maxInput)));
+            helper.add(maxIn(TileEntityCropmatron.maxInput));
+        } else if (blockEntity instanceof TileEntityTesla) {
+            TileEntityTesla tesla = (TileEntityTesla) blockEntity;
+            helper.add(tier(Helper.getTierFromEU(tesla.maxInput)));
+            helper.add(maxIn(tesla.maxInput));
         }
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 
     public static String getMiningMode(TileEntityMiner miner) {
         int operationHeight = getOperationHeight(miner);
         if (miner.inventory[3] == null) {
-            return I18n.format("info.miner.retracting");
+            return Translator.format("info.miner.retracting");
         } else if (operationHeight >= 0) {
             int blockId = miner.worldObj.getBlockId(miner.xCoord, operationHeight, miner.zCoord);
             if (blockId != Ic2Items.miningPipeTip.itemID) {
-                return I18n.format("info.miner.stuck");
+                return Translator.format("info.miner.stuck");
             } else {
-                return I18n.format("info.miner.mining");
+                return Translator.format("info.miner.mining");
             }
         }
-        return TextColor.RED.format("ERROR, please report!");
+        return FormattedTranslator.RED.literal("ERROR, please report!");
     }
 
     private static int getOperationHeight(TileEntityMiner miner) {

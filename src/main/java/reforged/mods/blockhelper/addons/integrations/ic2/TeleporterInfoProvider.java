@@ -1,28 +1,22 @@
 package reforged.mods.blockhelper.addons.integrations.ic2;
 
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.core.block.machine.tileentity.TileEntityTeleporter;
+import mods.vintage.core.platform.lang.FormattedTranslator;
+import mods.vintage.core.platform.lang.Translator;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.blockhelper.addons.i18n.I18n;
-import reforged.mods.blockhelper.addons.TextColor;
+import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
-public class TeleporterInfoProvider implements BlockHelperBlockProvider {
+public class TeleporterInfoProvider extends InfoProvider {
 
     @Override
-    public void addInformation(BlockHelperBlockState blockHelperBlockState, InfoHolder infoHolder) {
-        TileEntity tile = blockHelperBlockState.te;
-        if (tile instanceof TileEntityTeleporter) {
-            TileEntityTeleporter tp = (TileEntityTeleporter) tile;
+    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
+        if (blockEntity instanceof TileEntityTeleporter) {
+            TileEntityTeleporter tp = (TileEntityTeleporter) blockEntity;
             boolean hasTarget = tp.targetSet;
-            infoHolder.add(TextColor.GOLD.format(I18n.format("info.teleporter.target.set", hasTarget ? TextColor.GREEN.format(String.valueOf(true)) : TextColor.RED.format(String.valueOf(false)))));
-            infoHolder.add(TextColor.WHITE.format(I18n.format("info.teleporter.target", tp.targetX, tp.targetY, tp.targetZ)));
+            helper.add(FormattedTranslator.GOLD.format("info.teleporter.target.set", Translator.formattedBoolean(hasTarget)));
+            helper.add(translate("info.teleporter.target", tp.targetX, tp.targetY, tp.targetZ));
         }
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 }

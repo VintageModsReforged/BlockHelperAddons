@@ -1,27 +1,24 @@
 package reforged.mods.blockhelper.addons.integrations.ic2;
 
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.api.IWrenchable;
 import ic2.core.item.tool.ItemToolWrench;
-import net.minecraft.client.Minecraft;
+import mods.vintage.core.platform.lang.FormattedTranslator;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.Helper;
-import reforged.mods.blockhelper.addons.TextColor;
-import reforged.mods.blockhelper.addons.i18n.I18n;
+import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
-public class WrenchableInfoProvider implements BlockHelperBlockProvider {
+public class WrenchableInfoProvider extends InfoProvider {
 
     @Override
-    public void addInformation(BlockHelperBlockState blockHelperBlockState, InfoHolder infoHolder) {
-        TileEntity machine = blockHelperBlockState.te;
-        ItemStack heldStack = Minecraft.getMinecraft().thePlayer.getHeldItem();
+    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
         boolean showInfo = false;
         float dropRate = 0;
-        if (machine instanceof IWrenchable) {
-            IWrenchable wrenchable = (IWrenchable) machine;
+        ItemStack heldStack = player.getHeldItem();
+        if (blockEntity instanceof IWrenchable) {
+            IWrenchable wrenchable = (IWrenchable) blockEntity;
             dropRate = wrenchable.getWrenchDropRate();
             if (dropRate > 0) {
                 showInfo = true;
@@ -31,18 +28,18 @@ public class WrenchableInfoProvider implements BlockHelperBlockProvider {
             if (heldStack != null) {
                 if (heldStack.getItem() instanceof ItemToolWrench) {
                     int actualDrop = ((ItemToolWrench) heldStack.getItem()).overrideWrenchSuccessRate(heldStack) ? 100 : (int) (dropRate * 100);
-                    infoHolder.add(TextColor.GOLD.format(Helper.getTextColor(actualDrop) + actualDrop + "% " + "\2476" + I18n.format("info.wrenchable.rate")));
+                    helper.add(translate(FormattedTranslator.GOLD, "probe.info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")));
                 } else {
-                    infoHolder.add(TextColor.GOLD.format(I18n.format("info.wrenchable")));
+                    helper.add(translate(FormattedTranslator.GOLD, "info.wrenchable"));
                 }
             } else {
-                infoHolder.add(TextColor.GOLD.format(I18n.format("info.wrenchable")));
+                helper.add(translate(FormattedTranslator.GOLD, "info.wrenchable"));
             }
         }
     }
 
     @Override
-    public boolean isEnabled() {
-        return true;
+    public IFilter getFilter() {
+        return ALWAYS;
     }
 }

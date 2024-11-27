@@ -2,6 +2,7 @@ package reforged.mods.blockhelper.addons.integrations;
 
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
 import de.thexxturboxx.blockhelper.api.BlockHelperInfoProvider;
+import de.thexxturboxx.blockhelper.api.BlockHelperItemStackFixer;
 import de.thexxturboxx.blockhelper.api.BlockHelperModSupport;
 
 public class BasePlugin {
@@ -10,7 +11,7 @@ public class BasePlugin {
         BlockHelperModSupport.registerBlockProvider(provider);
     }
 
-    public static void addIconProvider(BlockHelperInfoProvider provider) {
+    public static void addIconProvider(BlockHelperItemStackFixer provider) {
         BlockHelperModSupport.registerItemStackFixer(provider);
     }
 }

@@ -1,18 +1,20 @@
 package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
-import de.thexxturboxx.blockhelper.api.BlockHelperInfoProvider;
+import de.thexxturboxx.blockhelper.api.BlockHelperItemStackFixer;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.api.CropCard;
 import ic2.api.TECrop;
 import ic2.core.block.crop.IC2Crops;
+import mods.vintage.core.platform.lang.FormattedTranslator;
+import mods.vintage.core.platform.lang.Translator;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.BarElement;
-import reforged.mods.blockhelper.addons.i18n.I18n;
-import reforged.mods.blockhelper.addons.TextColor;
+import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
-public class CropInfoProvider extends BlockHelperInfoProvider {
+public class CropInfoProvider extends InfoProvider implements BlockHelperItemStackFixer {
 
     @Override
     public ItemStack getItemStack(BlockHelperBlockState state) {
@@ -28,14 +30,13 @@ public class CropInfoProvider extends BlockHelperInfoProvider {
                 }
             }
         }
-        return super.getItemStack(state);
+        return null;
     }
 
     @Override
-    public void addInformation(BlockHelperBlockState blockHelperBlockState, InfoHolder infoHolder) {
-        TileEntity tile = blockHelperBlockState.te;
-        if (tile instanceof TECrop) {
-            TECrop cropTile = (TECrop) tile;
+    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
+        if (blockEntity instanceof TECrop) {
+            TECrop cropTile = (TECrop) blockEntity;
             int scanLevel = cropTile.scanLevel;
 
             // stats info
@@ -55,44 +56,39 @@ public class CropInfoProvider extends BlockHelperInfoProvider {
             CropCard crop = CropCard.getCrop(cropTile.id);
             if (crop != null) {
                 if (scanLevel < 1 && !crop.isWeed(cropTile)) {
-                    infoHolder.add(String.format("By: %s", "Unknown"));
+                    helper.add(translate("probe.crop.by", FormattedTranslator.AQUA.format("probe.crop.by.unknown")));
                 } else {
-                    infoHolder.add(String.format("By: %s", crop.discoveredBy()));
+                    helper.add(translate("probe.crop.by", FormattedTranslator.AQUA.literal(crop.discoveredBy())));
                 }
                 if (scanLevel < 4) {
-                    infoHolder.add("");
-                    infoHolder.add(BarElement.bar(scanLevel, 4, TextColor.GREEN, I18n.format("crop.scan", scanLevel, 4)));
+                    helper.add("");
+                    helper.add(BarElement.bar(scanLevel, 4, FormattedTranslator.GREEN, Translator.format("probe.crop.info.scan", scanLevel, 4)));
                 }
                 if (scanLevel >= 4) {
-                    infoHolder.add("");
-                    infoHolder.add(TextColor.YELLOW.format("#### Stats ####"));
-                    infoHolder.add(BarElement.bar(growth, 31, TextColor.DARK_GREEN, I18n.format("crop.growth", growth, 31)));
-                    infoHolder.add(BarElement.bar(gain, 31, TextColor.GOLD, I18n.format("crop.gain", gain, 31)));;
-                    infoHolder.add(BarElement.bar(resistance, 31, TextColor.DARK_AQUA, I18n.format("crop.resistance", resistance, 31)));
+                    helper.add("");
+                    helper.add(FormattedTranslator.YELLOW.format("probe.crop.stats"));
+                    helper.add(BarElement.bar(growth, 31, FormattedTranslator.DARK_GREEN, Translator.format("probe.crop.info.growth", growth, 31)));
+                    helper.add(BarElement.bar(gain, 31, FormattedTranslator.GOLD, Translator.format("probe.crop.info.gain", gain, 31)));;
+                    helper.add(BarElement.bar(resistance, 31, FormattedTranslator.DARK_AQUA, Translator.format("probe.crop.info.resistance", resistance, 31)));
 
                     int stress = (crop.tier() - 1) * 4 + growth + gain + resistance;
                     int maxStress = crop.weightInfluences(cropTile, humidity, nutrients, env) * 5;
-                    infoHolder.add(BarElement.bar(stress, maxStress, TextColor.DARK_PURPLE, I18n.format("crop.stress", stress, maxStress)));
+                    helper.add(BarElement.bar(stress, maxStress, FormattedTranslator.DARK_PURPLE, Translator.format("probe.crop.info.needs", stress, maxStress)));
                 }
             }
 
-            infoHolder.add("");
-            infoHolder.add(TextColor.YELLOW.format("#### Storage ####"));
-            infoHolder.add(BarElement.bar(fertilizer, 200, TextColor.GOLD, I18n.format("crop.fertilizer", fertilizer, 100)));
-            infoHolder.add(BarElement.bar(water, 200, TextColor.BLUE, I18n.format("crop.water", water, 200)));
-            infoHolder.add(BarElement.bar(weedex, 100, TextColor.LIGHT_PURPLE, I18n.format("crop.weedex", weedex, 150)));
+            helper.add("");
+            helper.add(FormattedTranslator.YELLOW.format("probe.crop.storage"));
+            helper.add(BarElement.bar(fertilizer, 200, FormattedTranslator.GOLD, Translator.format("probe.crop.info.fertilizer", fertilizer, 100)));
+            helper.add(BarElement.bar(water, 200, FormattedTranslator.BLUE, Translator.format("probe.crop.info.water", water, 200)));
+            helper.add(BarElement.bar(weedex, 100, FormattedTranslator.LIGHT_PURPLE, Translator.format("probe.crop.info.weedex", weedex, 150)));
 
-            infoHolder.add("");
-            infoHolder.add(TextColor.YELLOW.format("#### Environment ####"));
-            infoHolder.add(BarElement.bar(nutrients, 20, TextColor.GREEN, I18n.format("crop.nutrients", nutrients, 20)));
-            infoHolder.add(BarElement.bar(humidity, 20, TextColor.DARK_AQUA, I18n.format("crop.humidity", humidity, 20)));
-            infoHolder.add(BarElement.bar(env, 10, TextColor.AQUA, I18n.format("crop.env", env, 10)));
-            infoHolder.add(BarElement.bar(light, 15, TextColor.YELLOW, I18n.format("crop.light", light, 15)));
+            helper.add("");
+            helper.add(FormattedTranslator.YELLOW.format("probe.crop.env"));
+            helper.add(BarElement.bar(nutrients, 20, FormattedTranslator.GREEN, Translator.format("probe.crop.info.nutrients", nutrients, 20)));
+            helper.add(BarElement.bar(humidity, 20, FormattedTranslator.DARK_AQUA, Translator.format("probe.crop.info.humidity", humidity, 20)));
+            helper.add(BarElement.bar(env, 10, FormattedTranslator.AQUA, Translator.format("probe.crop.info.env", env, 10)));
+            helper.add(BarElement.bar(light, 15, FormattedTranslator.YELLOW, Translator.format("probe.crop.info.light", light, 15)));
         }
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 }

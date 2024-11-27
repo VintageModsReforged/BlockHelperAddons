@@ -31,6 +31,10 @@ volde {
 	}
 }
 
+repositories {
+	maven { url = "https://api.modrinth.com/maven" }
+}
+
 dependencies {
 	minecraft "com.mojang:minecraft:${minecraftVersion}"
 	forge "net.minecraftforge:forge:${forgeVersion}:universal@zip"
@@ -39,18 +43,12 @@ dependencies {
 		baseZip "net.minecraftforge:forge:${forgeVersion}:src@zip"
 		unmapClass(["bar", "bas"])
 	}
-	
-	//accessTransformers files("./src/main/resources/good_cool_ats.cfg")
-	
-	//coremodImplementation files("libs/name.jar")
-	//coremodImplementation files("libs/name.zip")
-	//modImplementation files("libs/name.jar")
-	//modImplementation files("libs/name.zip")
 
-	modImplementation files("libs/blockhelper-1.4.7-1.0.0-voldeloom-dev.jar")
-	modImplementation files("libs/advancedmachines-1.4.7-1.0.0-voldeloom.jar")
 	modImplementation files("libs/industrialcraft-2_1.115.207-lf.jar")
 	modImplementation files("libs/gregtechmod290h.zip")
+	modImplementation files("libs/VintageCore-1.4.7-1.0.2-dev.jar")
+
+	modImplementation("maven.modrinth:block-helper:1.2.0-1.4.7")
 }
 
 sourceSets {
