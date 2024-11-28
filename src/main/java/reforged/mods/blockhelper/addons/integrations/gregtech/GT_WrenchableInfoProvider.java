@@ -56,7 +56,7 @@ public class GT_WrenchableInfoProvider extends InfoProvider {
                 }
             }
         } else {
-            if (blockEntity instanceof IWrenchable && ((IWrenchable) blockEntity).getWrenchDropRate() > 0) {
+            if (blockEntity instanceof IWrenchable && ((IWrenchable) blockEntity).getWrenchDropRate() > 0 || blockEntity instanceof BaseTileEntity) {
                 helper.add(FormattedTranslator.GOLD.format("info.wrenchable"));
             }
         }
