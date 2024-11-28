@@ -8,7 +8,6 @@ import ic2.api.crops.ICropTile;
 import ic2.core.block.crop.IC2Crops;
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import mods.vintage.core.platform.lang.Translator;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.BarElement;
@@ -39,7 +38,7 @@ public class CropInfoProvider extends InfoProvider implements BlockHelperItemSta
     }
 
     @Override
-    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
+    public void addInfo(InfoHolder helper, TileEntity blockEntity) {
         if (blockEntity instanceof ICropTile) {
             ICropTile cropTile = (ICropTile) blockEntity;
             int scanLevel = cropTile.getScanLevel();

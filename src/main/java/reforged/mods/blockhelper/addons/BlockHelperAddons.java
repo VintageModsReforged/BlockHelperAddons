@@ -19,7 +19,7 @@ import java.util.List;
                 "after:AdvancedPowerManagement;" +
                 "after:ChargePads;" +
                 "after:GregTech_Addon;" +
-                "after:AdvancedSolarPanel;"
+                "after:AdvancedSolarPanel"
 )
 public class BlockHelperAddons implements ILangProvider {
 

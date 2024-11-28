@@ -4,7 +4,6 @@ import de.thexxturboxx.blockhelper.api.InfoHolder;
 import gregtechmod.api.metatileentity.BaseTileEntity;
 import gregtechmod.common.tileentities.GT_TileEntityMetaID_Machine;
 import mods.vintage.core.platform.lang.FormattedTranslator;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.Helper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
@@ -12,7 +11,7 @@ import reforged.mods.blockhelper.addons.utils.InfoProvider;
 public class GT_MetaMachineInfoProvider extends InfoProvider {
 
     @Override
-    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
+    public void addInfo(InfoHolder helper, TileEntity blockEntity) {
         if (blockEntity instanceof BaseTileEntity) {
             BaseTileEntity baseTile = (BaseTileEntity) blockEntity;
             if (baseTile instanceof GT_TileEntityMetaID_Machine) {

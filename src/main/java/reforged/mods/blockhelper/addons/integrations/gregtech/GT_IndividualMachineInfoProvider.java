@@ -5,14 +5,13 @@ import gregtechmod.api.interfaces.IGregTechTileEntity;
 import gregtechmod.api.metatileentity.MetaTileEntity;
 import gregtechmod.common.tileentities.*;
 import mods.vintage.core.platform.lang.FormattedTranslator;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class GT_IndividualMachineInfoProvider extends InfoProvider {
 
     @Override
-    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
+    public void addInfo(InfoHolder helper, TileEntity blockEntity) {
         if (blockEntity instanceof IGregTechTileEntity) {
             IGregTechTileEntity baseTile = (IGregTechTileEntity) blockEntity;
             MetaTileEntity metaTile = baseTile.getMetaTileEntity();

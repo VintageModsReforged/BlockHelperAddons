@@ -5,7 +5,6 @@ import ic2.core.Ic2Items;
 import ic2.core.block.machine.tileentity.*;
 import ic2.core.util.StackUtil;
 import mods.vintage.core.platform.lang.FormattedTranslator;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.Helper;
@@ -14,7 +13,7 @@ import reforged.mods.blockhelper.addons.utils.InfoProvider;
 public class IndividualInfoProvider extends InfoProvider {
 
     @Override
-    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
+    public void addInfo(InfoHolder helper, TileEntity blockEntity) {
         if (blockEntity instanceof TileEntityCanner) {
             TileEntityCanner canner = (TileEntityCanner) blockEntity;
             helper.add(usage(canner.energyconsume));

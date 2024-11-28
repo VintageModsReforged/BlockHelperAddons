@@ -47,6 +47,7 @@ dependencies {
 	minecraft "com.mojang:minecraft:${minecraftVersion}"
 	forge "net.minecraftforge:forge:${forgeVersion}:universal@zip"
 	mappings "net.minecraftforge:forge:${forgeVersion}:src@zip"
+
 	modImplementation files("libs/industrialcraft-2_1.117.385-lf.jar")
 	modImplementation files("libs/mod_AdvancedSolarPanels_3_3_7-deobf.jar")
 	modImplementation files("libs/compactsolars-universal-1.5.2-4.2.0.52.zip")
@@ -56,6 +57,7 @@ dependencies {
 	modImplementation files("libs/VintageCore-1.5.2-1.0.2-dev.jar")
 	modImplementation files("libs/AdvancedMachines-1.5.2-4.7.5.2d-dev.jar")
 
+	implementation 'com.google.code.gson:gson:2.11.0'
 	implementation group: 'it.unimi.dsi', name: 'fastutil', version: '8.2.1'
 }
 

@@ -13,7 +13,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.blockhelper.addons.BlockHelperAddons;
 import reforged.mods.blockhelper.addons.Helper;
 
 public abstract class InfoProvider implements BlockHelperBlockProvider, IInfoProvider {
@@ -49,15 +48,19 @@ public abstract class InfoProvider implements BlockHelperBlockProvider, IInfoPro
 
     @Override
     public void addInformation(BlockHelperBlockState blockHelperBlockState, InfoHolder infoHolder) {
-        addInfo(infoHolder, blockHelperBlockState.te, BlockHelperAddons.PROXY.getPlayer());
+        addInfo(infoHolder, blockHelperBlockState.te);
     }
 
+    public abstract void addInfo(final InfoHolder helper, final TileEntity blockEntity);
+
+    /** TODO:
+     * re-add this when BlockHelper provide EntityPlayer inside {@link BlockHelperBlockState}
+     * return canHandle(BlockHelperAddons.PROXY.getPlayer())
+     * */
     @Override
     public boolean isEnabled() {
-        return canHandle(BlockHelperAddons.PROXY.getPlayer());
+        return true;
     }
-
-    public abstract void addInfo(final InfoHolder helper, final TileEntity blockEntity, final EntityPlayer player);
 
     @Override
     public boolean canHandle(EntityPlayer player) {

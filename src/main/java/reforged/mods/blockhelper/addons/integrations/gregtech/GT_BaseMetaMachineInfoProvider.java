@@ -6,7 +6,6 @@ import gregtechmod.api.metatileentity.MetaTileEntity;
 import gregtechmod.common.tileentities.GT_MetaTileEntity_TesseractGenerator;
 import gregtechmod.common.tileentities.GT_MetaTileEntity_TesseractTerminal;
 import mods.vintage.core.platform.lang.FormattedTranslator;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.Helper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
@@ -14,7 +13,7 @@ import reforged.mods.blockhelper.addons.utils.InfoProvider;
 public class GT_BaseMetaMachineInfoProvider extends InfoProvider {
 
     @Override
-    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
+    public void addInfo(InfoHolder helper, TileEntity blockEntity) {
         if (blockEntity instanceof IGregTechTileEntity) {
             IGregTechTileEntity baseMetaTileEntity = (IGregTechTileEntity) blockEntity;
             MetaTileEntity metaTileEntity = baseMetaTileEntity.getMetaTileEntity();

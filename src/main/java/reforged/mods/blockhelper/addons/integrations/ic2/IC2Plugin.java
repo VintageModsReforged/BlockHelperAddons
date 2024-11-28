@@ -11,9 +11,13 @@ import reforged.mods.blockhelper.addons.integrations.gregtech.GregTechPlugin;
 
 public class IC2Plugin extends BasePlugin {
 
-    public static final String MODID = "IC2";
+    public final String MODID = "IC2";
 
-    public static void init() {
+    public static final IC2Plugin THIS = new IC2Plugin();
+
+    public IC2Plugin() {}
+
+    public void init() {
         if (Loader.isModLoaded(MODID)) {
             BlockHelperCommonProxy.ic2Integration = false;
             add(new EUStorageInfoProvider());
@@ -35,7 +39,7 @@ public class IC2Plugin extends BasePlugin {
                 add(new AdvancedPowerManagementInfoProvider());
             }
             add(new WrenchableInfoProvider());
-            GregTechPlugin.init();
+            GregTechPlugin.THIS.init();
         }
     }
 }

@@ -7,7 +7,9 @@ public class GregTechPlugin extends BasePlugin {
 
     public static final String MODID = "GregTech_Addon";
 
-    public static void init() {
+    public static final GregTechPlugin THIS = new GregTechPlugin();
+
+    public void init() {
         if (Loader.isModLoaded(MODID)) {
             add(new GT_BaseMetaMachineInfoProvider());
             add(new GT_MetaMachineInfoProvider());

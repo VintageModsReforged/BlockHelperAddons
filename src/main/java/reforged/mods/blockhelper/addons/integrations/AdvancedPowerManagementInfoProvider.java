@@ -5,7 +5,6 @@ import com.kaijin.AdvPowerMan.TEBatteryStation;
 import com.kaijin.AdvPowerMan.TEChargingBench;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
 import mods.vintage.core.platform.lang.FormattedTranslator;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.Helper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
@@ -13,7 +12,7 @@ import reforged.mods.blockhelper.addons.utils.InfoProvider;
 public class AdvancedPowerManagementInfoProvider extends InfoProvider {
 
     @Override
-    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
+    public void addInfo(InfoHolder helper, TileEntity blockEntity) {
         if (blockEntity instanceof TEChargingBench) {
             TEChargingBench bench = (TEChargingBench) blockEntity;
             helper.add(FormattedTranslator.AQUA.format("info.energy", bench.getStored(), bench.getCapacity()));

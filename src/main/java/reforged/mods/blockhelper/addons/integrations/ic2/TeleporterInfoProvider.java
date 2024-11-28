@@ -4,14 +4,13 @@ import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.core.block.machine.tileentity.TileEntityTeleporter;
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import mods.vintage.core.platform.lang.Translator;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class TeleporterInfoProvider extends InfoProvider {
 
     @Override
-    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
+    public void addInfo(InfoHolder helper, TileEntity blockEntity) {
         if (blockEntity instanceof TileEntityTeleporter) {
             TileEntityTeleporter tp = (TileEntityTeleporter) blockEntity;
             boolean hasTarget = tp.targetSet;

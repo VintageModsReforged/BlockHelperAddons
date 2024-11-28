@@ -5,7 +5,6 @@ import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
 import ic2.core.block.generator.tileentity.*;
 import mods.vintage.core.platform.lang.FormattedTranslator;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.BarElement;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
@@ -24,7 +23,7 @@ public class GeneratorInfoProvider extends InfoProvider {
     }
 
     @Override
-    public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
+    public void addInfo(InfoHolder helper, TileEntity blockEntity) {
         if (blockEntity instanceof TileEntityBaseGenerator) {
             TileEntityBaseGenerator gen = (TileEntityBaseGenerator) blockEntity;
             helper.add(tier(1));
