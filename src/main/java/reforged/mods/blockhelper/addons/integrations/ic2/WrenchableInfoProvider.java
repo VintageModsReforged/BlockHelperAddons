@@ -1,5 +1,6 @@
 package reforged.mods.blockhelper.addons.integrations.ic2;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.api.IWrenchable;
 import ic2.core.item.tool.ItemToolWrench;
@@ -16,7 +17,6 @@ public class WrenchableInfoProvider extends InfoProvider {
     public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
         boolean showInfo = false;
         float dropRate = 0;
-        ItemStack heldStack = player.getHeldItem();
         if (blockEntity instanceof IWrenchable) {
             IWrenchable wrenchable = (IWrenchable) blockEntity;
             dropRate = wrenchable.getWrenchDropRate();
@@ -25,16 +25,19 @@ public class WrenchableInfoProvider extends InfoProvider {
             }
         }
         if (showInfo) {
-            if (heldStack != null) {
-                if (heldStack.getItem() instanceof ItemToolWrench) {
-                    int actualDrop = ((ItemToolWrench) heldStack.getItem()).overrideWrenchSuccessRate(heldStack) ? 100 : (int) (dropRate * 100);
-                    helper.add(translate(FormattedTranslator.GOLD, "probe.info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")));
+            if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
+                ItemStack heldStack = player.getHeldItem();
+                if (heldStack != null) {
+                    if (heldStack.getItem() instanceof ItemToolWrench) {
+                        int actualDrop = ((ItemToolWrench) heldStack.getItem()).overrideWrenchSuccessRate(heldStack) ? 100 : (int) (dropRate * 100);
+                        helper.add(translate(FormattedTranslator.GOLD, "probe.info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")));
+                    } else {
+                        helper.add(translate(FormattedTranslator.GOLD, "info.wrenchable"));
+                    }
                 } else {
                     helper.add(translate(FormattedTranslator.GOLD, "info.wrenchable"));
                 }
-            } else {
-                helper.add(translate(FormattedTranslator.GOLD, "info.wrenchable"));
-            }
+            } else helper.add(translate(FormattedTranslator.GOLD, "info.wrenchable"));
         }
     }
 

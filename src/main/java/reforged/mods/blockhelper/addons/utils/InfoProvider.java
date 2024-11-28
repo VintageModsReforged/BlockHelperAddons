@@ -52,9 +52,13 @@ public abstract class InfoProvider implements BlockHelperBlockProvider, IInfoPro
         addInfo(infoHolder, blockHelperBlockState.te, BlockHelperAddons.PROXY.getPlayer());
     }
 
+    /** TODO:
+     * re-add this when BlockHelper provide EntityPlayer inside {@link BlockHelperBlockState}
+     * return canHandle(BlockHelperAddons.PROXY.getPlayer())
+     * */
     @Override
     public boolean isEnabled() {
-        return canHandle(BlockHelperAddons.PROXY.getPlayer());
+        return true;
     }
 
     public abstract void addInfo(final InfoHolder helper, final TileEntity blockEntity, final EntityPlayer player);
