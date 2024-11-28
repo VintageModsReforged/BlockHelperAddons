@@ -25,19 +25,17 @@ public class WrenchableInfoProvider extends InfoProvider {
             }
         }
         if (showInfo) {
-            if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
-                ItemStack heldStack = player.getHeldItem();
-                if (heldStack != null) {
-                    if (heldStack.getItem() instanceof ItemToolWrench) {
-                        int actualDrop = ((ItemToolWrench) heldStack.getItem()).overrideWrenchSuccessRate(heldStack) ? 100 : (int) (dropRate * 100);
-                        helper.add(translate(FormattedTranslator.GOLD, "probe.info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")));
-                    } else {
-                        helper.add(translate(FormattedTranslator.GOLD, "info.wrenchable"));
-                    }
+            ItemStack heldStack = player.getHeldItem();
+            if (heldStack != null) {
+                if (heldStack.getItem() instanceof ItemToolWrench) {
+                    int actualDrop = ((ItemToolWrench) heldStack.getItem()).overrideWrenchSuccessRate(heldStack) ? 100 : (int) (dropRate * 100);
+                    helper.add(translate(FormattedTranslator.GOLD, "probe.info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")));
                 } else {
                     helper.add(translate(FormattedTranslator.GOLD, "info.wrenchable"));
                 }
-            } else helper.add(translate(FormattedTranslator.GOLD, "info.wrenchable"));
+            } else {
+                helper.add(translate(FormattedTranslator.GOLD, "info.wrenchable"));
+            }
         }
     }
 
