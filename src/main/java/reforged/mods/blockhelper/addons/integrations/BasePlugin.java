@@ -10,7 +10,6 @@ public class BasePlugin {
 
     public void add(BlockHelperBlockProvider provider) {
         BlockHelperModSupport.registerBlockProvider(provider);
-        VintageCore.LOGGER.info("Loaded: " + provider.toString());
     }
 
     public void addIconProvider(BlockHelperItemStackFixer provider) {
