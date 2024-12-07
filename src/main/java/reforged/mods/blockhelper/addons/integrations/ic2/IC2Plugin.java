@@ -27,6 +27,7 @@ public class IC2Plugin extends BasePlugin {
             add(new GeneratorInfoProvider());
             add(new TransformerInfoProvider());
             add(new TeleporterInfoProvider());
+            addNameProvider(new CropInfoProvider());
             addIconProvider(new CropInfoProvider());
             add(new CropInfoProvider());
             if (Loader.isModLoaded("AdvancedSolarPanel")) {

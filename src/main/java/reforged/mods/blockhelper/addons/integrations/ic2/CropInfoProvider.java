@@ -2,18 +2,52 @@ package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
 import de.thexxturboxx.blockhelper.api.BlockHelperItemStackFixer;
+import de.thexxturboxx.blockhelper.api.BlockHelperNameFixer;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.api.crops.CropCard;
 import ic2.api.crops.ICropTile;
+import ic2.api.item.Items;
 import ic2.core.block.crop.IC2Crops;
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import mods.vintage.core.platform.lang.Translator;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.BarElement;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
-public class CropInfoProvider extends InfoProvider implements BlockHelperItemStackFixer {
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+public class CropInfoProvider extends InfoProvider implements BlockHelperItemStackFixer, BlockHelperNameFixer {
+
+    public static Map<String, ItemStack[]> CROPS_DROPS = new HashMap<String, ItemStack[]>();
+
+    static {
+        // ic2
+        CROPS_DROPS.put(IC2Crops.cropMelon.name(), new ItemStack[] { new ItemStack(Item.melon), new ItemStack(Block.melon) });
+        CROPS_DROPS.put(IC2Crops.cropPotato.name(), new ItemStack[] { new ItemStack(Item.potato), new ItemStack(Item.poisonousPotato) });
+        // GregTech
+        CROPS_DROPS.put("Bobsyeruncleranks", new ItemStack[]{ new ItemStack(Item.emerald) });
+        CROPS_DROPS.put("Diareed", new ItemStack[]{ new ItemStack(Item.diamond) });
+        CROPS_DROPS.put("Withereed", new ItemStack[]{ new ItemStack(Item.coal), Items.getItem("coalDust") });
+        CROPS_DROPS.put("Blazereed", new ItemStack[]{ new ItemStack(Item.blazePowder), new ItemStack(Item.blazeRod) });
+        CROPS_DROPS.put("Eggplant", new ItemStack[]{ new ItemStack(Item.egg), new ItemStack(Item.chickenRaw), new ItemStack(Item.feather) });
+        CROPS_DROPS.put("Corpseplant", new ItemStack[]{ new ItemStack(Item.rottenFlesh), new ItemStack(Item.dyePowder, 1, 15), new ItemStack(Item.bone) });
+        CROPS_DROPS.put("Enderbloom", new ItemStack[]{ new ItemStack(Item.enderPearl), new ItemStack(Item.eyeOfEnder) });
+        CROPS_DROPS.put("Meatrose", new ItemStack[]{ new ItemStack(Item.dyePowder, 1, 9), new ItemStack(Item.beefRaw), new ItemStack(Item.porkRaw), new ItemStack(Item.chickenRaw), new ItemStack(Item.fishRaw) });
+        CROPS_DROPS.put("Spidernip", new ItemStack[]{ new ItemStack(Block.web), new ItemStack(Item.silk), new ItemStack(Item.spiderEye) });
+    }
+
+    private static final Random random = new Random();
+
+    private static int currentDropIndex;
+    private static ItemStack currentDropStack;
+    private static String currentBlockName;
+    public long lastUpdate = 0;
+    public long interval = 1000;
 
     @Override
     public IFilter getFilter() {
@@ -28,10 +62,45 @@ public class CropInfoProvider extends InfoProvider implements BlockHelperItemSta
             CropCard crop = IC2Crops.instance.getCropList()[cropTile.getID()];
             if (crop != null) {
                 if (!crop.isWeed(cropTile)) {
-                    return crop.getGain(cropTile);
+                    if (CROPS_DROPS.get(crop.name()) != null) {
+                        String name = crop.name();
+                        if (!name.equals(currentBlockName)) {
+                            currentBlockName = name;
+                            updateDropIcon(name);
+                        } else {
+                            long currentTime = System.currentTimeMillis();
+                            if (currentTime - lastUpdate >= interval || currentDropStack == null) {
+                                lastUpdate = currentTime;
+                                updateDropIcon(name);
+                            }
+                        }
+                        return currentDropStack;
+                    } else return crop.getGain(cropTile);
                 } else {
-                    return IC2Crops.weed.getGain(cropTile);
+                    return Items.getItem("weedEx");
                 }
+            }
+        }
+        return null;
+    }
+
+    private static void updateDropIcon(String cropName) {
+        ItemStack[] drops = CROPS_DROPS.get(cropName);
+        if (drops != null && drops.length > 0) {
+            int nextIndex = random.nextInt(drops.length);
+            currentDropIndex = currentDropIndex == nextIndex ? random.nextInt(drops.length) : nextIndex;
+            currentDropStack = drops[currentDropIndex];
+        }
+    }
+
+    @Override
+    public String getName(BlockHelperBlockState state) {
+        TileEntity tile = state.te;
+        if (tile instanceof ICropTile) {
+            ICropTile cropTile = (ICropTile) tile;
+            CropCard crop = IC2Crops.instance.getCropList()[cropTile.getID()];
+            if (crop != null) {
+                return crop.name();
             }
         }
         return null;
