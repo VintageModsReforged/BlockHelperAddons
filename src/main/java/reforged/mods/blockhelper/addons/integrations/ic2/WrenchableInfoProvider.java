@@ -1,6 +1,5 @@
 package reforged.mods.blockhelper.addons.integrations.ic2;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.api.IWrenchable;
 import ic2.core.item.tool.ItemToolWrench;
@@ -29,7 +28,7 @@ public class WrenchableInfoProvider extends InfoProvider {
             if (heldStack != null) {
                 if (heldStack.getItem() instanceof ItemToolWrench) {
                     int actualDrop = ((ItemToolWrench) heldStack.getItem()).overrideWrenchSuccessRate(heldStack) ? 100 : (int) (dropRate * 100);
-                    helper.add(translate(FormattedTranslator.GOLD, "probe.info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")));
+                    helper.add(translate(FormattedTranslator.GOLD, "info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")));
                 } else {
                     helper.add(translate(FormattedTranslator.GOLD, "info.wrenchable"));
                 }

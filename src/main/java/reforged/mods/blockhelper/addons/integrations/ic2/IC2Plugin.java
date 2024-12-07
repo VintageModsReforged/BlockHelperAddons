@@ -22,6 +22,7 @@ public class IC2Plugin extends BasePlugin {
             add(new TransformerInfoProvider());
             add(new TeleporterInfoProvider());
             addIconProvider(new CropInfoProvider());
+            addNameProvider(new CropInfoProvider());
             add(new CropInfoProvider());
             if (Loader.isModLoaded("AdvancedMachines")) {
                 add(new AdvancedMachinesInfoProvider());
