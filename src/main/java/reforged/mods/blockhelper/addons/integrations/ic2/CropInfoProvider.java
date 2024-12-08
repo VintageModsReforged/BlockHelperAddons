@@ -7,6 +7,7 @@ import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.api.crops.CropCard;
 import ic2.api.crops.ICropTile;
 import ic2.api.item.Items;
+import ic2.core.block.TileEntityCrop;
 import ic2.core.block.crop.IC2Crops;
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import mods.vintage.core.platform.lang.Translator;
@@ -17,7 +18,10 @@ import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.BarElement;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -108,8 +112,8 @@ public class CropInfoProvider extends InfoProvider implements BlockHelperItemSta
 
     @Override
     public void addInfo(InfoHolder helper, TileEntity blockEntity) {
-        if (blockEntity instanceof ICropTile) {
-            ICropTile cropTile = (ICropTile) blockEntity;
+        if (blockEntity instanceof TileEntityCrop) {
+            TileEntityCrop cropTile = (TileEntityCrop) blockEntity;
             int scanLevel = cropTile.getScanLevel();
 
             // stats info
@@ -128,6 +132,8 @@ public class CropInfoProvider extends InfoProvider implements BlockHelperItemSta
 
             CropCard crop = IC2Crops.instance.getCropList()[cropTile.getID()];
             if (crop != null) {
+                int size = cropTile.getSize();
+                int maxSize = cropTile.crop().maxSize();
                 if (scanLevel < 1 && !crop.isWeed(cropTile)) {
                     helper.add(translate("probe.crop.by", FormattedTranslator.AQUA.format("probe.crop.by.unknown")));
                 } else {
@@ -139,6 +145,18 @@ public class CropInfoProvider extends InfoProvider implements BlockHelperItemSta
                 }
                 if (scanLevel >= 4) {
                     helper.add("");
+                    helper.add(FormattedTranslator.YELLOW.format("probe.crop.growth"));
+                    if (size == maxSize) {
+                        helper.add(BarElement.bar(maxSize, maxSize, FormattedTranslator.GREEN, Translator.format("probe.crop.info.stage_done", maxSize)));
+                    } else {
+                        helper.add(BarElement.bar(size, maxSize, FormattedTranslator.GREEN, Translator.format("probe.crop.info.stage", size, maxSize)));
+                        helper.add(BarElement.bar(cropTile.growthPoints, crop.growthDuration(cropTile), FormattedTranslator.GREEN, Translator.format("probe.crop.info.points", cropTile.growthPoints, crop.growthDuration(cropTile))));
+                    }
+
+                    if (!crop.canGrow(cropTile)) {
+                        helper.add(BarElement.bar(1, 1, FormattedTranslator.RED, Translator.format("probe.crop.grow.not")));
+                    }
+                    helper.add(FormattedTranslator.GOLD.format("probe.crop.harvest", Translator.formattedBoolean(crop.canBeHarvested(cropTile))));
                     helper.add(FormattedTranslator.YELLOW.format("probe.crop.stats"));
                     helper.add(BarElement.bar(growth, 31, FormattedTranslator.DARK_GREEN, Translator.format("probe.crop.info.growth", growth, 31)));
                     helper.add(BarElement.bar(gain, 31, FormattedTranslator.GOLD, Translator.format("probe.crop.info.gain", gain, 31)));;
@@ -147,6 +165,8 @@ public class CropInfoProvider extends InfoProvider implements BlockHelperItemSta
                     int stress = (crop.tier() - 1) * 4 + growth + gain + resistance;
                     int maxStress = crop.weightInfluences(cropTile, humidity, nutrients, env) * 5;
                     helper.add(BarElement.bar(stress, maxStress, FormattedTranslator.DARK_PURPLE, Translator.format("probe.crop.info.needs", stress, maxStress)));
+                    DecimalFormat format = new DecimalFormat("##.##", new DecimalFormatSymbols(Locale.ROOT));
+                    helper.add(FormattedTranslator.GOLD.format("probe.seed.drop.chance", format.format(crop.dropSeedChance(cropTile) * 100.0)));
                 }
             }
 
