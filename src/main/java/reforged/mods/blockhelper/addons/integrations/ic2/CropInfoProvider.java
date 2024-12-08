@@ -7,6 +7,7 @@ import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.api.CropCard;
 import ic2.api.Items;
 import ic2.api.TECrop;
+import ic2.core.block.TileEntityCrop;
 import ic2.core.block.crop.IC2Crops;
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import mods.vintage.core.platform.lang.Translator;
@@ -18,18 +19,44 @@ import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.BarElement;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
 public class CropInfoProvider extends InfoProvider implements BlockHelperItemStackFixer, BlockHelperNameFixer {
 
     public static Map<String, ItemStack[]> CROPS_DROPS = new HashMap<String, ItemStack[]>();
+    public static Map<CropCard, Integer> CROPS_MAX_SIZES = new HashMap<CropCard, Integer>();
 
     static {
         // ic2
         CROPS_DROPS.put(IC2Crops.cropMelon.name(), new ItemStack[] { new ItemStack(Item.melon), new ItemStack(Block.melon) });
         CROPS_DROPS.put(IC2Crops.cropPotato.name(), new ItemStack[] { new ItemStack(Item.potato), new ItemStack(Item.poisonousPotato) });
+        // TODO: CHECK THESE
+        CROPS_MAX_SIZES.put(IC2Crops.cropAurelia, 4);
+        CROPS_MAX_SIZES.put(IC2Crops.cropCocoa, 4);
+        CROPS_MAX_SIZES.put(IC2Crops.cropCoffee, 5);
+        CROPS_MAX_SIZES.put(IC2Crops.cropYellowFlower, 4);
+        CROPS_MAX_SIZES.put(IC2Crops.cropRedFlower, 4);
+        CROPS_MAX_SIZES.put(IC2Crops.cropBlackFlower, 4);
+        CROPS_MAX_SIZES.put(IC2Crops.cropPurpleFlower, 4);
+        CROPS_MAX_SIZES.put(IC2Crops.cropBlueFlower, 4);
+        CROPS_MAX_SIZES.put(IC2Crops.cropFerru, 4);
+        CROPS_MAX_SIZES.put(IC2Crops.cropHops, 7);
+        CROPS_MAX_SIZES.put(IC2Crops.cropMelon, 4);
+        CROPS_MAX_SIZES.put(IC2Crops.cropNetherWart, 3);
+        CROPS_MAX_SIZES.put(IC2Crops.cropPotato, 3);
+        CROPS_MAX_SIZES.put(IC2Crops.cropCarrots, 3);
+        CROPS_MAX_SIZES.put(IC2Crops.cropPumpkin, 4);
+        CROPS_MAX_SIZES.put(IC2Crops.cropRedwheat, 7);
+        CROPS_MAX_SIZES.put(IC2Crops.cropReed, 3);
+        CROPS_MAX_SIZES.put(IC2Crops.cropStickReed, 4);
+        CROPS_MAX_SIZES.put(IC2Crops.cropTerraWart, 3);
+        CROPS_MAX_SIZES.put(IC2Crops.cropVenomilia, 6);
+        CROPS_MAX_SIZES.put(IC2Crops.cropWheat, 7);
     }
 
     private static final Random random = new Random();
@@ -99,8 +126,8 @@ public class CropInfoProvider extends InfoProvider implements BlockHelperItemSta
 
     @Override
     public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
-        if (blockEntity instanceof TECrop) {
-            TECrop cropTile = (TECrop) blockEntity;
+        if (blockEntity instanceof TileEntityCrop) {
+            TileEntityCrop cropTile = (TileEntityCrop) blockEntity;
             int scanLevel = cropTile.scanLevel;
 
             // stats info
@@ -119,6 +146,8 @@ public class CropInfoProvider extends InfoProvider implements BlockHelperItemSta
 
             CropCard crop = CropCard.getCrop(cropTile.id);
             if (crop != null) {
+                int size = cropTile.size;
+                int maxSize = CROPS_MAX_SIZES.get(cropTile.crop());
                 if (scanLevel < 1 && !crop.isWeed(cropTile)) {
                     helper.add(translate("probe.crop.by", FormattedTranslator.AQUA.format("probe.crop.by.unknown")));
                 } else {
@@ -130,6 +159,18 @@ public class CropInfoProvider extends InfoProvider implements BlockHelperItemSta
                 }
                 if (scanLevel >= 4) {
                     helper.add("");
+                    helper.add(FormattedTranslator.YELLOW.format("probe.crop.growth"));
+                    if (size == maxSize) {
+                        helper.add(BarElement.bar(maxSize, maxSize, FormattedTranslator.GREEN, Translator.format("probe.crop.info.stage_done", maxSize)));
+                    } else {
+                        helper.add(BarElement.bar(size, maxSize, FormattedTranslator.GREEN, Translator.format("probe.crop.info.stage", size, maxSize)));
+                        helper.add(BarElement.bar(cropTile.growthPoints, crop.growthDuration(cropTile), FormattedTranslator.GREEN, Translator.format("probe.crop.info.points", cropTile.growthPoints, crop.growthDuration(cropTile))));
+                    }
+
+                    if (!crop.canGrow(cropTile)) {
+                        helper.add(BarElement.bar(1, 1, FormattedTranslator.RED, Translator.format("probe.crop.grow.not")));
+                    }
+                    helper.add(FormattedTranslator.GOLD.format("probe.crop.harvest", Translator.formattedBoolean(crop.canBeHarvested(cropTile))));
                     helper.add(FormattedTranslator.YELLOW.format("probe.crop.stats"));
                     helper.add(BarElement.bar(growth, 31, FormattedTranslator.DARK_GREEN, Translator.format("probe.crop.info.growth", growth, 31)));
                     helper.add(BarElement.bar(gain, 31, FormattedTranslator.GOLD, Translator.format("probe.crop.info.gain", gain, 31)));;
@@ -138,6 +179,8 @@ public class CropInfoProvider extends InfoProvider implements BlockHelperItemSta
                     int stress = (crop.tier() - 1) * 4 + growth + gain + resistance;
                     int maxStress = crop.weightInfluences(cropTile, humidity, nutrients, env) * 5;
                     helper.add(BarElement.bar(stress, maxStress, FormattedTranslator.DARK_PURPLE, Translator.format("probe.crop.info.needs", stress, maxStress)));
+                    DecimalFormat format = new DecimalFormat("##.##", new DecimalFormatSymbols(Locale.ROOT));
+                    helper.add(FormattedTranslator.GOLD.format("probe.seed.drop.chance", format.format(crop.dropSeedChance(cropTile) * 100.0)));
                 }
             }
 
