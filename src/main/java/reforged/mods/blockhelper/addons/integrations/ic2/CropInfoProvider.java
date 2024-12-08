@@ -186,9 +186,9 @@ public class CropInfoProvider extends InfoProvider implements BlockHelperItemSta
 
             helper.add("");
             helper.add(FormattedTranslator.YELLOW.format("probe.crop.storage"));
-            helper.add(BarElement.bar(fertilizer, 200, FormattedTranslator.GOLD, Translator.format("probe.crop.info.fertilizer", fertilizer, 100)));
+            helper.add(BarElement.bar(fertilizer, 100, FormattedTranslator.GOLD, Translator.format("probe.crop.info.fertilizer", fertilizer, 100)));
             helper.add(BarElement.bar(water, 200, FormattedTranslator.BLUE, Translator.format("probe.crop.info.water", water, 200)));
-            helper.add(BarElement.bar(weedex, 100, FormattedTranslator.LIGHT_PURPLE, Translator.format("probe.crop.info.weedex", weedex, 150)));
+            helper.add(BarElement.bar(weedex, 150, FormattedTranslator.LIGHT_PURPLE, Translator.format("probe.crop.info.weedex", weedex, 150)));
 
             helper.add("");
             helper.add(FormattedTranslator.YELLOW.format("probe.crop.env"));
