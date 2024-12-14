@@ -11,7 +11,7 @@ import reforged.mods.blockhelper.addons.proxy.CommonProxy;
 import java.util.Arrays;
 import java.util.List;
 
-@Mod(modid = "BlockHelperAddons", name = "Block Helper Addons", version = "1.4.7-1.0.4.2", acceptedMinecraftVersions = "[1.4.7]", dependencies =
+@Mod(modid = "BlockHelperAddons", name = "Block Helper Addons", version = "1.4.7-1.0.4.3", acceptedMinecraftVersions = "[1.4.7]", dependencies =
         "required-after:VintageCore;" +
                 "required-after:mod_BlockHelper;" +
                 "required-after:IC2;" +
