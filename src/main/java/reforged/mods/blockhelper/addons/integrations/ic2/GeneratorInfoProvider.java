@@ -18,7 +18,7 @@ public class GeneratorInfoProvider extends InfoProvider {
             int maxHeat = reactor.maxHeat;
             int production = reactor.getOutput() * 5;
             infoHolder.add(FormattedTranslator.WHITE.format("info.generator.output", production));
-            infoHolder.add(FormattedTranslator.DARK_GRAY.format("probe.reactor.heat.short", BarElement.bar(heat, maxHeat, getReactorColor(heat, maxHeat), String.format("%s/%s", heat, maxHeat))));
+            infoHolder.add(FormattedTranslator.DARK_GRAY.format("info.reactor.heat.short", BarElement.bar(heat, maxHeat, getReactorColor(heat, maxHeat), String.format("%s/%s", heat, maxHeat))));
         }
     }
 

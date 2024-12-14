@@ -56,7 +56,7 @@ info.crop.info.env = Env. Quality: %s/%s
 info.crop.info.light = Light Level: %s/%s
 
 info.fuel = Fuel: %s/%s
-probe.reactor.heat.short = Heat: %s
+info.reactor.heat.short = Heat: %s
 info.matter.amplifier = Amplifier: %s
 
 info.miner.level = Mining Level: %s

@@ -56,7 +56,7 @@ info.crop.info.env = Качество воздуха: %s/%s
 info.crop.info.light = Освещенность: %s/%s
 
 info.fuel = Топливо: %s/%s
-probe.reactor.heat.short = Нагрев: %s
+info.reactor.heat.short = Нагрев: %s
 info.matter.amplifier = Усилитель: %s
 
 info.miner.level = Уровень добычи: %s
