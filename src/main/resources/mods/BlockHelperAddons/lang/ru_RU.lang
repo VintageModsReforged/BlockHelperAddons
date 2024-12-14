@@ -1,0 +1,88 @@
+info.wrenchable = Снимается ключём
+info.wrenchable.rate = %s%% шанс выпадения
+
+info.energy = Энергия: %s/%s EU
+info.energy.tier = Напряжение: %s
+info.energy.input.max = Макс. вход: %s EU/t
+info.energy.usage = Потребление: %s EU/t
+info.generator.output = Выработка: %s EU/t
+info.generator.max_output = Макс. выработка: %s EU/p
+info.storage.output = Выход: %s EU/p
+info.eu_reader.packets.out = Пакетов выходит: %s
+info.speed.heat = Нагрев: %s%%
+info.speed.rotation = Вращение: %s%%
+info.speed.pressure = Давление: %s%%
+info.speed.speed = Скорость: %s%%
+info.gt.possible_upgrades = Допустимые апгрейды:
+info.gt.overclockers = %s апгрейдов ускорителя
+info.gt.transformers = %s апгрейдов трансформатора
+info.gt.batteries = %s дополнительной энергии
+info.gt.mj = %s преобразователь MJ энергии
+info.gt.steam = %s апгрейд для работы от пара
+info.gt.invalid = Корпус машины не собран!
+info.heat = Нагрев:
+info.gt.detector.players.all = Обнаруживать всех игроков
+info.gt.detector.players.you = Обнаруживать только вас
+info.gt.detector.players.other = Обнаруживать только других игроков
+info.gt.wrenchable.warning = Используйте гаечный ключ из GregTech!
+info.progress = Процесс: %s%%
+info.eu_reader.cable_limit = Предел напряжения: %s EU
+info.eu_reader.cable_loss = Потеря энергии: %s EU
+
+info.crop.by = Обнаружил: %s
+info.crop.by.unknown = Неизвестный
+info.crop.info.scan = Просканировано: %s/%s
+info.crop.growth = #### Этапы роста ####
+info.crop.info.stage_done = Стадия: %s (выросло)
+info.crop.info.stage = Стадия: %s/%s
+info.crop.info.points = Очки: %s/%s
+info.crop.grow.not = Не может расти
+info.crop.grow.rate = ~ Темп роста: %s
+info.crop.harvest = Можно собирать: %s
+info.crop.stats = #### Характеристики ####
+info.crop.info.growth = Рост: %s/%s
+info.crop.info.gain = Прирост: %s/%s
+info.crop.info.resistance = Сопротивление: %s/%s
+info.crop.info.needs = Стресс: ~%s/%s
+info.crop.drop.chance = Шанс выпадения семян: %s%%
+info.crop.storage = #### Уход за культурой ####
+info.crop.info.fertilizer = Удобрение: %s/%s
+info.crop.info.water = Вода: %s/%s
+info.crop.info.weedex = Средство от сорняков: %s/%s
+info.crop.env = #### Окружающая среда ####
+info.crop.info.nutrients = Плодородность почвы: %s/%s
+info.crop.info.humidity = Влажность: %s/%s
+info.crop.info.env = Качество воздуха: %s/%s
+info.crop.info.light = Освещенность: %s/%s
+
+info.fuel = Топливо: %s/%s
+probe.reactor.heat.short = Нагрев: %s
+info.matter.amplifier = Усилитель: %s
+
+info.miner.level = Уровень добычи: %s
+info.miner.retracting = Статус: втягивание трубы
+info.miner.stuck = Статус: застопорился
+info.miner.mining = Статус: бурение
+
+info.teleporter.target.set = Цель установлена: %s
+info.teleporter.target = Координаты цели: %s %s %s
+
+info.transformer.inverted = Инвертирован: %s
+
+info.tier.ulv = ULV
+info.tier.lv = LV
+info.tier.mv = MV
+info.tier.hv = HV
+info.tier.ev = EV
+info.tier.iv = IV
+info.tier.luv = LuV
+info.tier.zpm = ZPM
+info.tier.uv = UV
+info.tier.uhv = UHV
+info.tier.uev = UEV
+info.tier.uiv = UIV
+info.tier.umv = UMV
+info.tier.uxv = UXV
+info.tier.max = MAX
+
+info.bar = [%s]

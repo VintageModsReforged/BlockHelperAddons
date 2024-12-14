@@ -17,7 +17,7 @@ public class BlockHelperAddonsConfig {
         MAIN_CONFIG = new Configuration(new File((File) FMLInjectionData.data()[6], "config/BlockHelperAddons.cfg"));
         MAIN_CONFIG.load();
 
-        LANGS = getStrings("localization", "langs", new String[] {"en_US"}, "Supported localizations.");
+        LANGS = getStrings("localization", "langs", new String[] {"en_US", "ru_RU"}, "Supported localizations.");
 
         if (MAIN_CONFIG != null) {
             MAIN_CONFIG.save();

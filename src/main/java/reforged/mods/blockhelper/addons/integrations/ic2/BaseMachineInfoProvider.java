@@ -13,7 +13,7 @@ public class BaseMachineInfoProvider extends InfoProvider {
         if (blockEntity instanceof TileEntityStandardMachine) {
             TileEntityStandardMachine machine = (TileEntityStandardMachine) blockEntity;
             int energyConsume = machine.energyConsume;
-            helper.add(FormattedTranslator.WHITE.format("info.eu_reader.usage", energyConsume));
+            helper.add(FormattedTranslator.WHITE.format("info.energy.usage", energyConsume));
             float progress = machine.getProgress();
             if (progress > 0) {
                 helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", (int) (progress * 100)));
