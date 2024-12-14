@@ -8,7 +8,7 @@ public class BarElement {
     FormattedTranslator COLOR;
     int CURRENT;
     int MAX;
-    int SIZE = 25; // default
+    int SIZE = BlockHelperAddonsConfig.DEFAULT_BAR_SIZE;
 
     public BarElement(int current, int max, FormattedTranslator color, String text) {
         this.CURRENT = current;

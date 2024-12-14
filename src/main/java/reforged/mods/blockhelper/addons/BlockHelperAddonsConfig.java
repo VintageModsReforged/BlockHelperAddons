@@ -1,33 +1,27 @@
 package reforged.mods.blockhelper.addons;
 
 import cpw.mods.fml.relauncher.FMLInjectionData;
+import mods.vintage.core.helpers.ConfigHelper;
 import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.Property;
 
 import java.io.File;
-import java.util.Arrays;
 
 public class BlockHelperAddonsConfig {
 
     public static Configuration MAIN_CONFIG;
 
     public static String[] LANGS;
+    public static int DEFAULT_BAR_SIZE = 25;
 
     public static void init() {
         MAIN_CONFIG = new Configuration(new File((File) FMLInjectionData.data()[6], "config/BlockHelperAddons.cfg"));
         MAIN_CONFIG.load();
 
-        LANGS = getStrings("localization", "langs", new String[] {"en_US", "ru_RU"}, "Supported localizations.");
+        LANGS = ConfigHelper.getStrings(MAIN_CONFIG, "localization", "langs", new String[] {"en_US", "ru_RU"}, "Supported localizations.");
+        DEFAULT_BAR_SIZE = ConfigHelper.getInt(MAIN_CONFIG, "general", "defaultBarSize", 25, Integer.MAX_VALUE, DEFAULT_BAR_SIZE, "Default Bar Element Size.\nSome localizations might require extra space (ru_RU for instance requires at least extra 10 size (35) to display the info).\nFeel free to change this to fit your language.");
 
         if (MAIN_CONFIG != null) {
             MAIN_CONFIG.save();
         }
-    }
-
-    private static String[] getStrings(String cat, String tag, String[] defaultValue, String comment) {
-        comment = comment.replace("{t}", tag) + "\n";
-        Property prop = MAIN_CONFIG.get(cat, tag, defaultValue);
-        prop.comment = comment + "Default: " + Arrays.toString(defaultValue);
-        return prop.getStringList();
     }
 }
