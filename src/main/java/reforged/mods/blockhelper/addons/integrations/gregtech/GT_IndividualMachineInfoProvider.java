@@ -48,7 +48,7 @@ public class GT_IndividualMachineInfoProvider extends InfoProvider {
             if (baseTile instanceof GT_TileEntity_Matterfabricator) {
                 GT_TileEntity_Matterfabricator matter = (GT_TileEntity_Matterfabricator) baseTile;
                 int progress = (int) Math.max(0L, (long) matter.getProgresstime() / Math.max(1L, (long) matter.maxProgresstime() / 100L));
-                helper.add(FormattedTranslator.LIGHT_PURPLE.format("info.progress", progress) + "%");
+                helper.add(FormattedTranslator.LIGHT_PURPLE.format("info.progress", progress));
             } else if (baseTile instanceof GT_TileEntity_PlayerDetector) {
                 GT_TileEntity_PlayerDetector detector = (GT_TileEntity_PlayerDetector) baseTile;
                 byte mode = detector.mMode;

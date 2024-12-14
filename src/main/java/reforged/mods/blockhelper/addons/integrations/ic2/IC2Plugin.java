@@ -2,7 +2,6 @@ package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import cpw.mods.fml.common.Loader;
 import de.thexxturboxx.blockhelper.BlockHelperCommonProxy;
-import mods.vintage.core.VintageCore;
 import reforged.mods.blockhelper.addons.integrations.AdvancedMachinesInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.AdvancedPowerManagementInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.AdvancedSolarPanelInfoProvider;
