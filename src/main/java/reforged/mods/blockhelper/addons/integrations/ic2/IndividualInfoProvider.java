@@ -43,11 +43,11 @@ public class IndividualInfoProvider extends InfoProvider {
             TileEntityMatter massFab = (TileEntityMatter) blockEntity;
             String progress = massFab.getProgressAsString();
             if (!progress.isEmpty()) {
-                helper.add(FormattedTranslator.LIGHT_PURPLE.format("probe.info.progress", progress));
+                helper.add(FormattedTranslator.LIGHT_PURPLE.format("probe.progress", progress));
             }
             int scrap = massFab.scrap;
             if (scrap > 0) {
-                helper.add(FormattedTranslator.DARK_AQUA.format("probe.info.matter.amplifier", massFab.scrap));
+                helper.add(FormattedTranslator.DARK_AQUA.format("probe.matter.amplifier", massFab.scrap));
             }
         } else if (blockEntity instanceof TileEntityMiner) {
             TileEntityMiner miner = (TileEntityMiner) blockEntity;
@@ -66,10 +66,10 @@ public class IndividualInfoProvider extends InfoProvider {
             }
             helper.add(usage(usage));
             helper.add(translate(getMiningMode(miner)));
-            helper.add(FormattedTranslator.GOLD.format("probe.info.miner.level", getOperationHeight(miner)));
+            helper.add(FormattedTranslator.GOLD.format("probe.miner.level", getOperationHeight(miner)));
             int displayProgress = miner.progress * 100 / progress;
             if (displayProgress > 0) {
-                helper.add(FormattedTranslator.DARK_GREEN.format("probe.info.progress", displayProgress) + "%");
+                helper.add(FormattedTranslator.DARK_GREEN.format("probe.progress", displayProgress) + "%");
             }
         } else if (blockEntity instanceof TileEntityCropmatron) {
             helper.add(tier(Helper.getTierFromEU(TileEntityCropmatron.maxInput)));
@@ -84,13 +84,13 @@ public class IndividualInfoProvider extends InfoProvider {
     public static String getMiningMode(TileEntityMiner miner) {
         int operationHeight = getOperationHeight(miner);
         if (miner.drillSlot.isEmpty()) {
-            return "probe.info.miner.retracting";
+            return "probe.miner.retracting";
         } else if (operationHeight >= 0) {
             int blockId = miner.worldObj.getBlockId(miner.xCoord, operationHeight, miner.zCoord);
             if (blockId != Ic2Items.miningPipeTip.itemID) {
-                return "probe.info.miner.stuck";
+                return "probe.miner.stuck";
             } else {
-                return "probe.info.miner.mining";
+                return "probe.miner.mining";
             }
         }
         return FormattedTranslator.RED.literal("ERROR, please report!");
