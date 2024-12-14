@@ -13,7 +13,7 @@ public class BaseMachineInfoProvider extends InfoProvider {
     public void addInfo(InfoHolder helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TileEntityElectricMachine) {
             TileEntityElectricMachine machine = (TileEntityElectricMachine) blockEntity;
-            helper.add(translate("info.eu_reader.usage", machine.energyConsume));
+            helper.add(translate("info.energy.usage", machine.energyConsume));
             float progress = machine.getProgress();
             if (progress > 0) {
                 helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", (int) (progress * 100)));

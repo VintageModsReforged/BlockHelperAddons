@@ -17,13 +17,13 @@ public class AdvancedMachinesInfoProvider extends InfoProvider {
             helper.add(usage(advMachine.energyUsage));
             String speedName;
             if (advMachine instanceof TileEntityRotaryMacerator) {
-                speedName = "probe.speed.rotation";
+                speedName = "info.speed.rotation";
             } else if (advMachine instanceof TileEntitySingularityCompressor) {
-                speedName = "probe.speed.pressure";
+                speedName = "info.speed.pressure";
             } else if (advMachine instanceof TileEntityCentrifugeExtractor || advMachine instanceof TileEntityCompactingRecycler) {
-                speedName = "probe.speed.speed";
+                speedName = "info.speed.speed";
             } else {
-                speedName = "probe.speed.heat";
+                speedName = "info.speed.heat";
             }
             int speed = advMachine.speed;
             int maxSpeed = advMachine.maxSpeed;

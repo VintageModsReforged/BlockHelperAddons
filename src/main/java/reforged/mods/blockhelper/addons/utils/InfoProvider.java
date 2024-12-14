@@ -118,14 +118,14 @@ public abstract class InfoProvider implements BlockHelperBlockProvider, IInfoPro
     }
 
     public String tier(int tier) {
-        return translate("probe.energy.tier", Helper.getTierForDisplay(tier));
+        return translate("info.energy.tier", Helper.getTierForDisplay(tier));
     }
 
     public String maxIn(int maxIn) {
-        return translate("probe.energy.input.max", maxIn);
+        return translate("info.energy.input.max", maxIn);
     }
 
     public String usage(int usage) {
-        return translate("probe.energy.usage", usage);
+        return translate("info.energy.usage", usage);
     }
 }

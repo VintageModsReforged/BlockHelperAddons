@@ -1,11 +1,9 @@
 package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import de.thexxturboxx.blockhelper.api.InfoHolder;
-import ic2.core.Ic2Items;
+import ic2.api.Items;
 import ic2.core.block.machine.tileentity.*;
-import ic2.core.util.StackUtil;
 import mods.vintage.core.platform.lang.FormattedTranslator;
-import mods.vintage.core.platform.lang.Translator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -28,7 +26,7 @@ public class IndividualInfoProvider extends InfoProvider {
             helper.add(usage(15));
             int heat = induction.heat;
             int maxHeat = 10000;
-            helper.add(FormattedTranslator.YELLOW.format("info.induction.heat", heat * 100 / maxHeat));
+            helper.add(FormattedTranslator.YELLOW.format("info.speed.heat", heat * 100 / maxHeat));
             int progress = induction.gaugeProgressScaled(100);
             if (progress > 0) {
                 helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", progress));
@@ -44,7 +42,7 @@ public class IndividualInfoProvider extends InfoProvider {
             TileEntityMatter massFab = (TileEntityMatter) blockEntity;
             String progress = massFab.getProgressAsString();
             if (!progress.isEmpty()) {
-                helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", progress));
+                helper.add(FormattedTranslator.LIGHT_PURPLE.format("info.progress", progress));
             }
             int scrap = massFab.scrap;
             if (scrap > 0) {
@@ -52,25 +50,25 @@ public class IndividualInfoProvider extends InfoProvider {
             }
         } else if (blockEntity instanceof TileEntityMiner) {
             TileEntityMiner miner = (TileEntityMiner) blockEntity;
-            ItemStack drill = miner.inventory[3];
-            int progress;
-            int usage;
-            if (StackUtil.isStackEqual(drill, Ic2Items.miningDrill)) {
-                usage = 1;
-                progress = 200;
-            } else if (StackUtil.isStackEqual(drill, Ic2Items.diamondDrill)) {
-                usage = 14;
-                progress = 200;
-            } else {
-                usage = 2;
-                progress = 20;
-            }
+            int progress = 20;
+            int usage = 2;
+            try {
+                ItemStack drill = miner.inventory[3];
+                if (drill.itemID == Items.getItem("miningDrill").itemID) {
+                    usage = 1;
+                    progress = 200;
+                } else if (drill.itemID == Items.getItem("diamondDrill").itemID) {
+                    usage = 14;
+                    progress = 200;
+                }
+            } catch (Throwable ignored) {}
+
             helper.add(usage(usage));
             helper.add(translate(getMiningMode(miner)));
             helper.add(FormattedTranslator.GOLD.format("info.miner.level", getOperationHeight(miner)));
             int displayProgress = miner.miningTicker * 100 / progress;
             if (displayProgress > 0) {
-                helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", progress));
+                helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", displayProgress));
             }
         } else if (blockEntity instanceof TileEntityCropmatron) {
             helper.add(tier(Helper.getTierFromEU(TileEntityCropmatron.maxInput)));
@@ -82,25 +80,25 @@ public class IndividualInfoProvider extends InfoProvider {
         }
     }
 
-    public static String getMiningMode(TileEntityMiner miner) {
+    private String getMiningMode(TileEntityMiner miner) {
         int operationHeight = getOperationHeight(miner);
         if (miner.inventory[3] == null) {
-            return Translator.format("info.miner.retracting");
+            return "info.miner.retracting";
         } else if (operationHeight >= 0) {
             int blockId = miner.worldObj.getBlockId(miner.xCoord, operationHeight, miner.zCoord);
-            if (blockId != Ic2Items.miningPipeTip.itemID) {
-                return Translator.format("info.miner.stuck");
+            if (blockId != Items.getItem("miningPipeTip").itemID) {
+                return "info.miner.stuck";
             } else {
-                return Translator.format("info.miner.mining");
+                return "info.miner.mining";
             }
         }
         return FormattedTranslator.RED.literal("ERROR, please report!");
     }
 
-    private static int getOperationHeight(TileEntityMiner miner) {
-        for(int y = miner.yCoord - 1; y >= 0; --y) {
+    private int getOperationHeight(TileEntityMiner miner) {
+        for (int y = miner.yCoord - 1; y >= 0; --y) {
             int blockId = miner.worldObj.getBlockId(miner.xCoord, y, miner.zCoord);
-            if (blockId != Ic2Items.miningPipe.itemID) {
+            if (blockId != Items.getItem("miningPipe").itemID) {
                 return y;
             }
         }
