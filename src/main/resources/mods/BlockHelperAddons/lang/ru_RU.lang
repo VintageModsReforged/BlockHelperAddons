@@ -1,4 +1,4 @@
-info.wrenchable = Снимается ключём
+info.wrenchable = Снимается ключом
 info.wrenchable.rate = %s%% шанс выпадения
 
 info.energy = Энергия: %s/%s EU
