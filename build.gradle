@@ -56,9 +56,6 @@ dependencies {
 	modImplementation files("libs/VintageCore-1.5.2-1.0.7-dev.jar")
 	modImplementation files("libs/AdvancedMachines-1.5.2-4.7.5.2d-dev.jar")
 	modImplementation files("libs/BlockHelper-1.5.x-2.0.0-pre1-dev.jar")
-
-	implementation 'com.google.code.gson:gson:2.11.0'
-	implementation group: 'it.unimi.dsi', name: 'fastutil', version: '8.2.1'
 }
 
 sourceSets {
