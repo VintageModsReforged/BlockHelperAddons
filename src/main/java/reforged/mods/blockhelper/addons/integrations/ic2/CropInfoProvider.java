@@ -51,59 +51,56 @@ public class CropInfoProvider extends InfoProvider {
             int env = cropTile.getAirQuality();
             int light = cropTile.getLightLevel();
 
-            CropCard crop = IC2Crops.instance.getCropList()[cropTile.getID()];
-            if (crop != null) {
-                int size = cropTile.getSize();
-                int maxSize = cropTile.crop().maxSize();
-                if (scanLevel < 1 && !crop.isWeed(cropTile)) {
-                    text(helper, translate("info.crop.by", FormattedTranslator.AQUA.format("info.crop.by.unknown")));
-                } else {
-                    text(helper, translate("info.crop.by", FormattedTranslator.AQUA.literal(crop.discoveredBy())));
-                }
-                if (scanLevel < 4) {
-                    text(helper, "");
-                    bar(helper, scanLevel, 4, FormattedTranslator.WHITE.format("info.crop.info.scan", scanLevel, 4), ColorUtils.GREEN);
-                }
-                if (scanLevel >= 4) {
-                    text(helper, "");
-                    text(helper, FormattedTranslator.YELLOW.format("info.crop.growth"), true);
-                    if (size == maxSize) {
-                        bar(helper, maxSize, maxSize, translate("info.crop.info.stage_done", maxSize), ColorUtils.GREEN);
+            if (cropTile.getID() != -1) {
+                CropCard crop = IC2Crops.instance.getCropList()[cropTile.getID()];
+                if (crop != null) {
+                    int size = cropTile.getSize();
+                    int maxSize = cropTile.crop().maxSize();
+                    if (scanLevel < 1 && !crop.isWeed(cropTile)) {
+                        text(helper, translate("info.crop.by", FormattedTranslator.AQUA.format("info.crop.by.unknown")));
                     } else {
-                        int growthPoints = cropTile.growthPoints;
-                        int maxGrowthPoints = crop.growthDuration(cropTile);
-                        bar(helper, size, maxSize, translate("info.crop.info.stage", size, maxSize), ColorUtils.GREEN);
-                        bar(helper, growthPoints, maxGrowthPoints, translate("info.crop.info.points", growthPoints, maxGrowthPoints), ColorUtils.GREEN);
+                        text(helper, translate("info.crop.by", FormattedTranslator.AQUA.literal(crop.discoveredBy())));
                     }
-
-                    if (!crop.canGrow(cropTile)) {
-                        bar(helper, 1, 1, translate("info.crop.grow.not"), ColorUtils.RED);
-                    } else {
-                        bar(helper, 1, 1, translate("info.crop.grow.rate", cropTile.calcGrowthRate()), ColorUtils.GREEN);
+                    if (scanLevel < 4) {
+                        bar(helper, scanLevel, 4, FormattedTranslator.WHITE.format("info.crop.info.scan", scanLevel, 4), ColorUtils.GREEN);
                     }
-                    text(helper, FormattedTranslator.GOLD.format("info.crop.harvest", status(crop.canBeHarvested(cropTile))));
-                    text(helper, "");
-                    text(helper, FormattedTranslator.YELLOW.format("info.crop.stats"), true);
-                    bar(helper, growth, 31, translate("info.crop.info.growth", growth, 31), ColorUtils.CYAN);
-                    bar(helper, gain, 31, translate("info.crop.info.gain", gain, 31), -5829955);
-                    bar(helper, resistance, 31, translate("info.crop.info.resistance", resistance, 31), ColorUtils.rgb(255, 170, 0));
+                    if (scanLevel >= 4) {
+                        text(helper, FormattedTranslator.YELLOW.format("info.crop.growth"), true);
+                        if (size == maxSize) {
+                            bar(helper, maxSize, maxSize, translate("info.crop.info.stage_done", maxSize), ColorUtils.GREEN);
+                        } else {
+                            int growthPoints = cropTile.growthPoints;
+                            int maxGrowthPoints = crop.growthDuration(cropTile);
+                            bar(helper, size, maxSize, translate("info.crop.info.stage", size, maxSize), ColorUtils.GREEN);
+                            bar(helper, growthPoints, maxGrowthPoints, translate("info.crop.info.points", growthPoints, maxGrowthPoints), ColorUtils.GREEN);
+                        }
 
-                    int stress = (crop.tier() - 1) * 4 + growth + gain + resistance;
-                    int maxStress = crop.weightInfluences(cropTile, humidity, nutrients, env) * 5;
-                    bar(helper, stress, maxStress, translate("info.crop.info.needs", stress, maxStress), ColorUtils.CYAN);
-                    DecimalFormat format = new DecimalFormat("##.##", new DecimalFormatSymbols(Locale.ROOT));
-                    text(helper, FormattedTranslator.GOLD.format("info.crop.drop.chance", format.format(crop.dropSeedChance(cropTile) * 100.0)), true);
+                        if (!crop.canGrow(cropTile)) {
+                            bar(helper, 1, 1, translate("info.crop.grow.not"), ColorUtils.RED);
+                        } else {
+                            bar(helper, 1, 1, translate("info.crop.grow.rate", cropTile.calcGrowthRate()), ColorUtils.GREEN);
+                        }
+                        text(helper, FormattedTranslator.GOLD.format("info.crop.harvest", status(crop.canBeHarvested(cropTile))));
+                        text(helper, FormattedTranslator.YELLOW.format("info.crop.stats"), true);
+                        bar(helper, growth, 31, translate("info.crop.info.growth", growth, 31), ColorUtils.CYAN);
+                        bar(helper, gain, 31, translate("info.crop.info.gain", gain, 31), -5829955);
+                        bar(helper, resistance, 31, translate("info.crop.info.resistance", resistance, 31), ColorUtils.rgb(255, 170, 0));
 
+                        int stress = (crop.tier() - 1) * 4 + growth + gain + resistance;
+                        int maxStress = crop.weightInfluences(cropTile, humidity, nutrients, env) * 5;
+                        bar(helper, stress, maxStress, translate("info.crop.info.needs", stress, maxStress), ColorUtils.CYAN);
+                        DecimalFormat format = new DecimalFormat("##.##", new DecimalFormatSymbols(Locale.ROOT));
+                        text(helper, FormattedTranslator.GOLD.format("info.crop.drop.chance", format.format(crop.dropSeedChance(cropTile) * 100.0)), true);
+
+                    }
                 }
             }
 
-            text(helper, "");
             text(helper, FormattedTranslator.YELLOW.format("info.crop.storage"), true);
             bar(helper, fertilizer, 100, translate("info.crop.info.fertilizer", fertilizer, 100), ColorUtils.rgb(86, 54, 36));
             bar(helper, water, 200, translate("info.crop.info.water", water, 200), ColorUtils.rgb(93, 105, 255));
             bar(helper, weedex, 150, translate("info.crop.info.weedex", weedex, 150), ColorUtils.rgb(255, 85, 255));
 
-            text(helper, "");
             text(helper, FormattedTranslator.YELLOW.format("info.crop.env"), true);
             bar(helper, nutrients, 20, translate("info.crop.info.nutrients", nutrients, 20), ColorUtils.rgb(0, 255, 5));
             bar(helper, humidity, 20, translate("info.crop.info.humidity", humidity, 20), ColorUtils.rgb(93, 105, 255));
