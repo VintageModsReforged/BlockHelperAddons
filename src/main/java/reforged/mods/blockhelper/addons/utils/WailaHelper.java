@@ -11,13 +11,11 @@ import java.util.List;
 public class WailaHelper implements IWailaHelper {
 
     public NBTTagList DATA = new NBTTagList();
-    public static final String ADD_TAG = "add";
 
     @Override
     public void add(IWailaElementBuilder element) {
         NBTTagCompound addTag = new NBTTagCompound();
         NBTTagCompound elementTag = element.save(new NBTTagCompound());
-        elementTag.setBoolean(ADD_TAG, true);
         addTag.setTag(element.getTagId(), elementTag);
         DATA.appendTag(addTag);
     }
