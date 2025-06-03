@@ -23,7 +23,7 @@ public class WailaTooltipRenderer extends TooltipHelper implements IDataProvider
 
     public void addTooltips(ITaggedList<String, String> strings, IDataAccessor accessor) {
         NBTTagCompound serverData = accessor.getNBTData();
-        if (serverData.hasKey(WailaTags.TAG_DATA)) {
+        if (serverData != null && serverData.hasKey(WailaTags.TAG_DATA)) {
             NBTTagList tagList = serverData.getTagList(WailaTags.TAG_DATA);
             for (int i = 0; i < tagList.tagCount(); i++) {
                 NBTTagCompound serverTag = (NBTTagCompound) tagList.tagAt(i);
