@@ -1,19 +1,22 @@
 package reforged.mods.blockhelper.addons.integrations;
 
-import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.advancedmachines.blocks.tiles.base.TileEntityAdvancedMachine;
 import ic2.advancedmachines.blocks.tiles.machines.*;
 import mods.vintage.core.platform.lang.FormattedTranslator;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import reforged.mods.blockhelper.addons.utils.ColorUtils;
+import reforged.mods.blockhelper.addons.utils.Formatter;
+import reforged.mods.blockhelper.addons.utils.IWailaHelper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class AdvancedMachinesInfoProvider extends InfoProvider {
 
     @Override
-    public void addInfo(InfoHolder helper, TileEntity blockEntity) {
+    public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TileEntityAdvancedMachine) {
             TileEntityAdvancedMachine advMachine = (TileEntityAdvancedMachine) blockEntity;
-            helper.add(usage(advMachine.energyUsage));
+            text(helper, usage(advMachine.energyUsage));
             String speedName;
             if (advMachine instanceof TileEntityRotaryMacerator) {
                 speedName = "info.speed.rotation";
@@ -26,10 +29,13 @@ public class AdvancedMachinesInfoProvider extends InfoProvider {
             }
             int speed = advMachine.speed;
             int maxSpeed = advMachine.maxSpeed;
-            helper.add(FormattedTranslator.YELLOW.format(speedName, speed * 100 / maxSpeed));
-            int progress = advMachine.gaugeProgressScaled(100);
+            bar(helper, speed, maxSpeed, translate(speedName, speed * 100 / maxSpeed), -295680);
+            int progress = advMachine.progress;
             if (progress > 0) {
-                helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", progress));
+                int operationsPerTick = advMachine.speed / 30;
+                int scaledOp = (int) Math.min(6.0E7F, (float) advMachine.progress / operationsPerTick);
+                int scaledMaxOp = (int) Math.min(6.0E7F, (float) advMachine.maxProgress / operationsPerTick);
+                bar(helper, scaledOp, scaledMaxOp, FormattedTranslator.WHITE.format("info.progress.full", scaledOp, scaledMaxOp).concat("t"), ColorUtils.PROGRESS);
             }
         }
     }

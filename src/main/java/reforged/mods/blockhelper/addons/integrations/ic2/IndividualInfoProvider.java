@@ -1,12 +1,15 @@
 package reforged.mods.blockhelper.addons.integrations.ic2;
 
-import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.api.item.Items;
 import ic2.core.block.machine.tileentity.*;
 import mods.vintage.core.platform.lang.FormattedTranslator;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.Helper;
+import reforged.mods.blockhelper.addons.utils.ColorUtils;
+import reforged.mods.blockhelper.addons.utils.Formatter;
+import reforged.mods.blockhelper.addons.utils.IWailaHelper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 import java.text.DecimalFormat;
@@ -16,41 +19,48 @@ import java.util.Locale;
 public class IndividualInfoProvider extends InfoProvider {
 
     @Override
-    public void addInfo(InfoHolder helper, TileEntity blockEntity) {
+    public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TileEntityCanner) {
             TileEntityCanner canner = (TileEntityCanner) blockEntity;
-            helper.add(usage(canner.energyconsume));
+            text(helper, usage(canner.energyconsume));
 
             int progress = canner.gaugeProgressScaled(100);
             if (progress > 0) {
-                helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", progress));
+                bar(helper, progress, 100, translate("info.progress", progress), ColorUtils.PROGRESS);
             }
         } else if (blockEntity instanceof TileEntityInduction) {
             TileEntityInduction induction = (TileEntityInduction) blockEntity;
-            helper.add(usage(15));
+            text(helper, usage(15));
             int heat = induction.heat;
             int maxHeat = 10000;
-            helper.add(FormattedTranslator.YELLOW.format("info.speed.heat", heat * 100 / maxHeat));
-            int progress = induction.gaugeProgressScaled(100);
+            bar(helper, heat, maxHeat, translate("info.speed.heat", heat * 100 / maxHeat), -295680);
+            int progress = induction.progress;
             if (progress > 0) {
-                helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", progress));
+                int operationsPerTick = induction.heat / 30;
+                int scaledOp = (int) Math.min(6.0E7F, (float) progress / operationsPerTick);
+                int scaledMaxOp = (int) Math.min(6.0E7F, (float) 4000 / operationsPerTick);
+                bar(helper, scaledOp, scaledMaxOp, FormattedTranslator.WHITE.format("info.progress.full", scaledOp, scaledMaxOp).concat("t"), ColorUtils.PROGRESS);
             }
         } else if (blockEntity instanceof TileEntityPump) {
             TileEntityPump pump = (TileEntityPump) blockEntity;
-            helper.add(usage(1));
+            text(helper, usage(1));
             int progress = (pump.energy * 100) / 200;
             if (progress > 0) {
-                helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", progress));
+                bar(helper, progress, 120, translate("info.progress.full", progress, 120), -16733185);
             }
         } else if (blockEntity instanceof TileEntityMatter) {
             TileEntityMatter massFab = (TileEntityMatter) blockEntity;
-            String progress = massFab.getProgressAsString();
-            if (!progress.isEmpty()) {
-                helper.add(FormattedTranslator.LIGHT_PURPLE.format("info.progress", progress));
+            int progress = massFab.energy;
+            int maxProgress = massFab.maxEnergy;
+            if (progress > 0) {
+                double finalProgress = Math.min((double) progress / maxProgress * 100.0, 100);
+                bar(helper, progress, maxProgress, translate("info.progress",
+                        Formatter.THERMAL_GEN.format(finalProgress)), -4441721);
             }
             int scrap = massFab.scrap;
             if (scrap > 0) {
-                helper.add(FormattedTranslator.DARK_AQUA.format("info.matter.amplifier", massFab.scrap));
+                bar(helper, scrap, 45000, translate("info.matter.amplifier",
+                        massFab.scrap), -10996205);
             }
         } else if (blockEntity instanceof TileEntityMiner) {
             TileEntityMiner miner = (TileEntityMiner) blockEntity;
@@ -65,21 +75,25 @@ public class IndividualInfoProvider extends InfoProvider {
                     progress = 50;
                 }
             } catch (Throwable ignored) {}
-            helper.add(usage(usage));
-            helper.add(translate(getMiningMode(miner)));
-            helper.add(FormattedTranslator.GOLD.format("info.miner.level", getOperationHeight(miner)));
+            text(helper, usage(usage));
+            text(helper, translate(getMiningMode(miner)));
+            text(helper, FormattedTranslator.GOLD.format("info.miner.level", getOperationHeight(miner)));
             double displayProgress = ((double) miner.progress / progress) * 100.0;
             DecimalFormat format = new DecimalFormat("##.##", new DecimalFormatSymbols(Locale.ROOT));
             if (displayProgress > 0) {
-                helper.add(FormattedTranslator.DARK_GREEN.format("info.progress", format.format(displayProgress)));
+                text(helper, FormattedTranslator.DARK_GREEN.format("info.progress", format.format(displayProgress)));
             }
         } else if (blockEntity instanceof TileEntityCropmatron) {
-            helper.add(tier(Helper.getTierFromEU(TileEntityCropmatron.maxInput)));
-            helper.add(maxIn(TileEntityCropmatron.maxInput));
+            text(helper, tier(Helper.getTierFromEU(TileEntityCropmatron.maxInput)));
+            text(helper, maxIn(TileEntityCropmatron.maxInput));
         } else if (blockEntity instanceof TileEntityTesla) {
             TileEntityTesla tesla = (TileEntityTesla) blockEntity;
-            helper.add(tier(Helper.getTierFromEU(tesla.maxInput)));
-            helper.add(maxIn(tesla.maxInput));
+            text(helper, tier(Helper.getTierFromEU(tesla.maxInput)));
+            text(helper, maxIn(tesla.maxInput));
+        }
+        if (blockEntity instanceof TileEntityElectrolyzer) {
+            TileEntityElectrolyzer electrolyzer = (TileEntityElectrolyzer) blockEntity;
+            bar(helper, electrolyzer.energy, 20000, FormattedTranslator.WHITE.format("info.progress.full", electrolyzer.energy, 20000).concat(" EU"), ColorUtils.RED);
         }
     }
 

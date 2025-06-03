@@ -1,32 +1,23 @@
 package reforged.mods.blockhelper.addons.integrations.ic2;
 
-import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
 import ic2.core.block.generator.tileentity.*;
 import mods.vintage.core.platform.lang.FormattedTranslator;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.BarElement;
+import reforged.mods.blockhelper.addons.utils.ColorUtils;
+import reforged.mods.blockhelper.addons.utils.IWailaHelper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class GeneratorInfoProvider extends InfoProvider {
 
-    public static void addReactorInfo(InfoHolder infoHolder, TileEntity reactorRelated) {
-        if (reactorRelated instanceof TileEntityNuclearReactor) {
-            TileEntityNuclearReactor reactor = (TileEntityNuclearReactor) reactorRelated;
-            int heat = reactor.heat;
-            int maxHeat = reactor.maxHeat;
-            int production = reactor.getOutput() * 5;
-            infoHolder.add(FormattedTranslator.WHITE.format("info.generator.output", production));
-            infoHolder.add(FormattedTranslator.DARK_GRAY.format("info.reactor.heat.short", BarElement.bar(heat, maxHeat, getReactorColor(heat, maxHeat), String.format("%s/%s", heat, maxHeat))));
-        }
-    }
-
     @Override
-    public void addInfo(InfoHolder helper, TileEntity blockEntity) {
+    public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TileEntityBaseGenerator) {
             TileEntityBaseGenerator gen = (TileEntityBaseGenerator) blockEntity;
-            helper.add(tier(1));
+            text(helper, tier(1));
             double production = 0;
             if (gen instanceof TileEntityGenerator || gen instanceof TileEntityGeoGenerator) {
                 if (gen.isConverting()) {
@@ -40,9 +31,9 @@ public class GeneratorInfoProvider extends InfoProvider {
                 production = gen.production;
             }
             if (production > 0) { // blame windmill
-                helper.add(translate("info.generator.output", production));
+                text(helper, translate("info.generator.output", production));
             }
-            helper.add(translate("info.generator.max_output", gen.getMaxEnergyOutput()));
+            text(helper, translate("info.generator.max_output", gen.getMaxEnergyOutput()));
         }
         if (blockEntity instanceof IReactor) {
             addReactorInfo(helper, blockEntity);
@@ -52,14 +43,26 @@ public class GeneratorInfoProvider extends InfoProvider {
         }
     }
 
-    public static FormattedTranslator getReactorColor(int current, int max) {
+    public void addReactorInfo(IWailaHelper helper, TileEntity reactorRelated) {
+        if (reactorRelated instanceof TileEntityNuclearReactor) {
+            TileEntityNuclearReactor reactor = (TileEntityNuclearReactor) reactorRelated;
+            int heat = reactor.heat;
+            int maxHeat = reactor.maxHeat;
+            int production = reactor.getOutput() * 5;
+            text(helper, FormattedTranslator.WHITE.format("info.generator.output", production));
+            bar(helper, heat, maxHeat, translate("info.reactor.heat.long", heat, maxHeat), getReactorColor(heat, maxHeat));
+
+        }
+    }
+
+    public static int getReactorColor(int current, int max) {
         float progress = (float) current / max;
         if ((double) progress < 0.25) {
-            return FormattedTranslator.GREEN;
+            return ColorUtils.GREEN;
         } else if ((double) progress < 0.5) {
-            return FormattedTranslator.YELLOW;
+            return -1189115;
         } else {
-            return (double) progress < 0.75 ? FormattedTranslator.GOLD : FormattedTranslator.RED;
+            return (double) progress < 0.75 ? -1203707 : ColorUtils.RED;
         }
     }
 }

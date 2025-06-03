@@ -4,6 +4,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import mcp.mobius.waila.mod_BlockHelper;
 import mods.vintage.core.platform.lang.ILangProvider;
 import mods.vintage.core.platform.lang.LangManager;
 import reforged.mods.blockhelper.addons.proxy.CommonProxy;
@@ -32,6 +33,7 @@ public class BlockHelperAddons implements ILangProvider {
     public void pre(FMLPreInitializationEvent e) {
         PROXY.loadPre();
         LangManager.THIS.registerLangProvider(this);
+        mod_BlockHelper.proxy.registerPlugin(new WailaPluginHandler());
     }
 
     @Mod.PostInit

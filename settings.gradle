@@ -1,1 +1,15 @@
+pluginManagement {
+    repositories {
+        maven {
+            url = uri("https://repo.sleeping.town")
+        }
+        mavenCentral()
+        gradlePluginPortal {
+            content {
+                excludeGroup("org.apache.logging.log4j")
+            }
+        }
+    }
+}
+
 rootProject.name = "Block Helper Addons - 1.5.2"
