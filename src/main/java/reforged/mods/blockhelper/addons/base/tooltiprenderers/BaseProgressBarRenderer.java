@@ -16,11 +16,12 @@ import reforged.mods.blockhelper.addons.utils.GuiHelper;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.WeakHashMap;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaseProgressBarRenderer implements ITooltipRenderer {
 
-    private final WeakHashMap<String[], Tooltip> subTooltips = new WeakHashMap<String[], Tooltip>();
+    private final Map<String[], Tooltip> subTooltips = new HashMap<String[], Tooltip>();
     private static Field FIELD_POS;
 
     static {
@@ -34,29 +35,31 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
 
     @Override
     public Dimension getSize(String[] strings, ICommonAccessor accessor) {
+        if (FIELD_POS == null) {
+            return new Dimension();
+        }
+        // An instance of our tooltip group for width consistency
         Tooltip tooltip;
         if (this.subTooltips.containsKey(strings)) {
+            // is present
             tooltip = this.subTooltips.get(strings);
         } else {
             TipList<String, String> list = new TipList<String, String>();
             list.addAll(Arrays.asList(strings));
+            // create a new one
             tooltip = new Tooltip(list, RayTracing.instance().getTargetStack());
             this.subTooltips.put(strings, mod_BlockHelper.TICK_HANDLER.tooltip);
         }
 
-        Rectangle rectangle = new Rectangle();
-        if ("1".equals(strings[4])) {
-            rectangle.setHeight(10);
-        } else {
-            rectangle.setHeight(13);
-        }
+        int height = "1".equals(strings[4]) ? 10 : 11;
         try {
-            rectangle.setWidth(((Rectangle) FIELD_POS.get(tooltip)).getWidth());
+            // get sizes for our tooltip
+            Rectangle rect = (Rectangle) FIELD_POS.get(tooltip);
+            return new Dimension(rect.getWidth(), height);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
             return new Dimension();
         }
-        return new Dimension(rectangle.getWidth(), rectangle.getHeight());
     }
 
     /**
@@ -76,7 +79,7 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
         Tooltip tooltip = subTooltips.get(strings);
         if (tooltip != null) {
             Rectangle rectangle = new Rectangle();
-            rectangle.setHeight(13);
+            rectangle.setHeight(11);
             try {
                 rectangle.setWidth(((Rectangle) FIELD_POS.get(tooltip)).getWidth() - 37);
             } catch (IllegalAccessException exception) {
@@ -102,7 +105,7 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
             if (centered) {
                 x += rectangle.getWidth() / 2 - font.getStringWidth(text) / 2 + 1;
             }
-            font.drawStringWithShadow(text, x, y + 3, ColorUtils.WHITE);
+            font.drawStringWithShadow(text, x, y + 2, ColorUtils.WHITE);
         }
     }
 }
