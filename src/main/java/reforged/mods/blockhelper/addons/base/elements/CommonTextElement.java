@@ -1,7 +1,7 @@
 package reforged.mods.blockhelper.addons.base.elements;
 
 import net.minecraft.nbt.NBTTagCompound;
-import reforged.mods.blockhelper.addons.utils.IWailaElementBuilder;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaElementBuilder;
 import reforged.mods.blockhelper.addons.utils.WailaTags;
 
 public class CommonTextElement implements IWailaElementBuilder {

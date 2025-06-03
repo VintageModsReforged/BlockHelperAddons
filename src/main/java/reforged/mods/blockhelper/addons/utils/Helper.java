@@ -1,4 +1,4 @@
-package reforged.mods.blockhelper.addons;
+package reforged.mods.blockhelper.addons.utils;
 
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import mods.vintage.core.platform.lang.Translator;

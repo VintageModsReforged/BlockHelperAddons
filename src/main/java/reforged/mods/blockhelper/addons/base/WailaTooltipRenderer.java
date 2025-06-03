@@ -45,6 +45,8 @@ public class WailaTooltipRenderer extends TooltipHelper implements IDataProvider
                     String text = barElement.getText();
                     bar(strings, current, max, text, color);
                 }
+                // TODO: Check if we need it
+                // fluid
                 if (serverTag.hasKey(WailaTags.ADDON_FLUID_TAG)) {
                     NBTTagCompound elementTag = serverTag.getCompoundTag(WailaTags.ADDON_FLUID_TAG);
                     CommonFluidElement fluidElement = CommonFluidElement.load(elementTag);

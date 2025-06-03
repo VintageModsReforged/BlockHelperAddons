@@ -8,9 +8,8 @@ import mods.vintage.core.platform.lang.FormattedTranslator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.blockhelper.addons.BlockHelperAddons;
-import reforged.mods.blockhelper.addons.Helper;
-import reforged.mods.blockhelper.addons.utils.IWailaHelper;
+import reforged.mods.blockhelper.addons.utils.Helper;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class GT_WrenchableInfoProvider extends InfoProvider {
@@ -18,7 +17,7 @@ public class GT_WrenchableInfoProvider extends InfoProvider {
     @Override
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         int actualDrop;
-        ItemStack heldStack = BlockHelperAddons.PROXY.getPlayer().getHeldItem();
+        ItemStack heldStack = player.getHeldItem();
         if (blockEntity instanceof IWrenchable && ((IWrenchable) blockEntity).getWrenchDropRate() > 0) {
             IWrenchable wrenchable = (IWrenchable) blockEntity;
             if (heldStack != null) {

@@ -3,11 +3,8 @@ package reforged.mods.blockhelper.addons.integrations;
 import advsolar.TileEntitySolarPanel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.blockhelper.addons.Helper;
-import reforged.mods.blockhelper.addons.utils.ColorUtils;
-import reforged.mods.blockhelper.addons.utils.Formatter;
-import reforged.mods.blockhelper.addons.utils.IWailaHelper;
-import reforged.mods.blockhelper.addons.utils.InfoProvider;
+import reforged.mods.blockhelper.addons.utils.*;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
 public class AdvancedSolarPanelInfoProvider extends InfoProvider {
 

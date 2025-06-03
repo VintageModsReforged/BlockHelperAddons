@@ -13,6 +13,9 @@ import net.minecraft.item.ItemStack;
 import reforged.mods.blockhelper.addons.base.elements.CommonBarElement;
 import reforged.mods.blockhelper.addons.base.elements.CommonFluidElement;
 import reforged.mods.blockhelper.addons.base.elements.CommonTextElement;
+import reforged.mods.blockhelper.addons.utils.interfaces.IInfoProvider;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaElementBuilder;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
 public abstract class InfoProvider implements IInfoProvider {
 
@@ -121,7 +124,7 @@ public abstract class InfoProvider implements IInfoProvider {
     }
 
     public String tier(int tier) {
-        return new ChatComponentTranslation("info.energy.tier", tier).getFormattedText();
+        return new ChatComponentTranslation("info.energy.tier", Helper.getMaxInputFromTier(tier)).getFormattedText();
     }
 
     public String maxIn(int maxIn) {

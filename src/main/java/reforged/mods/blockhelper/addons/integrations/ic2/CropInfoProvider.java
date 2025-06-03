@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
-import reforged.mods.blockhelper.addons.utils.IWailaHelper;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 import java.text.DecimalFormat;

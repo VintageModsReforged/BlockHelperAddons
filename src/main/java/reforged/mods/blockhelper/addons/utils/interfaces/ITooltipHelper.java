@@ -1,7 +1,6 @@
-package reforged.mods.blockhelper.addons.utils;
+package reforged.mods.blockhelper.addons.utils.interfaces;
 
 import mcp.mobius.waila.api.ITaggedList;
-import mods.vintage.core.platform.lang.components.IChatComponent;
 
 public interface ITooltipHelper {
 

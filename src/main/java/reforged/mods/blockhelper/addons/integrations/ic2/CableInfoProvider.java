@@ -3,7 +3,7 @@ package reforged.mods.blockhelper.addons.integrations.ic2;
 import ic2.core.block.wiring.TileEntityCable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.blockhelper.addons.utils.IWailaHelper;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class CableInfoProvider extends InfoProvider {

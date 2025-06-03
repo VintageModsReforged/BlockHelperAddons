@@ -1,13 +1,15 @@
 package reforged.mods.blockhelper.addons.integrations;
 
 import ic2.advancedmachines.blocks.tiles.base.TileEntityAdvancedMachine;
-import ic2.advancedmachines.blocks.tiles.machines.*;
+import ic2.advancedmachines.blocks.tiles.machines.TileEntityCentrifugeExtractor;
+import ic2.advancedmachines.blocks.tiles.machines.TileEntityCompactingRecycler;
+import ic2.advancedmachines.blocks.tiles.machines.TileEntityRotaryMacerator;
+import ic2.advancedmachines.blocks.tiles.machines.TileEntitySingularityCompressor;
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
-import reforged.mods.blockhelper.addons.utils.Formatter;
-import reforged.mods.blockhelper.addons.utils.IWailaHelper;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class AdvancedMachinesInfoProvider extends InfoProvider {

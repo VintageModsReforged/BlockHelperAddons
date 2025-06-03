@@ -6,9 +6,8 @@ import ic2.core.block.generator.tileentity.*;
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.blockhelper.addons.BarElement;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
-import reforged.mods.blockhelper.addons.utils.IWailaHelper;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class GeneratorInfoProvider extends InfoProvider {

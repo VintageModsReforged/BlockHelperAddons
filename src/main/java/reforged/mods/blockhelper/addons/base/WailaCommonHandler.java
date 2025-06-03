@@ -11,7 +11,6 @@ import net.minecraftforge.liquids.LiquidStack;
 import reforged.mods.blockhelper.addons.base.elements.CommonFluidElement;
 import reforged.mods.blockhelper.addons.integrations.AdvancedMachinesInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.AdvancedPowerManagementInfoProvider;
-//import reforged.mods.blockhelper.addons.integrations.AdvancedSolarPanelInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.AdvancedSolarPanelInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.gregtech.GT_BaseMetaMachineInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.gregtech.GT_IndividualMachineInfoProvider;
@@ -19,8 +18,8 @@ import reforged.mods.blockhelper.addons.integrations.gregtech.GT_MetaMachineInfo
 import reforged.mods.blockhelper.addons.integrations.gregtech.GT_WrenchableInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.ic2.*;
 import reforged.mods.blockhelper.addons.utils.Formatter;
-import reforged.mods.blockhelper.addons.utils.IInfoProvider;
-import reforged.mods.blockhelper.addons.utils.IWailaHelper;
+import reforged.mods.blockhelper.addons.utils.interfaces.IInfoProvider;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
 import java.util.ArrayList;
 import java.util.List;

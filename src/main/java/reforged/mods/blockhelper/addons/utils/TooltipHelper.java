@@ -2,7 +2,7 @@ package reforged.mods.blockhelper.addons.utils;
 
 import mcp.mobius.waila.api.ITaggedList;
 import mcp.mobius.waila.api.SpecialChars;
-import mods.vintage.core.platform.lang.components.IChatComponent;
+import reforged.mods.blockhelper.addons.utils.interfaces.ITooltipHelper;
 
 /**
  * Tooltip Builder

@@ -7,9 +7,9 @@ import gregtechmod.common.tileentities.GT_MetaTileEntity_TesseractTerminal;
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.blockhelper.addons.Helper;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
-import reforged.mods.blockhelper.addons.utils.IWailaHelper;
+import reforged.mods.blockhelper.addons.utils.Helper;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class GT_BaseMetaMachineInfoProvider extends InfoProvider {

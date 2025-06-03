@@ -1,4 +1,4 @@
-package reforged.mods.blockhelper.addons.utils;
+package reforged.mods.blockhelper.addons.utils.interfaces;
 
 import net.minecraft.nbt.NBTTagCompound;
 

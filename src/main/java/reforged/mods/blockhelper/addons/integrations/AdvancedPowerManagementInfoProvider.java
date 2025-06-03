@@ -3,14 +3,10 @@ package reforged.mods.blockhelper.addons.integrations;
 import com.kaijin.AdvPowerMan.TEAdjustableTransformer;
 import com.kaijin.AdvPowerMan.TEBatteryStation;
 import com.kaijin.AdvPowerMan.TEChargingBench;
-import mods.vintage.core.platform.lang.FormattedTranslator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.blockhelper.addons.Helper;
-import reforged.mods.blockhelper.addons.utils.ColorUtils;
-import reforged.mods.blockhelper.addons.utils.Formatter;
-import reforged.mods.blockhelper.addons.utils.IWailaHelper;
-import reforged.mods.blockhelper.addons.utils.InfoProvider;
+import reforged.mods.blockhelper.addons.utils.*;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
 public class AdvancedPowerManagementInfoProvider extends InfoProvider {
 

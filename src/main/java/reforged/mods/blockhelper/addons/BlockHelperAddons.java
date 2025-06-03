@@ -1,13 +1,13 @@
 package reforged.mods.blockhelper.addons;
 
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import mcp.mobius.waila.mod_BlockHelper;
+import mods.vintage.core.helpers.ConfigHelper;
 import mods.vintage.core.platform.lang.ILangProvider;
 import mods.vintage.core.platform.lang.LangManager;
-import reforged.mods.blockhelper.addons.proxy.CommonProxy;
+import net.minecraftforge.common.Configuration;
+import reforged.mods.blockhelper.addons.base.WailaCommonHandler;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,21 +24,23 @@ import java.util.List;
 )
 public class BlockHelperAddons implements ILangProvider {
 
-    @SidedProxy(clientSide = "reforged.mods.blockhelper.addons.proxy.ClientProxy", serverSide = "reforged.mods.blockhelper.addons.proxy.CommonProxy")
-    public static CommonProxy PROXY;
+    public Configuration CONFIG;
+    public static String[] LANGS;
 
-    public BlockHelperAddons() {}
+    public BlockHelperAddons() {
+        CONFIG = ConfigHelper.getConfigFor("BlockHelperAddons");
+        CONFIG.load();
+        LANGS = ConfigHelper.getLocalizations(CONFIG, new String[] {"en_US", "ru_RU"}, "BlockHelperAddons");
+        if (CONFIG != null) {
+            CONFIG.save();
+        }
+    }
 
     @Mod.PreInit
     public void pre(FMLPreInitializationEvent e) {
-        PROXY.loadPre();
+        WailaCommonHandler.init();
         LangManager.THIS.registerLangProvider(this);
         mod_BlockHelper.proxy.registerPlugin(new WailaPluginHandler());
-    }
-
-    @Mod.PostInit
-    public void post(FMLPostInitializationEvent e) {
-        PROXY.loadPost();
     }
 
     @Override
@@ -48,6 +50,6 @@ public class BlockHelperAddons implements ILangProvider {
 
     @Override
     public List<String> getLocalizationList() {
-        return Arrays.asList(BlockHelperAddonsConfig.LANGS);
+        return Arrays.asList(LANGS);
     }
 }

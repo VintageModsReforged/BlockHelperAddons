@@ -7,9 +7,8 @@ import mods.vintage.core.platform.lang.FormattedTranslator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.blockhelper.addons.BlockHelperAddons;
-import reforged.mods.blockhelper.addons.Helper;
-import reforged.mods.blockhelper.addons.utils.IWailaHelper;
+import reforged.mods.blockhelper.addons.utils.Helper;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class WrenchableInfoProvider extends InfoProvider {
@@ -18,7 +17,7 @@ public class WrenchableInfoProvider extends InfoProvider {
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (!Loader.isModLoaded("GregTech_Addon")) {
             if (blockEntity instanceof IWrenchable) {
-                ItemStack heldStack = BlockHelperAddons.PROXY.getPlayer().getHeldItem();
+                ItemStack heldStack = player.getHeldItem();
                 IWrenchable wrenchable = (IWrenchable) blockEntity;
                 float dropRate = wrenchable.getWrenchDropRate();
                 if (dropRate > 0) {

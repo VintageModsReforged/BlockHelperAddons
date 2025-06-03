@@ -2,6 +2,8 @@ package reforged.mods.blockhelper.addons.utils;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaElementBuilder;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
 import java.lang.reflect.Field;
 import java.util.List;
