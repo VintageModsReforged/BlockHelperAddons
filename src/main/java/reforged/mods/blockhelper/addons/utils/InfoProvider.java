@@ -124,7 +124,7 @@ public abstract class InfoProvider implements IInfoProvider {
     }
 
     public String tier(int tier) {
-        return new ChatComponentTranslation("info.energy.tier", Helper.getMaxInputFromTier(tier)).getFormattedText();
+        return new ChatComponentTranslation("info.energy.tier", Helper.getTierForDisplay(tier)).getFormattedText();
     }
 
     public String maxIn(int maxIn) {

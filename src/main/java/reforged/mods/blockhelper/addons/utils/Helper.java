@@ -1,42 +1,41 @@
 package reforged.mods.blockhelper.addons.utils;
 
 import mods.vintage.core.platform.lang.FormattedTranslator;
-import mods.vintage.core.platform.lang.Translator;
 
 public class Helper {
 
     public static String getTierForDisplay(int tier) {
         switch (tier) {
             case 0:
-                return Translator.format("info.tier.ulv");
+                return FormattedTranslator.DARK_GRAY.format("info.tier.ulv");
             case 1:
-                return Translator.format("info.tier.lv");
+                return FormattedTranslator.GRAY.format("info.tier.lv");
             case 2:
-                return Translator.format("info.tier.mv");
+                return FormattedTranslator.AQUA.format("info.tier.mv");
             case 3:
-                return Translator.format("info.tier.hv");
+                return FormattedTranslator.GOLD.format("info.tier.hv");
             case 4:
-                return Translator.format("info.tier.ev");
+                return FormattedTranslator.DARK_PURPLE.format("info.tier.ev");
             case 5:
-                return Translator.format("info.tier.iv");
+                return FormattedTranslator.BLUE.format("info.tier.iv");
             case 6:
-                return Translator.format("info.tier.luv");
+                return FormattedTranslator.LIGHT_PURPLE.format("info.tier.luv");
             case 7:
-                return Translator.format("info.tier.zpm");
+                return FormattedTranslator.RED.format("info.tier.zpm");
             case 8:
-                return Translator.format("info.tier.uv");
+                return FormattedTranslator.DARK_AQUA.format("info.tier.uv");
             case 9:
-                return Translator.format("info.tier.uhv");
+                return FormattedTranslator.WHITE.format("info.tier.uhv");
             case 10:
-                return Translator.format("info.tier.uev");
+                return FormattedTranslator.WHITE.format("info.tier.uev");
             case 11:
-                return Translator.format("info.tier.uiv");
+                return FormattedTranslator.WHITE.format("info.tier.uiv");
             case 12:
-                return Translator.format("info.tier.umv");
+                return FormattedTranslator.WHITE.format("info.tier.umv");
             case 13:
-                return Translator.format("info.tier.uxv");
+                return FormattedTranslator.WHITE.format("info.tier.uxv");
             case 14:
-                return Translator.format("info.tier.max");
+                return FormattedTranslator.WHITE.format("info.tier.max");
             default:
                 return FormattedTranslator.RED.literal("ERROR, please report!");
         }

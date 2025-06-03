@@ -90,7 +90,8 @@ public class IndividualInfoProvider extends InfoProvider {
         }
         if (blockEntity instanceof TileEntityElectrolyzer) {
             TileEntityElectrolyzer electrolyzer = (TileEntityElectrolyzer) blockEntity;
-            bar(helper, electrolyzer.energy, 20000, FormattedTranslator.WHITE.format("info.progress.full", electrolyzer.energy, 20000).concat(" EU"), ColorUtils.RED);
+            if (electrolyzer.energy > 0)
+                bar(helper, electrolyzer.energy, 20000, FormattedTranslator.WHITE.format("info.progress.full", electrolyzer.energy, 20000).concat(" EU"), ColorUtils.RED);
         }
     }
 
