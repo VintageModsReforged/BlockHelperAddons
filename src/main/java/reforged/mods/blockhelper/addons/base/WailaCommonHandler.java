@@ -22,42 +22,54 @@ import reforged.mods.blockhelper.addons.utils.interfaces.IInfoProvider;
 import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.WeakHashMap;
 
 public class WailaCommonHandler {
 
-    public static WeakHashMap<Integer, LiquidStack> FLUIDS = new WeakHashMap<Integer, LiquidStack>();
-    public static List<IInfoProvider> INFO_PROVIDERS = new ArrayList<IInfoProvider>();
+    public static final WailaCommonHandler INSTANCE = new WailaCommonHandler();
 
-    public static void init() {
-        INFO_PROVIDERS.add(new EUStorageInfoProvider());
-        INFO_PROVIDERS.add(new CableInfoProvider());
-        INFO_PROVIDERS.add(new BaseMachineInfoProvider());
-        INFO_PROVIDERS.add(new IndividualInfoProvider());
-        INFO_PROVIDERS.add(new GeneratorInfoProvider());
-        INFO_PROVIDERS.add(new TransformerInfoProvider());
-        INFO_PROVIDERS.add(new TeleporterInfoProvider());
-        INFO_PROVIDERS.add(new CropInfoProvider());
+    public static WeakHashMap<Integer, LiquidStack> FLUIDS = new WeakHashMap<Integer, LiquidStack>();
+    protected List<IInfoProvider> INFO_PROVIDERS = new ArrayList<IInfoProvider>();
+
+    public void init() {
+        registerProviders( // IC2
+                new EUStorageInfoProvider(),
+                new CableInfoProvider(),
+                new BaseMachineInfoProvider(),
+                new IndividualInfoProvider(),
+                new GeneratorInfoProvider(),
+                new TransformerInfoProvider(),
+                new TeleporterInfoProvider(),
+                new CropInfoProvider(),
+                new WrenchableInfoProvider()
+        );
+
         if (Loader.isModLoaded("AdvancedSolarPanel")) {
-            INFO_PROVIDERS.add(new AdvancedSolarPanelInfoProvider());
+            registerProviders(new AdvancedSolarPanelInfoProvider());
         }
         if (Loader.isModLoaded("AdvancedMachines")) {
-            INFO_PROVIDERS.add(new AdvancedMachinesInfoProvider());
+            registerProviders(new AdvancedMachinesInfoProvider());
         }
         if (Loader.isModLoaded("AdvancedPowerManagement")) {
-            INFO_PROVIDERS.add(new AdvancedPowerManagementInfoProvider());
+            registerProviders(new AdvancedPowerManagementInfoProvider());
         }
-        INFO_PROVIDERS.add(new WrenchableInfoProvider());
         if (Loader.isModLoaded("GregTech_Addon")) {
-            INFO_PROVIDERS.add(new GT_BaseMetaMachineInfoProvider());
-            INFO_PROVIDERS.add(new GT_MetaMachineInfoProvider());
-            INFO_PROVIDERS.add(new GT_IndividualMachineInfoProvider());
-            INFO_PROVIDERS.add(new GT_WrenchableInfoProvider());
+            registerProviders( // GregTech-Addon
+                    new GT_BaseMetaMachineInfoProvider(),
+                    new GT_MetaMachineInfoProvider(),
+                    new GT_IndividualMachineInfoProvider(),
+                    new GT_WrenchableInfoProvider()
+            );
         }
     }
 
-    public static void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
+    public void registerProviders(IInfoProvider... providers) {
+        INFO_PROVIDERS.addAll(Arrays.asList(providers));
+    }
+
+    public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity != null) {
             for (IInfoProvider provider : INFO_PROVIDERS) {
                 if (provider.canHandle(player)) {
@@ -67,13 +79,13 @@ public class WailaCommonHandler {
         }
     }
 
-    public static void addTankInfo(IWailaHelper helper, TileEntity blockEntity) {
+    public void addTankInfo(IWailaHelper helper, TileEntity blockEntity) {
         if (blockEntity instanceof ITankContainer) {
             loadTankData(helper, (ITankContainer) blockEntity);
         }
     }
 
-    public static void loadTankData(IWailaHelper helper, ITankContainer tankContainer) {
+    public void loadTankData(IWailaHelper helper, ITankContainer tankContainer) {
         ILiquidTank[] tanks = tankContainer.getTanks(ForgeDirection.NORTH);
         for (int i = 0; i < tanks.length; i++) {
             ILiquidTank tank = tanks[i];
@@ -87,7 +99,7 @@ public class WailaCommonHandler {
         }
     }
 
-    public static void loadTankInfo(IWailaHelper helper, LiquidStack fluidStack, int capacity) {
+    public void loadTankInfo(IWailaHelper helper, LiquidStack fluidStack, int capacity) {
         FLUIDS.put(fluidStack.itemID, fluidStack);
         helper.add(new CommonFluidElement(fluidStack.amount, capacity,
                 new ChatComponentTranslation("probe.info.fluid", fluidStack.asItemStack().getDisplayName(),

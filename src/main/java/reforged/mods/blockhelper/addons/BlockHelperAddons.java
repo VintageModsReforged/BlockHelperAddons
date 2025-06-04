@@ -38,7 +38,7 @@ public class BlockHelperAddons implements ILangProvider {
 
     @Mod.PreInit
     public void pre(FMLPreInitializationEvent e) {
-        WailaCommonHandler.init();
+        WailaCommonHandler.INSTANCE.init();
         LangManager.THIS.registerLangProvider(this);
         mod_BlockHelper.proxy.registerPlugin(new WailaPluginHandler());
     }

@@ -63,7 +63,7 @@ public class WailaTooltipRenderer extends TooltipHelper implements IDataProvider
     @Override
     public void appendServerData(TileEntity tile, NBTTagCompound tag, IServerDataAccessor accessor, IPluginConfig config) {
         WailaHelper helper = new WailaHelper();
-        WailaCommonHandler.addInfo(helper, tile, accessor.getPlayer());
+        WailaCommonHandler.INSTANCE.addInfo(helper, tile, accessor.getPlayer());
         helper.transferData(tag);
     }
 
