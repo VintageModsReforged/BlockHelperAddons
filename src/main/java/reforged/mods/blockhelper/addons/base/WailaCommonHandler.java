@@ -11,7 +11,6 @@ import net.minecraftforge.liquids.LiquidStack;
 import reforged.mods.blockhelper.addons.base.elements.CommonFluidElement;
 import reforged.mods.blockhelper.addons.integrations.AdvancedMachinesInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.AdvancedPowerManagementInfoProvider;
-import reforged.mods.blockhelper.addons.integrations.AdvancedSolarPanelInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.gregtech.GT_BaseMetaMachineInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.gregtech.GT_IndividualMachineInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.gregtech.GT_MetaMachineInfoProvider;
@@ -44,9 +43,6 @@ public class WailaCommonHandler {
                 new TeleporterInfoProvider(),
                 new CropInfoProvider()
         );
-        if (Loader.isModLoaded("AdvancedSolarPanel")) {
-            registerAddonProviders(new AdvancedSolarPanelInfoProvider());
-        }
         if (Loader.isModLoaded("AdvancedMachines")) {
             registerAddonProviders(new AdvancedMachinesInfoProvider());
         }
