@@ -24,12 +24,9 @@ public class WailaPluginHandler implements IWailaPlugin {
 
     @Override
     public void register(IRegistrar registration, Side side) {
-        registration.addSyncedConfig("general", "disableIc2", true);
         // disable built-in modules for IC2
-        if (PluginConfig.instance().get("general", "disableIc2", true)) {
-            PluginConfig.instance().setConfig("modules", "ic2.storage", false);
-            PluginConfig.instance().setConfig("modules", "ic2.outputeu", false);
-        }
+        PluginConfig.instance().setConfig("modules", "ic2.storage", false);
+        PluginConfig.instance().setConfig("modules", "ic2.outputeu", false);
         registration.registerStackProvider(CropInfoProvider.CropIconProvider.THIS, BlockCrop.class);
         registration.registerNBTProvider(CropInfoProvider.CropIconProvider.THIS, TileEntityCrop.class);
         registration.registerBodyProvider(WailaTooltipRenderer.THIS, Block.class);
