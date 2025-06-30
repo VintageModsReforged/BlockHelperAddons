@@ -52,16 +52,18 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
         }
 
         int height = "1".equals(strings[4]) ? 10 : 11;
-        try {
-            // safety check
-            if (tooltip == null) return new Dimension();
-            // get sizes for our tooltip
-            Rectangle rect = (Rectangle) FIELD_POS.get(tooltip);
-            return new Dimension(rect.getWidth(), height);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            return new Dimension();
+        FontRenderer font = Minecraft.getMinecraft().fontRenderer;
+        int maxLength = 0;
+        for (String str : strings) {
+            if (font.getStringWidth(str) > maxLength) {
+                maxLength = font.getStringWidth(str);
+            }
         }
+
+        // safety check
+        if (tooltip == null) return new Dimension();
+        // get sizes for our tooltip
+        return new Dimension(maxLength, height);
     }
 
     /**

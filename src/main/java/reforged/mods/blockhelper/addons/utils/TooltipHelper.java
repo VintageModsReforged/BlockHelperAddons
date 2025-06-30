@@ -11,7 +11,7 @@ import reforged.mods.blockhelper.addons.utils.interfaces.ITooltipHelper;
  * param 2 - color
  * param 3 - text
  * param 4 - string only, 0 - false, 1 - true
- * param 5 - centered, 0 - means false, 1 - true
+ * param 5 - centered, 0 - false, 1 - true
  * param 6 - fluid id: 0 for nothing
  * */
 
@@ -25,11 +25,7 @@ public class TooltipHelper implements ITooltipHelper {
         textData[2] = String.valueOf(1);
         textData[3] = text;
         textData[4] = "1";
-        if (centered) {
-            textData[5] = "1";
-        } else {
-            textData[5] = "0";
-        }
+        textData[5] = centered ? "1" : "0";
         textData[6] = "0";
         tooltip.add(SpecialChars.getRenderString("jade.progress", textData));
     }

@@ -31,9 +31,7 @@ public class GeneratorInfoProvider extends InfoProvider {
             } else {
                 production = gen.production;
             }
-            if (production > 0) { // blame windmill
-                text(helper, translate("info.generator.output", production));
-            }
+            text(helper, translate("info.generator.output", Math.max(0, production)));
             text(helper, translate("info.generator.max_output", gen.getMaxEnergyOutput()));
         }
         if (blockEntity instanceof IReactor) {
