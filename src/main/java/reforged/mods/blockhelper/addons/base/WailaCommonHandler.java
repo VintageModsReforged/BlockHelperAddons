@@ -15,7 +15,6 @@ import reforged.mods.blockhelper.addons.integrations.AdvancedSolarPanelInfoProvi
 import reforged.mods.blockhelper.addons.integrations.gregtech.GT_BaseMetaMachineInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.gregtech.GT_IndividualMachineInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.gregtech.GT_MetaMachineInfoProvider;
-import reforged.mods.blockhelper.addons.integrations.gregtech.GT_WrenchableInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.ic2.*;
 import reforged.mods.blockhelper.addons.utils.Formatter;
 import reforged.mods.blockhelper.addons.utils.interfaces.IInfoProvider;
@@ -32,6 +31,7 @@ public class WailaCommonHandler {
 
     public static WeakHashMap<Integer, LiquidStack> FLUIDS = new WeakHashMap<Integer, LiquidStack>();
     protected List<IInfoProvider> INFO_PROVIDERS = new ArrayList<IInfoProvider>();
+    protected List<IInfoProvider> ADDON_PROVIDERS = new ArrayList<IInfoProvider>();
 
     public void init() {
         registerProviders( // IC2
@@ -42,25 +42,22 @@ public class WailaCommonHandler {
                 new GeneratorInfoProvider(),
                 new TransformerInfoProvider(),
                 new TeleporterInfoProvider(),
-                new CropInfoProvider(),
-                new WrenchableInfoProvider()
+                new CropInfoProvider()
         );
-
         if (Loader.isModLoaded("AdvancedSolarPanel")) {
-            registerProviders(new AdvancedSolarPanelInfoProvider());
+            registerAddonProviders(new AdvancedSolarPanelInfoProvider());
         }
         if (Loader.isModLoaded("AdvancedMachines")) {
-            registerProviders(new AdvancedMachinesInfoProvider());
+            registerAddonProviders(new AdvancedMachinesInfoProvider());
         }
         if (Loader.isModLoaded("AdvancedPowerManagement")) {
-            registerProviders(new AdvancedPowerManagementInfoProvider());
+            registerAddonProviders(new AdvancedPowerManagementInfoProvider());
         }
         if (Loader.isModLoaded("GregTech_Addon")) {
-            registerProviders( // GregTech-Addon
+            registerAddonProviders( // GregTech-Addon
                     new GT_BaseMetaMachineInfoProvider(),
                     new GT_MetaMachineInfoProvider(),
-                    new GT_IndividualMachineInfoProvider(),
-                    new GT_WrenchableInfoProvider()
+                    new GT_IndividualMachineInfoProvider()
             );
         }
     }
@@ -69,9 +66,20 @@ public class WailaCommonHandler {
         INFO_PROVIDERS.addAll(Arrays.asList(providers));
     }
 
+    public void registerAddonProviders(IInfoProvider... providers) {
+        ADDON_PROVIDERS.addAll(Arrays.asList(providers));
+    }
+
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity != null) {
+            // register main providers
             for (IInfoProvider provider : INFO_PROVIDERS) {
+                if (provider.canHandle(player)) {
+                    provider.addInfo(helper, blockEntity, player);
+                }
+            }
+            // register addon providers
+            for (IInfoProvider provider : ADDON_PROVIDERS) {
                 if (provider.canHandle(player)) {
                     provider.addInfo(helper, blockEntity, player);
                 }

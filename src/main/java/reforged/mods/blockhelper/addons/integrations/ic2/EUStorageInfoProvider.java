@@ -6,6 +6,7 @@ import ic2.core.block.generator.tileentity.TileEntityGeoGenerator;
 import ic2.core.block.machine.tileentity.TileEntityElectricMachine;
 import ic2.core.block.machine.tileentity.TileEntityMatter;
 import ic2.core.block.wiring.TileEntityElectricBlock;
+import mods.vintage.core.helpers.Utils;
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -17,6 +18,7 @@ public class EUStorageInfoProvider extends InfoProvider {
     @Override
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         int energy;
+        if (Utils.instanceOf(blockEntity, "reforged.ic2.addons.asp.tiles.TileEntityAdvancedSolarPanel")) return;
         if (blockEntity instanceof TileEntityElectricMachine && !(blockEntity instanceof TileEntityMatter)) {
             TileEntityElectricMachine machine = (TileEntityElectricMachine) blockEntity;
             energy = machine.energy;

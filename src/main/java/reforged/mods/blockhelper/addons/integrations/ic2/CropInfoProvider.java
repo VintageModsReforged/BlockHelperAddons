@@ -76,9 +76,9 @@ public class CropInfoProvider extends InfoProvider {
                         }
 
                         if (!crop.canGrow(cropTile)) {
-                            bar(helper, 1, 1, translate("info.crop.grow.not"), ColorUtils.RED);
+                            text(helper, FormattedTranslator.RED.format("info.crop.grow.not"), true);
                         } else {
-                            bar(helper, 1, 1, translate("info.crop.grow.rate", cropTile.calcGrowthRate()), ColorUtils.GREEN);
+                            text(helper, FormattedTranslator.GREEN.format("info.crop.grow.rate", cropTile.calcGrowthRate()), true);
                         }
                         text(helper, FormattedTranslator.GOLD.format("info.crop.harvest", status(crop.canBeHarvested(cropTile))));
                         text(helper, FormattedTranslator.YELLOW.format("info.crop.stats"), true);

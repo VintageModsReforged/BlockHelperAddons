@@ -3,6 +3,7 @@ package reforged.mods.blockhelper.addons.integrations.ic2;
 import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
 import ic2.core.block.generator.tileentity.*;
+import mods.vintage.core.helpers.Utils;
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -14,6 +15,7 @@ public class GeneratorInfoProvider extends InfoProvider {
 
     @Override
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
+        if (Utils.instanceOf(blockEntity, "reforged.ic2.addons.asp.tiles.TileEntityAdvancedSolarPanel")) return;
         if (blockEntity instanceof TileEntityBaseGenerator) {
             TileEntityBaseGenerator gen = (TileEntityBaseGenerator) blockEntity;
             text(helper, tier(1));
