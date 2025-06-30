@@ -52,7 +52,7 @@ public class Helper {
             case 2:
                 return 128;
             case 3:
-                return 3;
+                return 512;
             case 4:
                 return 2048;
             case 5:
