@@ -49,12 +49,12 @@ dependencies {
 	mappings "net.minecraftforge:forge:${forgeVersion}:src@zip"
 
 	modImplementation files("libs/industrialcraft-2_1.117.385-lf.jar")
-//	modImplementation files("libs/mod_AdvancedSolarPanels_3_3_7-deobf.jar")
 	modImplementation files("libs/compactsolars-universal-1.5.2-4.2.0.52.jar")
 	modImplementation files("libs/AdvancedPowerManagement-1.2.68-IC2-1.115.jar")
 	modImplementation files("libs/gregtechmod311.jar")
 	modImplementation files("libs/VintageCore-1.5.2-1.0.7-dev.jar")
-	modImplementation files("libs/AdvancedMachines-1.5.2-4.7.5.2d-dev.jar")
+	modImplementation files("libs/AdvancedMachines-1.5.2-4.7.5.2g-pre-dev.jar")
+	modImplementation files("libs/AdvancedSolarPanels-1.5.2-4.0.0-dev.jar")
 	modImplementation files("libs/BlockHelper-1.5.x-2.0.0-pre1-dev.jar")
 }
 

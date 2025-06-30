@@ -53,6 +53,8 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
 
         int height = "1".equals(strings[4]) ? 10 : 11;
         try {
+            // safety check
+            if (tooltip == null) return new Dimension();
             // get sizes for our tooltip
             Rectangle rect = (Rectangle) FIELD_POS.get(tooltip);
             return new Dimension(rect.getWidth(), height);
@@ -69,7 +71,7 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
      * param 2 - color
      * param 3 - text
      * param 4 - string only, 0 - false, 1 - true
-     * param 5 - centered, 0 - means false, 1 - true
+     * param 5 - centered, 0 - false, 1 - true
      * param 6 - fluid id
      * */
 
@@ -95,13 +97,13 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
             int color = Integer.parseInt(strings[2]);
             String text = strings[3];
             boolean isStringOnly = "1".equals(strings[4]);
+            boolean centered = "1".equals(strings[5]);
             String fluidStringId = strings[6];
             FontRenderer font = Minecraft.getMinecraft().fontRenderer;
             if (!isStringOnly) {
                 GuiHelper.INSTANCE.render(current, max, x, y, rectangle.getWidth(), rectangle.getHeight() + 1, color, fluidStringId);
                 x += rectangle.getWidth() / 2 - font.getStringWidth(text) / 2 + 1;
             }
-            boolean centered = "1".equals(strings[5]);
             if (centered) {
                 x += rectangle.getWidth() / 2 - font.getStringWidth(text) / 2 + 1;
             }
