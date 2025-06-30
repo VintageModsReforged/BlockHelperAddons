@@ -23,28 +23,29 @@ public class GT_IndividualMachineInfoProvider extends InfoProvider {
                     if (blast.mMachine) {
                         text(helper, FormattedTranslator.DARK_GREEN.format("info.heat") + " " + blast.mHeatCapacity + " K");
                     } else {
-                        text(helper, FormattedTranslator.RED.format("info.gt.invalid"));
+                        addStructureStatus(helper);
                     }
                 } else if (metaTile instanceof GT_MetaTileEntity_Grinder) {
                     GT_MetaTileEntity_Grinder grinder = (GT_MetaTileEntity_Grinder) metaTile;
                     if (!grinder.mMachine) {
-                        text(helper, FormattedTranslator.RED.format("info.gt.invalid"));
+                        addStructureStatus(helper);
                     }
                 } else if (metaTile instanceof GT_MetaTileEntity_Sawmill) {
                     GT_MetaTileEntity_Sawmill sawmill = (GT_MetaTileEntity_Sawmill) metaTile;
                     if (!sawmill.mMachine) {
-                        text(helper, FormattedTranslator.RED.format("info.gt.invalid"));
+                        addStructureStatus(helper);
                     }
                 } else if (metaTile instanceof GT_MetaTileEntity_ImplosionCompressor) {
                     GT_MetaTileEntity_ImplosionCompressor compressor = (GT_MetaTileEntity_ImplosionCompressor) metaTile;
                     if (!compressor.mMachine) {
-                        text(helper, FormattedTranslator.RED.format("info.gt.invalid"));
+                        addStructureStatus(helper);
                     }
                 } else if (metaTile instanceof GT_MetaTileEntity_DistillationTower) {
                     GT_MetaTileEntity_DistillationTower tower = (GT_MetaTileEntity_DistillationTower) metaTile;
                     if (!tower.mMachine) {
-                        text(helper, FormattedTranslator.RED.format("info.gt.invalid"));
+                        addStructureStatus(helper);
                     }
+
                 }
                 int progress = metaTile.getProgresstime();
                 int maxProgress = metaTile.maxProgresstime();
@@ -69,5 +70,9 @@ public class GT_IndividualMachineInfoProvider extends InfoProvider {
                 }
             }
         }
+    }
+
+    public void addStructureStatus(IWailaHelper helper) {
+        text(helper, FormattedTranslator.RED.format("info.gt.invalid"));
     }
 }
