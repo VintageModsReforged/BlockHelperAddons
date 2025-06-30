@@ -6,6 +6,7 @@ import ic2.core.block.BlockCrop;
 import ic2.core.block.TileEntityCrop;
 import mcp.mobius.waila.api.IRegistrar;
 import mcp.mobius.waila.api.IWailaPlugin;
+import mcp.mobius.waila.api.impl.PluginConfig;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.base.WailaTooltipRenderer;
@@ -23,6 +24,12 @@ public class WailaPluginHandler implements IWailaPlugin {
 
     @Override
     public void register(IRegistrar registration, Side side) {
+        registration.addSyncedConfig("general", "disableIc2", true);
+        // disable built-in modules for IC2
+        if (PluginConfig.instance().get("general", "disableIc2", true)) {
+            PluginConfig.instance().setConfig("modules", "ic2.storage", false);
+            PluginConfig.instance().setConfig("modules", "ic2.outputeu", false);
+        }
         registration.registerStackProvider(CropInfoProvider.CropIconProvider.THIS, BlockCrop.class);
         registration.registerNBTProvider(CropInfoProvider.CropIconProvider.THIS, TileEntityCrop.class);
         registration.registerBodyProvider(WailaTooltipRenderer.THIS, Block.class);
