@@ -10,6 +10,7 @@ import net.minecraftforge.liquids.ITankContainer;
 import net.minecraftforge.liquids.LiquidStack;
 import reforged.mods.blockhelper.addons.base.elements.CommonFluidElement;
 import reforged.mods.blockhelper.addons.integrations.AdvancedPowerManagementInfoProvider;
+import reforged.mods.blockhelper.addons.integrations.CompactSolarPanelsInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.gregtech.GT_BaseMetaMachineInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.gregtech.GT_IndividualMachineInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.gregtech.GT_MetaMachineInfoProvider;
@@ -44,6 +45,9 @@ public class WailaCommonHandler {
         );
         if (Loader.isModLoaded("AdvancedPowerManagement")) {
             registerAddonProviders(new AdvancedPowerManagementInfoProvider());
+        }
+        if (Loader.isModLoaded("CompactSolars")) {
+            registerAddonProviders(CompactSolarPanelsInfoProvider.THIS);
         }
         if (Loader.isModLoaded("GregTech_Addon")) {
             registerAddonProviders( // GregTech-Addon
