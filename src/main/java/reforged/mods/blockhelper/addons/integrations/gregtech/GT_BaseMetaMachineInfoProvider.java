@@ -43,6 +43,12 @@ public class GT_BaseMetaMachineInfoProvider extends InfoProvider {
                     text(helper, translate(tTerminal.getSecondaryInfo()));
                     text(helper, translate(tTerminal.getTertiaryInfo()));
                 }
+                int progress = metaTileEntity.getProgresstime();
+                int maxProgress = metaTileEntity.maxProgresstime();
+                int scaled = (int) (((float) progress / maxProgress) * 100);
+
+                if (progress > 0)
+                    bar(helper, progress, maxProgress, FormattedTranslator.WHITE.format("info.progress", scaled), ColorUtils.PROGRESS);
             }
 
             String possibleUpgrades = getPossibleUpgrades(baseMetaTileEntity);

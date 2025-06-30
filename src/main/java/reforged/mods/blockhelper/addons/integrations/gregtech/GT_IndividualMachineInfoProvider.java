@@ -6,6 +6,7 @@ import gregtechmod.common.tileentities.*;
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import reforged.mods.blockhelper.addons.utils.ColorUtils;
 import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
@@ -45,6 +46,12 @@ public class GT_IndividualMachineInfoProvider extends InfoProvider {
                         text(helper, FormattedTranslator.RED.format("info.gt.invalid"));
                     }
                 }
+                int progress = metaTile.getProgresstime();
+                int maxProgress = metaTile.maxProgresstime();
+                int scaled = (int) (((float) progress / maxProgress) * 100);
+
+                if (progress > 0)
+                    bar(helper, progress, maxProgress, FormattedTranslator.WHITE.format("info.progress", scaled), ColorUtils.PROGRESS);
             }
             if (baseTile instanceof GT_TileEntity_Matterfabricator) {
                 GT_TileEntity_Matterfabricator matter = (GT_TileEntity_Matterfabricator) baseTile;
