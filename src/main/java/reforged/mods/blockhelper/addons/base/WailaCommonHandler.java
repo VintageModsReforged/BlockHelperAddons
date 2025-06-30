@@ -9,7 +9,6 @@ import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.ITankContainer;
 import net.minecraftforge.liquids.LiquidStack;
 import reforged.mods.blockhelper.addons.base.elements.CommonFluidElement;
-import reforged.mods.blockhelper.addons.integrations.AdvancedMachinesInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.AdvancedPowerManagementInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.gregtech.GT_BaseMetaMachineInfoProvider;
 import reforged.mods.blockhelper.addons.integrations.gregtech.GT_IndividualMachineInfoProvider;
@@ -43,9 +42,6 @@ public class WailaCommonHandler {
                 new TeleporterInfoProvider(),
                 new CropInfoProvider()
         );
-        if (Loader.isModLoaded("AdvancedMachines")) {
-            registerAddonProviders(new AdvancedMachinesInfoProvider());
-        }
         if (Loader.isModLoaded("AdvancedPowerManagement")) {
             registerAddonProviders(new AdvancedPowerManagementInfoProvider());
         }
