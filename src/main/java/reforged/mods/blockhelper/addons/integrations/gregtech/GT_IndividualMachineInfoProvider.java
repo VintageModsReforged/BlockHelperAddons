@@ -25,27 +25,16 @@ public class GT_IndividualMachineInfoProvider extends InfoProvider {
                     } else {
                         addStructureStatus(helper);
                     }
-                } else if (metaTile instanceof GT_MetaTileEntity_Grinder) {
-                    GT_MetaTileEntity_Grinder grinder = (GT_MetaTileEntity_Grinder) metaTile;
-                    if (!grinder.mMachine) {
-                        addStructureStatus(helper);
-                    }
-                } else if (metaTile instanceof GT_MetaTileEntity_Sawmill) {
-                    GT_MetaTileEntity_Sawmill sawmill = (GT_MetaTileEntity_Sawmill) metaTile;
-                    if (!sawmill.mMachine) {
-                        addStructureStatus(helper);
-                    }
-                } else if (metaTile instanceof GT_MetaTileEntity_ImplosionCompressor) {
-                    GT_MetaTileEntity_ImplosionCompressor compressor = (GT_MetaTileEntity_ImplosionCompressor) metaTile;
-                    if (!compressor.mMachine) {
-                        addStructureStatus(helper);
-                    }
-                } else if (metaTile instanceof GT_MetaTileEntity_DistillationTower) {
-                    GT_MetaTileEntity_DistillationTower tower = (GT_MetaTileEntity_DistillationTower) metaTile;
-                    if (!tower.mMachine) {
-                        addStructureStatus(helper);
-                    }
+                } else {
+                    boolean needsStructureStatus =
+                            (metaTile instanceof GT_MetaTileEntity_Grinder && !((GT_MetaTileEntity_Grinder) metaTile).mMachine)
+                                    || (metaTile instanceof GT_MetaTileEntity_Sawmill && !((GT_MetaTileEntity_Sawmill) metaTile).mMachine)
+                                    || (metaTile instanceof GT_MetaTileEntity_ImplosionCompressor && !((GT_MetaTileEntity_ImplosionCompressor) metaTile).mMachine)
+                                    || (metaTile instanceof GT_MetaTileEntity_DistillationTower && !((GT_MetaTileEntity_DistillationTower) metaTile).mMachine);
 
+                    if (needsStructureStatus) {
+                        addStructureStatus(helper);
+                    }
                 }
                 int progress = metaTile.getProgresstime();
                 int maxProgress = metaTile.maxProgresstime();
