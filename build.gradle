@@ -33,6 +33,12 @@ volde {
 
 repositories {
 	maven { url = "https://api.modrinth.com/maven" }
+	maven {
+		url "https://cursemaven.com"
+		content {
+			includeGroup "curse.maven"
+		}
+	}
 }
 
 dependencies {
@@ -48,8 +54,10 @@ dependencies {
 	modImplementation files("libs/gregtechmod290h.zip")
 	modImplementation files("libs/VintageCore-1.4.7-1.0.5-dev.jar")
 	modImplementation files("libs/AdvancedMachines-1.4.7-4.7.5.2d-dev.jar")
+	modImplementation files("libs/compactsolars.zip")
+	modImplementation files("libs/apm.jar")
 
-	modImplementation("maven.modrinth:block-helper:1.2.0-1.4.7")
+	modImplementation("curse.maven:block-helper-251766:6612898")
 }
 
 sourceSets {

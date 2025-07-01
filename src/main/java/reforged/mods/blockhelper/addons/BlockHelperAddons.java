@@ -1,12 +1,13 @@
 package reforged.mods.blockhelper.addons;
 
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import mods.vintage.core.helpers.ConfigHelper;
 import mods.vintage.core.platform.lang.ILangProvider;
 import mods.vintage.core.platform.lang.LangManager;
-import reforged.mods.blockhelper.addons.proxy.CommonProxy;
+import net.minecraft.src.mod_BlockHelper;
+import net.minecraftforge.common.Configuration;
+import reforged.mods.blockhelper.addons.base.WailaCommonHandler;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,28 +16,29 @@ import java.util.List;
         "required-after:VintageCore;" +
                 "required-after:mod_BlockHelper;" +
                 "required-after:IC2;" +
-                "after:AdvancedMachines;" +
                 "after:AdvancedPowerManagement;" +
                 "after:ChargePads;" +
-                "after:GregTech_Addon;" +
-                "after:AdvancedSolarPanel;"
+                "after:GregTech_Addon;"
 )
 public class BlockHelperAddons implements ILangProvider {
 
-    @SidedProxy(clientSide = "reforged.mods.blockhelper.addons.proxy.ClientProxy", serverSide = "reforged.mods.blockhelper.addons.proxy.CommonProxy")
-    public static CommonProxy PROXY;
+    public Configuration CONFIG;
+    public static String[] LANGS;
 
-    public BlockHelperAddons() {}
+    public BlockHelperAddons() {
+        CONFIG = ConfigHelper.getConfigFor("BlockHelperAddons");
+        CONFIG.load();
+        LANGS = ConfigHelper.getLocalizations(CONFIG, new String[] {"en_US", "ru_RU"}, "BlockHelperAddons");
+        if (CONFIG != null) {
+            CONFIG.save();
+        }
+    }
 
     @Mod.PreInit
     public void pre(FMLPreInitializationEvent e) {
-        PROXY.loadPre();
+        WailaCommonHandler.INSTANCE.init();
         LangManager.THIS.registerLangProvider(this);
-    }
-
-    @Mod.PostInit
-    public void post(FMLPostInitializationEvent e) {
-        PROXY.loadPost();
+        mod_BlockHelper.proxy.registerPlugin(new WailaPluginHandler());
     }
 
     @Override
@@ -46,6 +48,6 @@ public class BlockHelperAddons implements ILangProvider {
 
     @Override
     public List<String> getLocalizationList() {
-        return Arrays.asList(BlockHelperAddonsConfig.LANGS);
+        return Arrays.asList(LANGS);
     }
 }

@@ -1,22 +1,23 @@
 package reforged.mods.blockhelper.addons.utils;
 
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockProvider;
-import de.thexxturboxx.blockhelper.api.BlockHelperBlockState;
-import de.thexxturboxx.blockhelper.api.InfoHolder;
 import ic2.core.item.tool.ItemCropnalyzer;
 import ic2.core.item.tool.ItemToolMeter;
 import ic2.core.item.tool.ItemTreetap;
 import ic2.core.item.tool.ItemTreetapElectric;
 import mods.vintage.core.platform.lang.FormattedTranslator;
+import mods.vintage.core.platform.lang.components.ChatComponentTranslation;
 import mods.vintage.core.platform.lang.components.IChatComponent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import reforged.mods.blockhelper.addons.BlockHelperAddons;
-import reforged.mods.blockhelper.addons.Helper;
+import reforged.mods.blockhelper.addons.base.elements.CommonBarElement;
+import reforged.mods.blockhelper.addons.base.elements.CommonFluidElement;
+import reforged.mods.blockhelper.addons.base.elements.CommonTextElement;
+import reforged.mods.blockhelper.addons.utils.interfaces.IInfoProvider;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaElementBuilder;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
-public abstract class InfoProvider implements BlockHelperBlockProvider, IInfoProvider {
+public abstract class InfoProvider implements IInfoProvider {
 
     public IFilter READER = new IFilter() {
         @Override
@@ -48,22 +49,6 @@ public abstract class InfoProvider implements BlockHelperBlockProvider, IInfoPro
     }
 
     @Override
-    public void addInformation(BlockHelperBlockState blockHelperBlockState, InfoHolder infoHolder) {
-        addInfo(infoHolder, blockHelperBlockState.te, BlockHelperAddons.PROXY.getPlayer());
-    }
-
-    /** TODO:
-     * re-add this when BlockHelper provide EntityPlayer inside {@link BlockHelperBlockState}
-     * return canHandle(BlockHelperAddons.PROXY.getPlayer())
-     * */
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-    public abstract void addInfo(final InfoHolder helper, final TileEntity blockEntity, final EntityPlayer player);
-
-    @Override
     public boolean canHandle(EntityPlayer player) {
         return player != null && (hasHotbarItem(player, getFilter()) || player.capabilities.isCreativeMode);
     }
@@ -85,8 +70,29 @@ public abstract class InfoProvider implements BlockHelperBlockProvider, IInfoPro
         return status ? FormattedTranslator.GREEN.format("" + true) : FormattedTranslator.RED.format("" + false);
     }
 
-    public void text(InfoHolder helper, String text) {
-        helper.add(text);
+    public void text(IWailaHelper helper, String text, boolean centered) {
+        CommonTextElement element = new CommonTextElement(text, centered);
+        add(helper, element);
+    }
+
+    public void text(IWailaHelper helper, String text) {
+        CommonTextElement element = new CommonTextElement(text, false);
+        add(helper, element);
+    }
+
+    public void textCentered(IWailaHelper helper, String text) {
+        CommonTextElement element = new CommonTextElement(text, true);
+        add(helper, element);
+    }
+
+    public void bar(IWailaHelper helper, int current, int max, String text, int color) {
+        CommonBarElement barElement = new CommonBarElement(current, max, text, color);
+        add(helper, barElement);
+    }
+
+    public void fluidBar(IWailaHelper helper, int current, int max, String text, int fluidId) {
+        CommonFluidElement element = new CommonFluidElement(current, max, text, fluidId);
+        add(helper, element);
     }
 
     public String translate(String translatable) {
@@ -118,14 +124,18 @@ public abstract class InfoProvider implements BlockHelperBlockProvider, IInfoPro
     }
 
     public String tier(int tier) {
-        return translate("info.energy.tier", Helper.getTierForDisplay(tier));
+        return new ChatComponentTranslation("info.energy.tier", Helper.getTierForDisplay(tier)).getFormattedText();
     }
 
     public String maxIn(int maxIn) {
-        return translate("info.energy.input.max", maxIn);
+        return new ChatComponentTranslation("info.energy.input.max", maxIn).getFormattedText();
     }
 
     public String usage(int usage) {
-        return translate("info.energy.usage", usage);
+        return new ChatComponentTranslation("info.energy.usage", usage).getFormattedText();
+    }
+
+    public void add(IWailaHelper helper, IWailaElementBuilder element) {
+        helper.add(element);
     }
 }
