@@ -5,9 +5,9 @@ import mcp.mobius.waila.api.ITooltipRenderer;
 import mcp.mobius.waila.api.impl.TipList;
 import mcp.mobius.waila.overlay.RayTracing;
 import mcp.mobius.waila.overlay.Tooltip;
+import mcp.mobius.waila.overlay.WailaTickHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.src.mod_BlockHelper;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Dimension;
 import org.lwjgl.util.Rectangle;
@@ -23,6 +23,7 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
 
     private final Map<String[], Tooltip> subTooltips = new HashMap<String[], Tooltip>();
     private static Field FIELD_POS;
+    private static WailaTickHandler TICK_HANDLER;
 
     static {
         try {
@@ -30,6 +31,18 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
             FIELD_POS.setAccessible(true);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
+        }
+
+        try {
+            Class<?> clazz = Class.forName("mod_BlockHelper");
+            java.lang.reflect.Field field = clazz.getField("TICK_HANDLER");
+            TICK_HANDLER = (WailaTickHandler) field.get(null);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("mod_BlockHelper not found", e);
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException("TICK_HANDLER field not found in mod_BlockHelper", e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException("Cannot access TICK_HANDLER field", e);
         }
     }
 
@@ -48,7 +61,9 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
             list.addAll(Arrays.asList(strings));
             // create a new one
             tooltip = new Tooltip(list, RayTracing.instance().getTargetStack());
-            this.subTooltips.put(strings, mod_BlockHelper.TICK_HANDLER.tooltip);
+            if (TICK_HANDLER != null) {
+                this.subTooltips.put(strings, TICK_HANDLER.tooltip);
+            }
         }
 
         int height = "1".equals(strings[4]) ? 10 : 11;

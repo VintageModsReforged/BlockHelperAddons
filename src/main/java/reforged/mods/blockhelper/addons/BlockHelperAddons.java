@@ -5,14 +5,14 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import mods.vintage.core.helpers.ConfigHelper;
 import mods.vintage.core.platform.lang.ILangProvider;
 import mods.vintage.core.platform.lang.LangManager;
-import net.minecraft.src.mod_BlockHelper;
 import net.minecraftforge.common.Configuration;
 import reforged.mods.blockhelper.addons.base.WailaCommonHandler;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
-@Mod(modid = "BlockHelperAddons", name = "Block Helper Addons", version = "1.4.7-1.0.5", acceptedMinecraftVersions = "[1.4.7]", dependencies =
+@Mod(modid = "BlockHelperAddons", name = "Block Helper Addons", useMetadata = true, dependencies =
         "required-after:VintageCore;" +
                 "required-after:mod_BlockHelper;" +
                 "required-after:IC2;" +
@@ -38,7 +38,13 @@ public class BlockHelperAddons implements ILangProvider {
     public void pre(FMLPreInitializationEvent e) {
         WailaCommonHandler.INSTANCE.init();
         LangManager.THIS.registerLangProvider(this);
-        mod_BlockHelper.proxy.registerPlugin(new WailaPluginHandler());
+        try {
+            Method register = Class.forName("mod_BlockHelper").getMethod("registerPlugin",
+                    Class.forName("mcp.mobius.waila.api.IWailaPlugin"));
+            register.invoke(null, new WailaPluginHandler());
+        } catch (Throwable t) {
+            t.printStackTrace(); // Proper logging or ignoring
+        }
     }
 
     @Override
