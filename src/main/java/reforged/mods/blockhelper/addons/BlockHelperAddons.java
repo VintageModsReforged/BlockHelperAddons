@@ -2,17 +2,17 @@ package reforged.mods.blockhelper.addons;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import mcp.mobius.waila.mod_BlockHelper;
 import mods.vintage.core.helpers.ConfigHelper;
 import mods.vintage.core.platform.lang.ILangProvider;
 import mods.vintage.core.platform.lang.LangManager;
 import net.minecraftforge.common.Configuration;
 import reforged.mods.blockhelper.addons.base.WailaCommonHandler;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
-@Mod(modid = "BlockHelperAddons", name = "Block Helper Addons", version = "1.5.2-1.0.5", acceptedMinecraftVersions = "[1.5.2]", dependencies =
+@Mod(modid = "BlockHelperAddons", name = "Block Helper Addons", useMetadata = true, dependencies =
         "required-after:VintageCore;" +
                 "required-after:mod_BlockHelper;" +
                 "required-after:IC2;" +
@@ -38,7 +38,13 @@ public class BlockHelperAddons implements ILangProvider {
     public void pre(FMLPreInitializationEvent e) {
         WailaCommonHandler.INSTANCE.init();
         LangManager.THIS.registerLangProvider(this);
-        mod_BlockHelper.proxy.registerPlugin(new WailaPluginHandler());
+        try {
+            Method register = Class.forName("mcp.mobius.waila.mod_BlockHelper").getMethod("registerPlugin",
+                    Class.forName("mcp.mobius.waila.api.IWailaPlugin"));
+            register.invoke(null, new WailaPluginHandler());
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
     }
 
     @Override
