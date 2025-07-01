@@ -2,7 +2,6 @@ package reforged.mods.blockhelper.addons.integrations.gregtech;
 
 import gregtechmod.api.BaseMetaTileEntity;
 import gregtechmod.api.MetaTileEntity;
-import gregtechmod.common.tileentities.GT_MetaTileEntity_BasicMachine;
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -31,15 +30,6 @@ public class GT_BaseMetaMachineInfoProvider extends InfoProvider {
                 int maxOut = baseMetaTileEntity.getMaxEnergyOutput();
                 if (maxOut > 0) {
                     text(helper, translate("info.generator.max_output", maxOut));
-                }
-                if (metaTileEntity instanceof GT_MetaTileEntity_BasicMachine) {
-                    GT_MetaTileEntity_BasicMachine machine = (GT_MetaTileEntity_BasicMachine) metaTileEntity;
-                    int progress = machine.mProgresstime;
-                    int maxProgress = machine.mMaxProgresstime;
-                    int scaled = (int) (((float) progress / maxProgress) * 100);
-
-                    if (progress > 0)
-                        bar(helper, progress, maxProgress, FormattedTranslator.WHITE.format("info.progress", scaled), ColorUtils.PROGRESS);
                 }
 
                 String possibleUpgrades = getPossibleUpgrades(metaTileEntity);

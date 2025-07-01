@@ -16,12 +16,11 @@ public class BaseMachineInfoProvider extends InfoProvider {
             TileEntityElectricMachine machine = (TileEntityElectricMachine) blockEntity;
             int energyConsume = machine.energyConsume;
             text(helper, FormattedTranslator.WHITE.format("info.energy.usage", energyConsume));
-            float progress = machine.getProgress();
+            float progress = machine.progress;
             int maxProgress = machine.operationLength;
             if (progress > 0) {
                 int scaled = (int) ((progress / maxProgress) * 100);
                 bar(helper, (int) progress, maxProgress, FormattedTranslator.WHITE.format("info.progress", scaled), ColorUtils.PROGRESS);
-
             }
         }
     }
