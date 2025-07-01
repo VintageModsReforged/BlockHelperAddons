@@ -15,6 +15,14 @@ public class Formatter {
     public static final DecimalFormat EU_READER_FORMAT;
     public static final DecimalFormat CABLE_LOSS_FORMAT;
 
+    public static int getPowerFromTier(int tier) {
+        return 8 << Math.min(tier, 13) * 2;
+    }
+
+    public static int getTierFromPower(int value) {
+        return value <= 8 ? 0 : (int)Math.ceil(Math.log((double)value * (double)0.125F) * ((double)1.0F / Math.log((double)4.0F)));
+    }
+
     public static String formatNumber(double number, int digits) {
         return formatNumber(number, digits, false);
     }

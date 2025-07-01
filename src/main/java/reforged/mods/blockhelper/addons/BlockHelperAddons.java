@@ -16,11 +16,9 @@ import java.util.List;
         "required-after:VintageCore;" +
                 "required-after:mod_BlockHelper;" +
                 "required-after:IC2;" +
-                "after:AdvancedMachines;" +
                 "after:AdvancedPowerManagement;" +
                 "after:ChargePads;" +
-                "after:GregTech_Addon;" +
-                "after:AdvancedSolarPanel"
+                "after:GregTech_Addon;"
 )
 public class BlockHelperAddons implements ILangProvider {
 
