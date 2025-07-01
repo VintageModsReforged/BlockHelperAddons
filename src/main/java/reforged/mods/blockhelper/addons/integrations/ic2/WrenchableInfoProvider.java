@@ -1,6 +1,5 @@
 package reforged.mods.blockhelper.addons.integrations.ic2;
 
-import cpw.mods.fml.common.Loader;
 import ic2.api.IWrenchable;
 import ic2.core.item.tool.ItemToolWrench;
 import mcp.mobius.waila.api.*;
@@ -22,23 +21,21 @@ public class WrenchableInfoProvider extends TooltipHelper implements IDataProvid
     }
 
     public void addInfo(ITaggedList<String, String> strings, TileEntity blockEntity, EntityPlayer player) {
-        if (!Loader.isModLoaded("GregTech_Addon")) {
-            if (blockEntity instanceof IWrenchable) {
-                ItemStack heldStack = player.getHeldItem();
-                IWrenchable wrenchable = (IWrenchable) blockEntity;
-                float dropRate = wrenchable.getWrenchDropRate();
-                if (dropRate > 0) {
-                    if (heldStack != null) {
-                        if (heldStack.getItem() instanceof ItemToolWrench) {
-                            int actualDrop = ((ItemToolWrench) heldStack.getItem()).overrideWrenchSuccessRate(heldStack) ? 100 : (int) (dropRate * 100);
-                            text(strings, FormattedTranslator.WHITE.format("info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")), true);
+        if (blockEntity instanceof IWrenchable) {
+            ItemStack heldStack = player.getHeldItem();
+            IWrenchable wrenchable = (IWrenchable) blockEntity;
+            float dropRate = wrenchable.getWrenchDropRate();
+            if (dropRate > 0) {
+                if (heldStack != null) {
+                    if (heldStack.getItem() instanceof ItemToolWrench) {
+                        int actualDrop = ((ItemToolWrench) heldStack.getItem()).overrideWrenchSuccessRate(heldStack) ? 100 : (int) (dropRate * 100);
+                        text(strings, FormattedTranslator.WHITE.format("info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")), true);
 
-                        } else {
-                            text(strings, FormattedTranslator.GOLD.format("info.wrenchable"), true);
-                        }
                     } else {
                         text(strings, FormattedTranslator.GOLD.format("info.wrenchable"), true);
                     }
+                } else {
+                    text(strings, FormattedTranslator.GOLD.format("info.wrenchable"), true);
                 }
             }
         }
