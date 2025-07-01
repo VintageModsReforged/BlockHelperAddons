@@ -26,6 +26,7 @@ info.gt.detector.players.you = Detects only you
 info.gt.detector.players.other = Detects only other Players
 info.gt.wrenchable.warning = Use GregTech Wrenches Instead!
 info.progress = Progress: %s%%
+info.progress.full = Progress: %1$s / %2$s
 info.eu_reader.cable_limit = Energy Limit: %s EU
 info.eu_reader.cable_loss = Energy Loss: %s EU
 
@@ -57,6 +58,7 @@ info.crop.info.light = Light Level: %s/%s
 
 info.fuel = Fuel: %s/%s
 info.reactor.heat.short = Heat: %s
+info.reactor.heat.long = Heat: %s/%s
 info.matter.amplifier = Amplifier: %s
 
 info.miner.level = Mining Level: %s

@@ -26,6 +26,7 @@ info.gt.detector.players.you = Обнаруживать только вас
 info.gt.detector.players.other = Обнаруживать только других игроков
 info.gt.wrenchable.warning = Используйте гаечный ключ из GregTech!
 info.progress = Процесс: %s%%
+info.progress.full = Прогресс: %1$s / %2$s
 info.eu_reader.cable_limit = Предел напряжения: %s EU
 info.eu_reader.cable_loss = Потеря энергии: %s EU
 
@@ -57,6 +58,7 @@ info.crop.info.light = Освещенность: %s/%s
 
 info.fuel = Топливо: %s/%s
 info.reactor.heat.short = Нагрев: %s
+info.reactor.heat.long = Нагрев: %s/%s
 info.matter.amplifier = Усилитель: %s
 
 info.miner.level = Уровень добычи: %s

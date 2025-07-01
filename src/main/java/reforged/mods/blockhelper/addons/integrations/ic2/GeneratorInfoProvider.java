@@ -48,8 +48,8 @@ public class GeneratorInfoProvider extends InfoProvider {
             int heat = reactor.heat;
             int maxHeat = reactor.maxHeat;
             int production = reactor.getOutput() * 5;
-            text(helper, FormattedTranslator.WHITE.format("info.generator.output", production));
             bar(helper, heat, maxHeat, translate("info.reactor.heat.long", heat, maxHeat), getReactorColor(heat, maxHeat));
+            text(helper, FormattedTranslator.WHITE.format("info.generator.output", production));
 
         }
     }
