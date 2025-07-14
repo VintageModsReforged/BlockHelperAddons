@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.base.WailaTooltipRenderer;
 import reforged.mods.blockhelper.addons.base.tooltiprenderers.BaseProgressBarRenderer;
 import reforged.mods.blockhelper.addons.integrations.ic2.CropInfoProvider;
+import reforged.mods.blockhelper.addons.integrations.ic2.ItemStackNameProvider;
 import reforged.mods.blockhelper.addons.integrations.ic2.WrenchableInfoProvider;
 
 public class WailaPluginHandler implements IWailaPlugin {
@@ -23,13 +24,15 @@ public class WailaPluginHandler implements IWailaPlugin {
     @Override
     public void register(IRegistrar registration, Side side) {
         // disable built-in modules for IC2
-        PluginConfig.instance().setConfig("modules", "ic2.storage", false);
-        PluginConfig.instance().setConfig("modules", "ic2.outputeu", false);
+        PluginConfig.instance().setConfig("general", "Ic2Integration", false);
+
+        registration.registerHeadProvider(ItemStackNameProvider.THIS, Block.class);
+        registration.registerStackProvider(ItemStackNameProvider.THIS, Block.class);
         registration.registerStackProvider(CropInfoProvider.CropIconProvider.THIS, BlockCrop.class);
         registration.registerNBTProvider(CropInfoProvider.CropIconProvider.THIS, TileEntityCrop.class);
         registration.registerBodyProvider(WailaTooltipRenderer.THIS, Block.class);
         registration.registerNBTProvider(WailaTooltipRenderer.THIS, TileEntity.class);
-        registration.registerTailProvider(WrenchableInfoProvider.THIS, Block.class);
+        registration.registerBodyProvider(WrenchableInfoProvider.THIS, Block.class);
 
         registration.registerTooltipRenderer("jade.progress", new BaseProgressBarRenderer());
     }

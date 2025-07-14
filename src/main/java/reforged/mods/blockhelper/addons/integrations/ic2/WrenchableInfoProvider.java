@@ -16,7 +16,7 @@ public class WrenchableInfoProvider extends TooltipHelper implements IDataProvid
     public static final WrenchableInfoProvider THIS = new WrenchableInfoProvider();
 
     @Override
-    public void modifyTail(ItemStack itemStack, ITaggedList<String, String> strings, IDataAccessor iDataAccessor, IPluginConfig iPluginConfig) {
+    public void modifyBody(ItemStack itemStack, ITaggedList<String, String> strings, IDataAccessor iDataAccessor, IPluginConfig iPluginConfig) {
         addInfo(strings, iDataAccessor.getTileEntity(), iDataAccessor.getPlayer());
     }
 
@@ -54,5 +54,5 @@ public class WrenchableInfoProvider extends TooltipHelper implements IDataProvid
     public void modifyHead(ItemStack itemStack, ITaggedList<String, String> iTaggedList, IDataAccessor iDataAccessor, IPluginConfig iPluginConfig) {}
 
     @Override
-    public void modifyBody(ItemStack itemStack, ITaggedList<String, String> iTaggedList, IDataAccessor iDataAccessor, IPluginConfig iPluginConfig) {}
+    public void modifyTail(ItemStack itemStack, ITaggedList<String, String> strings, IDataAccessor iDataAccessor, IPluginConfig iPluginConfig) {}
 }

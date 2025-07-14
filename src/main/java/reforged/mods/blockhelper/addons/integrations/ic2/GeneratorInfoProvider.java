@@ -19,7 +19,7 @@ public class GeneratorInfoProvider extends InfoProvider {
         if (blockEntity instanceof TileEntityBaseGenerator) {
             TileEntityBaseGenerator gen = (TileEntityBaseGenerator) blockEntity;
             text(helper, tier(1));
-            double production = 0;
+            int production = 0;
             if (gen instanceof TileEntityGenerator || gen instanceof TileEntityGeoGenerator) {
                 if (gen.isConverting()) {
                     production = gen.production; // return production only when converting fuel

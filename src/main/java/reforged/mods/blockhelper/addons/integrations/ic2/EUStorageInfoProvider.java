@@ -3,6 +3,7 @@ package reforged.mods.blockhelper.addons.integrations.ic2;
 import ic2.core.block.generator.tileentity.TileEntityBaseGenerator;
 import ic2.core.block.generator.tileentity.TileEntityGenerator;
 import ic2.core.block.generator.tileentity.TileEntityGeoGenerator;
+import ic2.core.block.machine.tileentity.TileEntityElecMachine;
 import ic2.core.block.machine.tileentity.TileEntityElectricMachine;
 import ic2.core.block.machine.tileentity.TileEntityMatter;
 import ic2.core.block.wiring.TileEntityElectricBlock;
@@ -22,7 +23,7 @@ public class EUStorageInfoProvider extends InfoProvider {
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         int energy;
         if (Utils.instanceOf(blockEntity, "reforged.ic2.addons.asp.tiles.TileEntityAdvancedSolarPanel")) return;
-        if (blockEntity instanceof TileEntityElectricMachine && !(blockEntity instanceof TileEntityMatter)) {
+        if (blockEntity instanceof TileEntityElectricMachine) {
             TileEntityElectricMachine machine = (TileEntityElectricMachine) blockEntity;
             energy = machine.energy;
             if (energy > machine.maxEnergy) {
@@ -31,6 +32,14 @@ public class EUStorageInfoProvider extends InfoProvider {
             bar(helper, energy, machine.maxEnergy, FormattedTranslator.WHITE.format("info.energy", Formatter.formatNumber(energy, 2), Formatter.formatNumber(machine.maxEnergy, 2)), ColorUtils.RED);
             text(helper, tier(Helper.getTierFromEU(machine.maxInput)));
             text(helper, maxIn(machine.maxInput));
+            int energyConsume = machine.energyConsume;
+            text(helper, FormattedTranslator.WHITE.format("info.energy.usage", energyConsume));
+            float progress = machine.progress;
+            int maxProgress = machine.operationLength;
+            if (progress > 0) {
+                int scaled = (int) ((progress / maxProgress) * 100);
+                bar(helper, (int) progress, maxProgress, FormattedTranslator.WHITE.format("info.progress", scaled), ColorUtils.PROGRESS);
+            }
         } else if (blockEntity instanceof TileEntityElectricBlock) {
             TileEntityElectricBlock storage = (TileEntityElectricBlock) blockEntity;
             energy = storage.energy;
@@ -57,6 +66,12 @@ public class EUStorageInfoProvider extends InfoProvider {
             if (generator.fuel > 0) {
                 bar(helper, generator.fuel, maxFuel, FormattedTranslator.WHITE.format("info.fuel", generator.fuel, maxFuel), ColorUtils.DARK_GRAY);
             }
+        } else if (blockEntity instanceof TileEntityElecMachine) {
+            TileEntityElecMachine machine = (TileEntityElecMachine) blockEntity;
+            if (!(machine instanceof TileEntityMatter))
+                bar(helper, machine.energy, machine.maxEnergy, FormattedTranslator.WHITE.format("info.energy", Formatter.formatNumber(machine.energy, 2), Formatter.formatNumber(machine.maxEnergy, 2)), ColorUtils.RED);
+            text(helper, tier(Helper.getTierFromEU(machine.getMaxSafeInput())));
+            text(helper, maxIn(machine.getMaxSafeInput()));
         }
     }
 }

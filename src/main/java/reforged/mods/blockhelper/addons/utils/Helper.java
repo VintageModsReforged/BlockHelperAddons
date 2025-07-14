@@ -46,22 +46,7 @@ public class Helper {
     }
 
     public static int getMaxInputFromTier(int tier) {
-        switch (tier) {
-            case 1:
-                return 32;
-            case 2:
-                return 128;
-            case 3:
-                return 512;
-            case 4:
-                return 2048;
-            case 5:
-                return 8192;
-            case 6:
-                return 32768;
-            default:
-                return 0;
-        }
+        return 8 << Math.min(tier, 13) * 2;
     }
 
     public static FormattedTranslator getTextColor(int value) {

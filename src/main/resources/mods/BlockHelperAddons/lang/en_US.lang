@@ -70,6 +70,13 @@ info.teleporter.target.set = Teleport Target Set: %s
 info.teleporter.target = Teleport Target: %s %s %s
 
 info.transformer.inverted = Inverted: %s
+info.personal.access = Can access: %s
+info.personal.owner = Owner: %s
+
+block.blockBarrel.full=Booze Barrel (Full)
+block.blockBarrel.empty=Booze Barrel (Empty)
+
+block.cfoam.wall=Construction Foam
 
 info.tier.ulv = ULV
 info.tier.lv = LV

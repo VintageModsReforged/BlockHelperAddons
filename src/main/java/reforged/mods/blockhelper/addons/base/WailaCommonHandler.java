@@ -36,12 +36,12 @@ public class WailaCommonHandler {
         registerProviders( // IC2
                 new EUStorageInfoProvider(),
                 new CableInfoProvider(),
-                new BaseMachineInfoProvider(),
                 new IndividualInfoProvider(),
                 new GeneratorInfoProvider(),
                 new TransformerInfoProvider(),
                 new TeleporterInfoProvider(),
-                new CropInfoProvider()
+                new CropInfoProvider(),
+                PersonalInfoProvider.THIS
         );
         if (Loader.isModLoaded("AdvancedPowerManagement")) {
             registerAddonProviders(new AdvancedPowerManagementInfoProvider());
