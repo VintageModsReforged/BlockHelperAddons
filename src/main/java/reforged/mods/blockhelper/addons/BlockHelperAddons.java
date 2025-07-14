@@ -24,13 +24,15 @@ public class BlockHelperAddons implements ILangProvider {
 
     public Configuration CONFIG;
     public static String[] LANGS;
+    public static int barMaxWidth;
 
     public BlockHelperAddons() {
         CONFIG = ConfigHelper.getConfigFor("BlockHelperAddons");
         CONFIG.load();
         LANGS = ConfigHelper.getLocalizations(CONFIG, new String[] {"en_US", "ru_RU"}, "BlockHelperAddons");
+        barMaxWidth = ConfigHelper.getInt(CONFIG, "general", "barMaxWidth", 1, Integer.MAX_VALUE, 120, "Set Max Width for bar element (useful when using localizations that are longer than English)");
         if (CONFIG != null) {
-            CONFIG.save();
+            if (CONFIG.hasChanged()) CONFIG.save();
         }
     }
 
