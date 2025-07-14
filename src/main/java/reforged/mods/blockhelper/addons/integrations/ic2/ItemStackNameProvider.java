@@ -28,7 +28,7 @@ public class ItemStackNameProvider implements IDataProvider {
             Block block = accessor.getBlock();
             TileEntity blockEntity = accessor.getTileEntity();
             if (blockEntity instanceof TileEntityBarrel) {
-                boolean empty = ((TileEntityBarrel) blockEntity).isEmpty();
+                boolean empty = ((TileEntityBarrel) blockEntity).type == 0;
                 String name = "block.blockBarrel." + (empty ? "empty" : "full");
                 tooltip.set(0, FormattedTranslator.WHITE.format(name));
             }
