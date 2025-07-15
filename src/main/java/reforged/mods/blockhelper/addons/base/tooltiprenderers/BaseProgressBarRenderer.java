@@ -92,7 +92,7 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
             maxLineWidth = tooltipSize.get(tooltips);
         }
 
-        maxLineWidth = Math.max(BlockHelperAddons.barMaxWidth, maxLineWidth + offset);
+        maxLineWidth = Math.max(BlockHelperAddons.barMaxWidth, maxLineWidth);
 
         int barHeight = 11;
 
