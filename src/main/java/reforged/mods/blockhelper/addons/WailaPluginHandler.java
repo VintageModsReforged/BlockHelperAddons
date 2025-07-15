@@ -25,6 +25,7 @@ public class WailaPluginHandler implements IWailaPlugin {
     public void register(IRegistrar registration, Side side) {
         // disable built-in modules for IC2
         PluginConfig.instance().setConfig("general", "Ic2Integration", false);
+        registration.registerTooltipRenderer("jade.progress", new BaseProgressBarRenderer());
 
         registration.registerHeadProvider(ItemStackNameProvider.THIS, Block.class);
         registration.registerStackProvider(ItemStackNameProvider.THIS, Block.class);
@@ -33,7 +34,5 @@ public class WailaPluginHandler implements IWailaPlugin {
         registration.registerBodyProvider(WailaTooltipRenderer.THIS, Block.class);
         registration.registerNBTProvider(WailaTooltipRenderer.THIS, TileEntity.class);
         registration.registerBodyProvider(WrenchableInfoProvider.THIS, Block.class);
-
-        registration.registerTooltipRenderer("jade.progress", new BaseProgressBarRenderer());
     }
 }
