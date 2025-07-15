@@ -30,7 +30,8 @@ public class IndividualInfoProvider extends InfoProvider {
             text(helper, usage(15));
             int heat = induction.heat;
             int maxHeat = 10000;
-            bar(helper, heat, maxHeat, translate("info.speed.heat", heat * 100 / maxHeat), -295680);
+            if (heat > 0)
+                bar(helper, heat, maxHeat, translate("info.speed.heat", heat * 100 / maxHeat), -295680);
             int progress = induction.progress;
             if (progress > 0) {
                 int operationsPerTick = induction.heat / 30;

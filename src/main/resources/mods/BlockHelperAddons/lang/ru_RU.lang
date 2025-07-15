@@ -70,6 +70,8 @@ info.teleporter.target.set = Цель установлена: %s
 info.teleporter.target = Координаты цели: %s %s %s
 
 info.transformer.inverted = Инвертирован: %s
+info.personal.access = Имеет доступ: %s
+info.personal.owner = Владелец: %s
 
 info.tier.ulv = ULV
 info.tier.lv = LV

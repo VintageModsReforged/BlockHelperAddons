@@ -22,28 +22,8 @@ public class WailaHelper implements IWailaHelper {
 
     @Override
     public void transferData(NBTTagCompound serverData) {
-        if (!isEmpty(DATA)) {
+        if (DATA.tagCount() > 0) {
             serverData.setTag(WailaTags.TAG_DATA, this.DATA);
-        }
-    }
-
-    public boolean isEmpty(NBTTagList tag) {
-        try {
-            Field list;
-            try {
-                list = NBTTagList.class.getDeclaredField("tagList");
-            } catch (NoSuchFieldException e) {
-                list = NBTTagList.class.getDeclaredField("field_74747_a");
-            }
-            list.setAccessible(true);
-            List tagList = (List) list.get(tag);
-            if (tagList != null) {
-                return tagList.isEmpty();
-            }
-            return false;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
         }
     }
 }

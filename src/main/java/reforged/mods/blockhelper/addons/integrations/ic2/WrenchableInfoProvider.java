@@ -18,6 +18,11 @@ public class WrenchableInfoProvider extends TooltipHelper implements IDataProvid
 
     @Override
     public void modifyBody(ItemStack itemStack, ITaggedList<String, String> strings, IDataAccessor iDataAccessor, IPluginConfig iPluginConfig) {
+        iPluginConfig.set("ic2.inputeumach", false);
+        iPluginConfig.set("ic2.inputeuother", false);
+        iPluginConfig.set("ic2.mattergen", false);
+        iPluginConfig.set("ic2.storage", false);
+        iPluginConfig.set("ic2.outputeu", false);
         addInfo(strings, iDataAccessor.getTileEntity(), iDataAccessor.getPlayer());
     }
 

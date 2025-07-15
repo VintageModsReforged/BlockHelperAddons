@@ -5,40 +5,29 @@ import mods.vintage.core.platform.lang.FormattedTranslator;
 public class Helper {
 
     public static String getTierForDisplay(int tier) {
+        String suffix;
+        FormattedTranslator formatter;
+
         switch (tier) {
-            case 0:
-                return FormattedTranslator.DARK_GRAY.format("info.tier.ulv");
-            case 1:
-                return FormattedTranslator.GRAY.format("info.tier.lv");
-            case 2:
-                return FormattedTranslator.AQUA.format("info.tier.mv");
-            case 3:
-                return FormattedTranslator.GOLD.format("info.tier.hv");
-            case 4:
-                return FormattedTranslator.DARK_PURPLE.format("info.tier.ev");
-            case 5:
-                return FormattedTranslator.BLUE.format("info.tier.iv");
-            case 6:
-                return FormattedTranslator.LIGHT_PURPLE.format("info.tier.luv");
-            case 7:
-                return FormattedTranslator.RED.format("info.tier.zpm");
-            case 8:
-                return FormattedTranslator.DARK_AQUA.format("info.tier.uv");
-            case 9:
-                return FormattedTranslator.WHITE.format("info.tier.uhv");
-            case 10:
-                return FormattedTranslator.WHITE.format("info.tier.uev");
-            case 11:
-                return FormattedTranslator.WHITE.format("info.tier.uiv");
-            case 12:
-                return FormattedTranslator.WHITE.format("info.tier.umv");
-            case 13:
-                return FormattedTranslator.WHITE.format("info.tier.uxv");
-            case 14:
-                return FormattedTranslator.WHITE.format("info.tier.max");
+            case 0:  suffix = "ulv"; formatter = FormattedTranslator.DARK_GRAY; break;
+            case 1:  suffix = "lv";  formatter = FormattedTranslator.GRAY; break;
+            case 2:  suffix = "mv";  formatter = FormattedTranslator.AQUA; break;
+            case 3:  suffix = "hv";  formatter = FormattedTranslator.GOLD; break;
+            case 4:  suffix = "ev";  formatter = FormattedTranslator.DARK_PURPLE; break;
+            case 5:  suffix = "iv";  formatter = FormattedTranslator.BLUE; break;
+            case 6:  suffix = "luv"; formatter = FormattedTranslator.LIGHT_PURPLE; break;
+            case 7:  suffix = "zpm"; formatter = FormattedTranslator.RED; break;
+            case 8:  suffix = "uv";  formatter = FormattedTranslator.DARK_AQUA; break;
+            case 9:  suffix = "uhv"; formatter = FormattedTranslator.WHITE; break;
+            case 10: suffix = "uev"; formatter = FormattedTranslator.WHITE; break;
+            case 11: suffix = "uiv"; formatter = FormattedTranslator.WHITE; break;
+            case 12: suffix = "umv"; formatter = FormattedTranslator.WHITE; break;
+            case 13: suffix = "uxv"; formatter = FormattedTranslator.WHITE; break;
+            case 14: suffix = "max"; formatter = FormattedTranslator.WHITE; break;
             default:
                 return FormattedTranslator.RED.literal("ERROR, please report!");
         }
+        return formatter.format("info.tier." + suffix);
     }
 
     public static int getTierFromEU(int value) {
@@ -46,22 +35,7 @@ public class Helper {
     }
 
     public static int getMaxInputFromTier(int tier) {
-        switch (tier) {
-            case 1:
-                return 32;
-            case 2:
-                return 128;
-            case 3:
-                return 512;
-            case 4:
-                return 2048;
-            case 5:
-                return 8192;
-            case 6:
-                return 32768;
-            default:
-                return 0;
-        }
+        return 8 << Math.min(tier, 13) * 2;
     }
 
     public static FormattedTranslator getTextColor(int value) {

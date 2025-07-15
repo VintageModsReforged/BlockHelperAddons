@@ -25,8 +25,6 @@ public class WailaPluginHandler implements IWailaPlugin {
     @Override
     public void register(IRegistrar registration, Side side) {
         // disable built-in modules for IC2
-        PluginConfig.instance().setConfig("modules", "ic2.storage", false);
-        PluginConfig.instance().setConfig("modules", "ic2.outputeu", false);
         registration.registerTooltipRenderer("jade.progress", new BaseProgressBarRenderer());
 
         registration.registerStackProvider(CropInfoProvider.CropIconProvider.THIS, BlockCrop.class);

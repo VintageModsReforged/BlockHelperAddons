@@ -6,7 +6,7 @@ import java.util.Locale;
 
 public class Formatter {
 
-    public static final DecimalFormatSymbols US;
+    public static final DecimalFormatSymbols ROOT;
     public static final DecimalFormat THERMAL_GEN;
     public static final DecimalFormat SOLAR_TURBINE;
     public static final DecimalFormat NATURAL;
@@ -14,14 +14,6 @@ public class Formatter {
     public static final DecimalFormat EU_FORMAT;
     public static final DecimalFormat EU_READER_FORMAT;
     public static final DecimalFormat CABLE_LOSS_FORMAT;
-
-    public static int getPowerFromTier(int tier) {
-        return 8 << Math.min(tier, 13) * 2;
-    }
-
-    public static int getTierFromPower(int value) {
-        return value <= 8 ? 0 : (int)Math.ceil(Math.log((double)value * (double)0.125F) * ((double)1.0F / Math.log((double)4.0F)));
-    }
 
     public static String formatNumber(double number, int digits) {
         return formatNumber(number, digits, false);
@@ -83,7 +75,7 @@ public class Formatter {
         }
 
         String pattern = patternBuilder.toString();
-        String output = (new DecimalFormat(pattern + suffix, US)).format(outputNumber);
+        String output = (new DecimalFormat(pattern + suffix, ROOT)).format(outputNumber);
         String fill = "";
         int length = output.length();
         if (fixedLength && output.length() < digits) {
@@ -99,13 +91,13 @@ public class Formatter {
 
 
     static {
-        US = new DecimalFormatSymbols(Locale.US);
-        THERMAL_GEN = new DecimalFormat("#0.00", new DecimalFormatSymbols(Locale.US));
-        SOLAR_TURBINE = new DecimalFormat("#00.00", new DecimalFormatSymbols(Locale.US));
-        NATURAL = new DecimalFormat("###,##0", new DecimalFormatSymbols(Locale.US));
-        DECIMAL = new DecimalFormat(".#########", new DecimalFormatSymbols(Locale.US));
-        EU_FORMAT = new DecimalFormat("###,###", new DecimalFormatSymbols(Locale.US));
-        EU_READER_FORMAT = new DecimalFormat("###,###.##", new DecimalFormatSymbols(Locale.US));
-        CABLE_LOSS_FORMAT = new DecimalFormat("0.####", new DecimalFormatSymbols(Locale.US));
+        ROOT = new DecimalFormatSymbols(Locale.ROOT);
+        THERMAL_GEN = new DecimalFormat("#0.00", ROOT);
+        SOLAR_TURBINE = new DecimalFormat("#00.00", ROOT);
+        NATURAL = new DecimalFormat("###,##0", ROOT);
+        DECIMAL = new DecimalFormat(".#########", ROOT);
+        EU_FORMAT = new DecimalFormat("###,###", ROOT);
+        EU_READER_FORMAT = new DecimalFormat("###,###.##", ROOT);
+        CABLE_LOSS_FORMAT = new DecimalFormat("0.####", ROOT);
     }
 }
