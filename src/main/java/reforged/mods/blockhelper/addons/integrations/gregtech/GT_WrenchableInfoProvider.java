@@ -18,7 +18,7 @@ public class GT_WrenchableInfoProvider extends TooltipHelper implements IDataPro
     public static final GT_WrenchableInfoProvider THIS = new GT_WrenchableInfoProvider();
 
     @Override
-    public void modifyTail(ItemStack itemStack, ITaggedList<String, String> strings, IDataAccessor accessor, IPluginConfig iPluginConfig) {
+    public void modifyBody(ItemStack itemStack, ITaggedList<String, String> strings, IDataAccessor accessor, IPluginConfig iPluginConfig) {
         addInfo(strings, accessor.getTileEntity(), accessor.getPlayer());
     }
 
@@ -66,7 +66,7 @@ public class GT_WrenchableInfoProvider extends TooltipHelper implements IDataPro
     public void modifyHead(ItemStack itemStack, ITaggedList<String, String> iTaggedList, IDataAccessor iDataAccessor, IPluginConfig iPluginConfig) {}
 
     @Override
-    public void modifyBody(ItemStack itemStack, ITaggedList<String, String> iTaggedList, IDataAccessor iDataAccessor, IPluginConfig iPluginConfig) {}
+    public void modifyTail(ItemStack itemStack, ITaggedList<String, String> strings, IDataAccessor accessor, IPluginConfig iPluginConfig) {}
 
     @Override
     public void appendServerData(TileEntity tileEntity, NBTTagCompound nbtTagCompound, IServerDataAccessor iServerDataAccessor, IPluginConfig iPluginConfig) {}

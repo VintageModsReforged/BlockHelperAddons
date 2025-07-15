@@ -27,15 +27,15 @@ public class WailaPluginHandler implements IWailaPlugin {
         // disable built-in modules for IC2
         PluginConfig.instance().setConfig("modules", "ic2.storage", false);
         PluginConfig.instance().setConfig("modules", "ic2.outputeu", false);
+        registration.registerTooltipRenderer("jade.progress", new BaseProgressBarRenderer());
+
         registration.registerStackProvider(CropInfoProvider.CropIconProvider.THIS, BlockCrop.class);
         registration.registerNBTProvider(CropInfoProvider.CropIconProvider.THIS, TileEntityCrop.class);
         registration.registerBodyProvider(WailaTooltipRenderer.THIS, Block.class);
         registration.registerNBTProvider(WailaTooltipRenderer.THIS, TileEntity.class);
-        registration.registerTailProvider(WrenchableInfoProvider.THIS, Block.class);
+        registration.registerBodyProvider(WrenchableInfoProvider.THIS, Block.class);
         if (Loader.isModLoaded("GregTech_Addon")) {
-            registration.registerTailProvider(GT_WrenchableInfoProvider.THIS, Block.class);
+            registration.registerBodyProvider(GT_WrenchableInfoProvider.THIS, Block.class);
         }
-
-        registration.registerTooltipRenderer("jade.progress", new BaseProgressBarRenderer());
     }
 }
