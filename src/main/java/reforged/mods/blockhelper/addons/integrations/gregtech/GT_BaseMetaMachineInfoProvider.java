@@ -14,6 +14,8 @@ import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class GT_BaseMetaMachineInfoProvider extends InfoProvider {
 
+    public static final GT_BaseMetaMachineInfoProvider THIS = new GT_BaseMetaMachineInfoProvider();
+
     @Override
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof IGregTechTileEntity) {

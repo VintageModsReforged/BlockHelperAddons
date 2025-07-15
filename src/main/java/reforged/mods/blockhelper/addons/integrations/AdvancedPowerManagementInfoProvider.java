@@ -10,6 +10,8 @@ import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
 public class AdvancedPowerManagementInfoProvider extends InfoProvider {
 
+    public static final AdvancedPowerManagementInfoProvider THIS = new AdvancedPowerManagementInfoProvider();
+
     @Override
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TEChargingBench) {

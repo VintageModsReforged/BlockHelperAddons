@@ -26,6 +26,8 @@ import java.util.Random;
 
 public class CropInfoProvider extends InfoProvider {
 
+    public static final CropInfoProvider THIS = new CropInfoProvider();
+
     @Override
     public IFilter getFilter() {
         return ANALYZER;

@@ -15,6 +15,8 @@ import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
 public class EUStorageInfoProvider extends InfoProvider {
 
+    public static final EUStorageInfoProvider THIS = new EUStorageInfoProvider();
+
     @Override
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         int energy;

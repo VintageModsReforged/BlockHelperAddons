@@ -8,6 +8,8 @@ import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class CableInfoProvider extends InfoProvider {
 
+    public static final CableInfoProvider THIS = new CableInfoProvider();
+
     @Override
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TileEntityCable) {

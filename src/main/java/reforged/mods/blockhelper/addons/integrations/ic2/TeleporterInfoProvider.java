@@ -10,6 +10,8 @@ import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class TeleporterInfoProvider extends InfoProvider {
 
+    public static final TeleporterInfoProvider THIS = new TeleporterInfoProvider();
+
     @Override
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TileEntityTeleporter) {

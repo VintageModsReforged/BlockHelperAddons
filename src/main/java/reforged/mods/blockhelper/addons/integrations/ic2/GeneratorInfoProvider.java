@@ -13,6 +13,8 @@ import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class GeneratorInfoProvider extends InfoProvider {
 
+    public static final GeneratorInfoProvider THIS = new GeneratorInfoProvider();
+
     @Override
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (Utils.instanceOf(blockEntity, "reforged.ic2.addons.asp.tiles.TileEntityAdvancedSolarPanel")) return;

@@ -12,6 +12,8 @@ import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class GT_IndividualMachineInfoProvider extends InfoProvider {
 
+    public static final GT_IndividualMachineInfoProvider THIS = new GT_IndividualMachineInfoProvider();
+
     @Override
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof IGregTechTileEntity) {

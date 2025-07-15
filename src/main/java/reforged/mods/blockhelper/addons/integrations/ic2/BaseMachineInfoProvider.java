@@ -10,6 +10,8 @@ import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class BaseMachineInfoProvider extends InfoProvider {
 
+    public static final BaseMachineInfoProvider THIS = new BaseMachineInfoProvider();
+
     @Override
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TileEntityStandardMachine) {

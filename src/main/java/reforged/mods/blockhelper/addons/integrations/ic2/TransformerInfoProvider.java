@@ -10,6 +10,8 @@ import reforged.mods.blockhelper.addons.utils.InfoProvider;
 
 public class TransformerInfoProvider extends InfoProvider {
 
+    public static final TransformerInfoProvider THIS = new TransformerInfoProvider();
+
     @Override
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TileEntityTransformer) {

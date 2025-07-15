@@ -34,27 +34,27 @@ public class WailaCommonHandler {
 
     public void init() {
         registerProviders( // IC2
-                new EUStorageInfoProvider(),
-                new CableInfoProvider(),
-                new BaseMachineInfoProvider(),
-                new IndividualInfoProvider(),
-                new GeneratorInfoProvider(),
-                new TransformerInfoProvider(),
-                new TeleporterInfoProvider(),
-                new CropInfoProvider(),
+                EUStorageInfoProvider.THIS,
+                CableInfoProvider.THIS,
+                BaseMachineInfoProvider.THIS,
+                IndividualInfoProvider.THIS,
+                GeneratorInfoProvider.THIS,
+                TransformerInfoProvider.THIS,
+                TeleporterInfoProvider.THIS,
+                CropInfoProvider.THIS,
                 PersonalInfoProvider.THIS
         );
         if (Loader.isModLoaded("AdvancedPowerManagement")) {
-            registerAddonProviders(new AdvancedPowerManagementInfoProvider());
+            registerAddonProviders(AdvancedPowerManagementInfoProvider.THIS);
         }
         if (Loader.isModLoaded("CompactSolars")) {
             registerAddonProviders(CompactSolarPanelsInfoProvider.THIS);
         }
         if (Loader.isModLoaded("GregTech_Addon")) {
             registerAddonProviders( // GregTech-Addon
-                    new GT_BaseMetaMachineInfoProvider(),
-                    new GT_MetaMachineInfoProvider(),
-                    new GT_IndividualMachineInfoProvider()
+                    GT_BaseMetaMachineInfoProvider.THIS,
+                    GT_MetaMachineInfoProvider.THIS,
+                    GT_IndividualMachineInfoProvider.THIS
             );
         }
     }

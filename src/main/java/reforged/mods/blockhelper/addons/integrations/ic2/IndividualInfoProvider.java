@@ -15,6 +15,8 @@ import java.util.Locale;
 
 public class IndividualInfoProvider extends InfoProvider {
 
+    public static final IndividualInfoProvider THIS = new IndividualInfoProvider();
+
     @Override
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof TileEntityCanner) {
