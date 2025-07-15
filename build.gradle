@@ -56,7 +56,7 @@ dependencies {
 	modImplementation files("libs/AdvancedMachines-1.4.7-4.7.5.2d-dev.jar")
 	modImplementation files("libs/compactsolars.zip")
 	modImplementation files("libs/apm.jar")
-	modImplementation files("libs/BlockHelper-1.4.7-2.0.0-pre2.jar")
+	modImplementation files("libs/BlockHelper-1.4.7-2.0.0-pre4.jar")
 
 	//accessTransformers files("./src/main/resources/good_cool_ats.cfg")
 

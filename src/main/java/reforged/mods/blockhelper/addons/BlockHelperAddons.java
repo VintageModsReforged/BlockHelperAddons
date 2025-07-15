@@ -42,9 +42,7 @@ public class BlockHelperAddons implements ILangProvider {
             Method register = Class.forName("mod_BlockHelper").getMethod("registerPlugin",
                     Class.forName("mcp.mobius.waila.api.IWailaPlugin"));
             register.invoke(null, new WailaPluginHandler());
-        } catch (Throwable t) {
-            t.printStackTrace(); // Proper logging or ignoring
-        }
+        } catch (Throwable ignored) {}
     }
 
     @Override
