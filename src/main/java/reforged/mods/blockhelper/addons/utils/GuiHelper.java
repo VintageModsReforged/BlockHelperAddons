@@ -18,7 +18,7 @@ public class GuiHelper {
      * Modified copy of: <a href="https://github.com/McJtyMods/TheOneProbe/blob/f4797f1a7f1349ab71ac85e667517117a8a8d51a/src/main/java/mcjty/theoneprobe/apiimpl/client/ElementProgressRender.java#L15">ElementProgressRender#render</a>
      */
     public void render(long current, long max, int x, int y, int w, int h, int mainColor, String stringId) {
-        drawThickBeveledBox(x, y, x + w + 1, y + h, 1, ColorUtils.WHITE, ColorUtils.WHITE, ColorUtils.DARK_GRAY);
+        drawThickBeveledBox(x, y, x + w + 1, y + h, 1, ColorUtils.WHITE, ColorUtils.WHITE, ColorUtils.doubleDarker(mainColor));
         if (!"0".equals(stringId)) {
             int fluidId = Integer.parseInt(stringId);
             LiquidStack fluid = WailaCommonHandler.FLUIDS.get(fluidId);
