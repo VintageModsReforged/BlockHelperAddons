@@ -38,12 +38,12 @@ public class GT_IndividualMachineInfoProvider extends InfoProvider {
                         addStructureStatus(helper);
                     }
                 }
-                int progress = metaTile.getProgresstime();
-                int maxProgress = metaTile.maxProgresstime();
-                int scaled = (int) (((float) progress / maxProgress) * 100);
-
-                if (progress > 0)
-                    bar(helper, progress, maxProgress, FormattedTranslator.WHITE.format("info.progress", scaled), ColorUtils.PROGRESS);
+//                int progress = metaTile.getProgresstime();
+//                int maxProgress = metaTile.maxProgresstime();
+//                int scaled = (int) (((float) progress / maxProgress) * 100);
+//
+//                if (progress > 0)
+//                    bar(helper, progress, maxProgress, FormattedTranslator.WHITE.format("info.progress", scaled), ColorUtils.PROGRESS);
             }
             if (baseTile instanceof GT_TileEntity_Matterfabricator) {
                 GT_TileEntity_Matterfabricator matter = (GT_TileEntity_Matterfabricator) baseTile;
