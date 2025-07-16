@@ -84,6 +84,8 @@ public class IndividualInfoProvider extends InfoProvider {
                 text(helper, FormattedTranslator.DARK_GREEN.format("info.progress", format.format(displayProgress)));
             }
         } else if (blockEntity instanceof TileEntityCropmatron) {
+            TileEntityCropmatron cropmatron = (TileEntityCropmatron) blockEntity;
+            bar(helper, cropmatron.energy, cropmatron.maxEnergy, FormattedTranslator.WHITE.format("info.energy", Formatter.formatNumber(cropmatron.energy, 2), Formatter.formatNumber(cropmatron.maxEnergy, 2)), ColorUtils.RED);
             text(helper, tier(Helper.getTierFromEU(TileEntityCropmatron.maxInput)));
             text(helper, maxIn(TileEntityCropmatron.maxInput));
         } else if (blockEntity instanceof TileEntityTesla) {
