@@ -10,7 +10,7 @@ import net.minecraft.client.gui.FontRenderer;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Dimension;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
-import reforged.mods.blockhelper.addons.utils.GuiHelper;
+import reforged.mods.blockhelper.addons.utils.RenderHelper;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -80,13 +80,13 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
         if (!isStringOnly) {
-            GuiHelper.INSTANCE.render(current, max, x, y, maxLineWidth, barHeight + 1, color, fluidStringId);
+            RenderHelper.INSTANCE.render(current, max, x, y, maxLineWidth, barHeight + 1, color, fluidStringId);
             textX += (maxLineWidth - textWidth) / 2 + 1;
         } else if (centered) {
             textX += (maxLineWidth - textWidth) / 2 + 1;
         }
 
         float centerY = y + 2 + (float) font.FONT_HEIGHT / 2;
-        GuiHelper.drawScrollingString(font, text, textX + textWidth / 2F, centerY, maxLineWidth, font.FONT_HEIGHT * 1.5F, ColorUtils.WHITE);
+        RenderHelper.drawScrollingString(font, text, textX + textWidth / 2F, centerY, maxLineWidth, font.FONT_HEIGHT * 1.5F, ColorUtils.WHITE);
     }
 }

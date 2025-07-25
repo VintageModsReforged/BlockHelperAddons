@@ -13,9 +13,9 @@ import net.minecraftforge.liquids.LiquidStack;
 import org.lwjgl.opengl.GL11;
 import reforged.mods.blockhelper.addons.base.WailaCommonHandler;
 
-public class GuiHelper {
+public class RenderHelper {
 
-    public static final GuiHelper INSTANCE = new GuiHelper();
+    public static final RenderHelper INSTANCE = new RenderHelper();
 
     private static final ScissorsStack STACK = new ScissorsStack();
     private static final Minecraft mc = Minecraft.getMinecraft();
