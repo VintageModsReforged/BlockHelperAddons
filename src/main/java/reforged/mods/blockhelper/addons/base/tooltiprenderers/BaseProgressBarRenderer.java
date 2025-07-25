@@ -9,7 +9,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Dimension;
-import reforged.mods.blockhelper.addons.BlockHelperAddons;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
 import reforged.mods.blockhelper.addons.utils.GuiHelper;
 
@@ -21,9 +20,9 @@ import java.util.Map;
 public class BaseProgressBarRenderer implements ITooltipRenderer {
 
     private final Map<List<String>, Tooltip> subTooltips = new HashMap<List<String>, Tooltip>();
-    private final Map<Tooltip, Integer> tooltipSize = new HashMap<Tooltip, Integer>();
 
     int offset = 4;
+    int barWidth = 135;
 
     @Override
     public Dimension getSize(String[] strings, ICommonAccessor accessor) {
@@ -41,23 +40,10 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
             this.subTooltips.put(key, tooltip);
         }
 
-        FontRenderer font = Minecraft.getMinecraft().fontRenderer;
-
-        // Calculate max width of all lines
-        int maxLineWidth = 0;
-        for (String str : strings) {
-            int width = font.getStringWidth(str);
-            if (width > maxLineWidth) {
-                maxLineWidth = width;
-            }
-        }
-
-        tooltipSize.put(tooltip, maxLineWidth + offset);
-
         boolean isStringOnly = strings.length > 4 && "1".equals(strings[4]);
         int height = isStringOnly ? 10 : 11;
 
-        return new Dimension(Math.max(BlockHelperAddons.barMaxWidth, maxLineWidth + offset), height);
+        return new Dimension(barWidth + offset, height);
     }
 
     /**
@@ -85,33 +71,22 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
         boolean centered = "1".equals(strings[5]);
         String fluidStringId = strings[6];
 
-        int maxLineWidth = 0;
-
-        Tooltip tooltips = this.subTooltips.get(Arrays.asList(strings));
-        if (tooltips != null) {
-            maxLineWidth = tooltipSize.get(tooltips);
-        }
-
-        maxLineWidth = Math.max(BlockHelperAddons.barMaxWidth, maxLineWidth);
-
+        int maxLineWidth = barWidth;
         int barHeight = 11;
+        int textWidth = font.getStringWidth(text);
+        int textX = x;
 
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-        int textX = x;
         if (!isStringOnly) {
-            // Draw the background bar using full width
             GuiHelper.INSTANCE.render(current, max, x, y, maxLineWidth, barHeight + 1, color, fluidStringId);
-
-            // Center the text inside the full-width bar
-            textX += maxLineWidth / 2 - font.getStringWidth(text) / 2 + 1;
+            textX += (maxLineWidth - textWidth) / 2 + 1;
+        } else if (centered) {
+            textX += (maxLineWidth - textWidth) / 2 + 1;
         }
 
-        if (centered && isStringOnly) {
-            textX += maxLineWidth / 2 - font.getStringWidth(text) / 2 + 1;
-        }
-
-        font.drawStringWithShadow(text, textX, y + 2, ColorUtils.WHITE);
+        float centerY = y + 2 + (float) font.FONT_HEIGHT / 2;
+        GuiHelper.drawScrollingString(font, text, textX + textWidth / 2F, centerY, maxLineWidth, font.FONT_HEIGHT * 1.5F, ColorUtils.WHITE);
     }
 }
