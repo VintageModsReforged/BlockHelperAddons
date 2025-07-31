@@ -90,7 +90,7 @@ public abstract class InfoProvider implements IInfoProvider {
         add(helper, barElement);
     }
 
-    public void fluidBar(IWailaHelper helper, int current, int max, String text, int fluidId) {
+    public void fluidBar(IWailaHelper helper, int current, int max, String text, String fluidId) {
         CommonFluidElement element = new CommonFluidElement(current, max, text, fluidId);
         add(helper, element);
     }

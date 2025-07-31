@@ -22,13 +22,11 @@ import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.WeakHashMap;
 
 public class WailaCommonHandler {
 
     public static final WailaCommonHandler INSTANCE = new WailaCommonHandler();
 
-    public static WeakHashMap<Integer, LiquidStack> FLUIDS = new WeakHashMap<Integer, LiquidStack>();
     protected List<IInfoProvider> INFO_PROVIDERS = new ArrayList<IInfoProvider>();
     protected List<IInfoProvider> ADDON_PROVIDERS = new ArrayList<IInfoProvider>();
 
@@ -105,11 +103,10 @@ public class WailaCommonHandler {
     }
 
     public void loadTankInfo(IWailaHelper helper, LiquidStack fluidStack, int capacity) {
-        FLUIDS.put(fluidStack.itemID, fluidStack);
         helper.add(new CommonFluidElement(fluidStack.amount, capacity,
                 new ChatComponentTranslation("probe.info.fluid", fluidStack.asItemStack().getDisplayName(),
                         Formatter.formatNumber(fluidStack.amount, String.valueOf(fluidStack.amount).length() - 1),
                         Formatter.formatNumber(capacity, String.valueOf(capacity).length() - 1)).getFormattedText(),
-                fluidStack.itemID));
+                fluidStack.extra.getString("LiquidName")));
     }
 }

@@ -5,21 +5,21 @@ import reforged.mods.blockhelper.addons.utils.WailaTags;
 
 public class CommonFluidElement extends CommonBarElement {
 
-    int FLUID_ID;
+    String FLUID_ID;
 
-    public CommonFluidElement(int current, int max, String text, int fluidId) {
+    public CommonFluidElement(int current, int max, String text, String fluidId) {
         super(current, max, text, 1);
         this.FLUID_ID = fluidId;
     }
 
-    public int getFluidId() {
+    public String getFluidId() {
         return this.FLUID_ID;
     }
 
     @Override
     public NBTTagCompound save(NBTTagCompound tag) {
         super.save(tag);
-        tag.setInteger("fluidId", this.FLUID_ID);
+        tag.setString("fluidId", this.FLUID_ID);
         return tag;
     }
 
@@ -27,7 +27,7 @@ public class CommonFluidElement extends CommonBarElement {
         String text = tag.getString("text");
         int current = tag.getInteger("current");
         int max = tag.getInteger("max");
-        int fluidId = tag.getInteger("fluidId");
+        String fluidId = tag.getString("fluidId");
         return new CommonFluidElement(current, max, text, fluidId);
     }
 

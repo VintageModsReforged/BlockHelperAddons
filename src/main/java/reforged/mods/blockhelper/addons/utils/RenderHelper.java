@@ -9,9 +9,9 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.Item;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 import org.lwjgl.opengl.GL11;
-import reforged.mods.blockhelper.addons.base.WailaCommonHandler;
 
 public class RenderHelper {
 
@@ -98,10 +98,9 @@ public class RenderHelper {
     public void render(long current, long max, int x, int y, int w, int h, int mainColor, String stringId) {
         drawThickBeveledBox(x, y, x + w + 1, y + h, 1, ColorUtils.WHITE, ColorUtils.WHITE, ColorUtils.doubleDarker(mainColor));
         if (!"0".equals(stringId)) {
-            int fluidId = Integer.parseInt(stringId);
-            LiquidStack fluid = WailaCommonHandler.FLUIDS.get(fluidId);
-            if (fluid != null) {
-                renderTank(Minecraft.getMinecraft(), x, y, w, h, mainColor, (int) current, (int) max, fluid);
+            LiquidStack stack = LiquidDictionary.getCanonicalLiquid(stringId);
+            if (stack != null) {
+                renderTank(Minecraft.getMinecraft(), x, y, w, h, mainColor, (int) current, (int) max, stack);
             }
         } else {
             if (current > 0 && max > 0) {
