@@ -97,11 +97,10 @@ public class RenderHelper {
     /**
      * Modified copy of: <a href="https://github.com/McJtyMods/TheOneProbe/blob/f4797f1a7f1349ab71ac85e667517117a8a8d51a/src/main/java/mcjty/theoneprobe/apiimpl/client/ElementProgressRender.java#L15">ElementProgressRender#render</a>
      */
-    public void render(long current, long max, int x, int y, int w, int h, int mainColor, String stringId) {
+    public void render(long current, long max, int x, int y, int w, int h, int mainColor, int stringId) {
         drawThickBeveledBox(x, y, x + w + 1, y + h, 1, ColorUtils.WHITE, ColorUtils.WHITE, ColorUtils.doubleDarker(mainColor));
-        if (!"0".equals(stringId)) {
-            int fluidId = Integer.parseInt(stringId);
-            LiquidStack stack = new LiquidStack(fluidId, 1000);
+        if (stringId != 0) {
+            LiquidStack stack = new LiquidStack(stringId, 1000);
             renderTank(Minecraft.getMinecraft(), x, y, w, h, mainColor, (int) current, (int) max, stack);
         } else {
             if (current > 0 && max > 0) {
