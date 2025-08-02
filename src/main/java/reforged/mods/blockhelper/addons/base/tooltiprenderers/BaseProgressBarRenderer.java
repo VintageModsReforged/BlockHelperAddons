@@ -87,6 +87,6 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
         }
 
         float centerY = y + 2 + (float) font.FONT_HEIGHT / 2;
-        RenderHelper.drawScrollingString(font, text, textX + textWidth / 2F, centerY, maxLineWidth, font.FONT_HEIGHT * 1.5F, ColorUtils.WHITE);
+        RenderHelper.drawScrollingString(font, text, textX + textWidth / 2F, centerY, maxLineWidth + 1, font.FONT_HEIGHT * 1.5F, ColorUtils.WHITE);
     }
 }
