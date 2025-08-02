@@ -44,7 +44,7 @@ public class TooltipHelper implements ITooltipHelper {
     }
 
     @Override
-    public void fluid(ITaggedList<String, String> tooltip, int current, int max, String text, int fluidId) {
+    public void fluid(ITaggedList<String, String> tooltip, int current, int max, String text, String fluidId) {
         String[] fluidData = new String[7];
         fluidData[0] = String.valueOf(current);
         fluidData[1] = String.valueOf(max);

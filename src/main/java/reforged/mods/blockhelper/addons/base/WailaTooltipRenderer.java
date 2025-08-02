@@ -53,7 +53,7 @@ public class WailaTooltipRenderer extends TooltipHelper implements IDataProvider
                     int current = fluidElement.getCurrent();
                     int max = fluidElement.getMax();
                     String text = fluidElement.getText();
-                    int fluidId = fluidElement.getFluidId();
+                    String fluidId = fluidElement.getFluidId();
                     fluid(strings, current, max, text, fluidId);
                 }
             }
