@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Dimension;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
 import reforged.mods.blockhelper.addons.utils.RenderHelper;
+import reforged.mods.blockhelper.addons.utils.TooltipData;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -40,37 +41,27 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
             this.subTooltips.put(key, tooltip);
         }
 
-        boolean isStringOnly = strings.length > 4 && "1".equals(strings[4]);
-        int height = isStringOnly ? 10 : 11;
+        TooltipData data = TooltipData.parse(strings);
+        int height = data.isStringOnly ? 10 : 11;
 
         return new Dimension(barWidth + offset, height);
     }
-
-    /**
-     * Tooltip Builder
-     * param 0 - current
-     * param 1 - max
-     * param 2 - color
-     * param 3 - text
-     * param 4 - string only, 0 - false, 1 - true
-     * param 5 - centered, 0 - false, 1 - true
-     * param 6 - fluid id
-     * */
 
     @Override
     public void draw(String[] strings, ICommonAccessor accessor, int x, int y) {
         if (strings == null || strings.length < 7) return;
 
+        TooltipData tooltip = TooltipData.parse(strings);
+
+        int current = tooltip.current;
+        int max = tooltip.max;
+        int color = tooltip.color;
+        String text = tooltip.text;
+        boolean isStringOnly = tooltip.isStringOnly;
+        boolean centered = tooltip.centered;
+        String fluidStringId = tooltip.fluidId;
+
         FontRenderer font = Minecraft.getMinecraft().fontRenderer;
-
-        int current = Integer.parseInt(strings[0]);
-        int max = Integer.parseInt(strings[1]);
-        int color = Integer.parseInt(strings[2]);
-        String text = strings[3];
-        boolean isStringOnly = "1".equals(strings[4]);
-        boolean centered = "1".equals(strings[5]);
-        String fluidStringId = strings[6];
-
         int maxLineWidth = barWidth;
         int barHeight = 11;
         int textWidth = font.getStringWidth(text);
