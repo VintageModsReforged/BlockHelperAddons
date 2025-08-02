@@ -4,6 +4,7 @@ import ic2.core.item.tool.ItemCropnalyzer;
 import ic2.core.item.tool.ItemToolMeter;
 import ic2.core.item.tool.ItemTreetap;
 import ic2.core.item.tool.ItemTreetapElectric;
+import mods.vintage.core.helpers.Utils;
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import mods.vintage.core.platform.lang.components.ChatComponentTranslation;
 import mods.vintage.core.platform.lang.components.IChatComponent;
@@ -28,7 +29,7 @@ public abstract class InfoProvider implements IInfoProvider {
     public IFilter ANALYZER = new IFilter() {
         @Override
         public boolean matches(ItemStack stack) {
-            return stack != null && stack.getItem() instanceof ItemCropnalyzer;
+            return stack != null && (stack.getItem() instanceof ItemCropnalyzer || Utils.instanceOf(stack.getItem(), "dev.vintage.cropnalyzer.item.ItemAdvancedAnalyzer"));
         }
     };
     public IFilter TREETAP = new IFilter() {
