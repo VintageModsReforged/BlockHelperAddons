@@ -1,5 +1,6 @@
 package reforged.mods.blockhelper.addons.utils;
 
+import mcp.mobius.waila.overlay.OverlayConfig;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -67,10 +68,12 @@ public class RenderHelper {
         double scaleX = (double) mc.displayWidth / resolution.getScaledWidth();
         double scaleY = (double) mc.displayHeight / resolution.getScaledHeight();
 
-        int x = (int) (rect.getX() * scaleX);
-        int y = (int) ((resolution.getScaledHeight() - rect.getY() - rect.getHeight()) * scaleY);
-        int w = (int) (rect.getWidth() * scaleX);
-        int h = (int) (rect.getHeight() * scaleY);
+        float overlayScale = OverlayConfig.scale;
+
+        int x = (int) (rect.getX() * overlayScale * scaleX);
+        int y = (int) ((resolution.getScaledHeight() - (rect.getY() + rect.getHeight()) * overlayScale) * scaleY);
+        int w = (int) (rect.getWidth() * overlayScale * scaleX);
+        int h = (int) (rect.getHeight() * overlayScale * scaleY);
 
         GL11.glEnable(GL11.GL_SCISSOR_TEST);
         GL11.glScissor(x, y, w, h);
