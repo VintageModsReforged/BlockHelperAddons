@@ -56,6 +56,40 @@ info.crop.info.humidity = Humidity: %s/%s
 info.crop.info.env = Env. Quality: %s/%s
 info.crop.info.light = Light Level: %s/%s
 
+info.barrel.empty = Brew: Empty
+info.barrel.beer = Brew: Beer
+info.barrel.rum = Brew: Rum
+
+info.barrel.storage = Storage
+info.barrel.storage.wheat = Wheat: %s / 64
+info.barrel.storage.hops = Hops: %s / 64
+
+info.barrel.status.brew = Brew
+info.barrel.beer.quality.0 = Brew Quality: Brew
+info.barrel.beer.quality.1 = Brew Quality: Youngster
+info.barrel.beer.quality.2 = Brew Quality: Beer
+info.barrel.beer.quality.3 = Brew Quality: Ale
+info.barrel.beer.quality.4 = Brew Quality: Dragonblood
+info.barrel.beer.quality.5 = Brew Quality: Bad
+
+info.barrel.beer.alc.0 = Alcohol Level: Soup
+info.barrel.beer.alc.1 = Alcohol Level: Alcfree
+info.barrel.beer.alc.2 = Alcohol Level: White
+info.barrel.beer.alc.3 = Alcohol Level: Normal
+info.barrel.beer.alc.4 = Alcohol Level: Dark
+info.barrel.beer.alc.5 = Alcohol Level: Full
+info.barrel.beer.alc.6 = Alcohol Level: Black
+
+info.barrel.beer.solid.0 = Solid Ratio: Watery
+info.barrel.beer.solid.1 = Solid Ratio: Clear
+info.barrel.beer.solid.2 = Solid Ratio: Lite
+info.barrel.beer.solid.3 = Solid Ratio: Normal
+info.barrel.beer.solid.4 = Solid Ratio: Strong
+info.barrel.beer.solid.5 = Solid Ratio: Thick
+info.barrel.beer.solid.6 = Solid Ratio: Stodge
+
+info.barrel.beer.sugar_cane = Sugarcane: %s / 32
+
 info.fuel = Fuel: %s/%s
 info.reactor.heat.short = Heat: %s
 info.reactor.heat.long=Heat: %1$s / %2$s
