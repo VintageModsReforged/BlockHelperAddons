@@ -52,7 +52,7 @@ public class TooltipHelper implements ITooltipHelper {
         fluidData[3] = text;
         fluidData[4] = "0";
         fluidData[5] = "0";
-        fluidData[6] = String.valueOf(fluidId);
+        fluidData[6] = fluidId;
         tooltip.add(SpecialChars.getRenderString("jade.progress", fluidData));
     }
 }
