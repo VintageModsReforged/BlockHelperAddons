@@ -9,9 +9,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Dimension;
+import reforged.mods.blockhelper.addons.BlockHelperAddons;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
 import reforged.mods.blockhelper.addons.utils.RenderHelper;
-import reforged.mods.blockhelper.addons.utils.TooltipData;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -23,7 +23,6 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
     private final Map<List<String>, Tooltip> subTooltips = new HashMap<List<String>, Tooltip>();
 
     int offset = 4;
-    int barWidth = 135;
 
     @Override
     public Dimension getSize(String[] strings, ICommonAccessor accessor) {
@@ -41,43 +40,44 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
             this.subTooltips.put(key, tooltip);
         }
 
-        TooltipData data = TooltipData.parse(strings);
-        int height = data.isStringOnly ? 10 : 11;
+        int width = BlockHelperAddons.BAR_WIDTH;
 
-        return new Dimension(barWidth + offset, height);
+        boolean isStringOnly = strings.length > 4 && "1".equals(strings[4]);
+        int height = isStringOnly ? 10 : 11;
+
+        return new Dimension(width + offset, height);
     }
 
     @Override
     public void draw(String[] strings, ICommonAccessor accessor, int x, int y) {
         if (strings == null || strings.length < 7) return;
 
-        TooltipData tooltip = TooltipData.parse(strings);
-
-        int current = tooltip.current;
-        int max = tooltip.max;
-        int color = tooltip.color;
-        String text = tooltip.text;
-        boolean isStringOnly = tooltip.isStringOnly;
-        boolean centered = tooltip.centered;
-        int fluidStringId = tooltip.fluidId;
-
         FontRenderer font = Minecraft.getMinecraft().fontRenderer;
-        int maxLineWidth = barWidth;
+
+        int current = Integer.parseInt(strings[0]);
+        int max = Integer.parseInt(strings[1]);
+        int color = Integer.parseInt(strings[2]);
+        String text = strings[3];
+        boolean isStringOnly = "1".equals(strings[4]);
+        boolean centered = "1".equals(strings[5]);
+        int fluidStringId = Integer.parseInt(strings[6]);
+
+        int maxLineWidth = BlockHelperAddons.BAR_WIDTH;
         int barHeight = 11;
         int textWidth = font.getStringWidth(text);
-        int textX = x;
 
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
         if (!isStringOnly) {
             RenderHelper.INSTANCE.render(current, max, x, y, maxLineWidth, barHeight + 1, color, fluidStringId);
-            textX += (maxLineWidth - textWidth) / 2 + 1;
-        } else if (centered) {
-            textX += (maxLineWidth - textWidth) / 2 + 1;
         }
 
-        float centerY = y + 2 + (float) font.FONT_HEIGHT / 2;
-        RenderHelper.drawScrollingString(font, text, textX + textWidth / 2F, centerY, maxLineWidth + 1, font.FONT_HEIGHT * 1.5F, ColorUtils.WHITE);
+        float boxX = x + 2;
+        float boxWidth = maxLineWidth - 4;
+        float boxHeight = font.FONT_HEIGHT * 1.5F;
+        float drawOffsetX = centered ? (boxWidth - textWidth) / 2f : 0f;
+
+        RenderHelper.drawScrollingString(font, text, boxX + drawOffsetX, y, boxWidth - drawOffsetX, boxHeight, ColorUtils.WHITE);
     }
 }

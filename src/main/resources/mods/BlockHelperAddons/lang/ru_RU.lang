@@ -56,6 +56,40 @@ info.crop.info.humidity = Влажность: %s/%s
 info.crop.info.env = Качество воздуха: %s/%s
 info.crop.info.light = Освещенность: %s/%s
 
+info.barrel.empty = Варка: Пусто
+info.barrel.beer = Варка: Пиво
+info.barrel.rum = Варка: Ром
+
+info.barrel.storage = Хранилище
+info.barrel.storage.wheat = Пшеница: %s / 64
+info.barrel.storage.hops = Хмель: %s / 64
+
+info.barrel.status.brew = Варка
+info.barrel.beer.quality.0 = Качество пива: Варка
+info.barrel.beer.quality.1 = Качество пива: Молодой
+info.barrel.beer.quality.2 = Качество пива: Пиво
+info.barrel.beer.quality.3 = Качество пива: Эль
+info.barrel.beer.quality.4 = Качество пива: Драконья кровь
+info.barrel.beer.quality.5 = Качество пива: Плохое
+
+info.barrel.beer.alc.0 = Уровень алкоголя: Суп
+info.barrel.beer.alc.1 = Уровень алкоголя: Без алкоголя
+info.barrel.beer.alc.2 = Уровень алкоголя: Белый
+info.barrel.beer.alc.3 = Уровень алкоголя: Нормальный
+info.barrel.beer.alc.4 = Уровень алкоголя: Тёмный
+info.barrel.beer.alc.5 = Уровень алкоголя: Цельный
+info.barrel.beer.alc.6 = Уровень алкоголя: Чёрный
+
+info.barrel.beer.solid.0 = Соотношение: Водянистое
+info.barrel.beer.solid.1 = Соотношение: Чистое
+info.barrel.beer.solid.2 = Соотношение: Облегчённое
+info.barrel.beer.solid.3 = Соотношение: Нормальное
+info.barrel.beer.solid.4 = Соотношение: Сильное
+info.barrel.beer.solid.5 = Соотношение: Густое
+info.barrel.beer.solid.6 = Соотношение: Стодж
+
+info.barrel.beer.sugar_cane = Сахарный тростник: %s / 32
+
 info.fuel = Топливо: %s/%s
 info.reactor.heat.short = Нагрев: %s
 info.reactor.heat.long=Нагрев: %1$s / %2$s

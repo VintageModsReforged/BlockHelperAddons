@@ -39,7 +39,8 @@ public class WailaCommonHandler {
                 new TransformerInfoProvider(),
                 new TeleporterInfoProvider(),
                 new CropInfoProvider(),
-                PersonalInfoProvider.THIS
+                PersonalInfoProvider.THIS,
+                BarrelInfoProvider.THIS
         );
         if (Loader.isModLoaded("AdvancedPowerManagement")) {
             registerAddonProviders(new AdvancedPowerManagementInfoProvider());
