@@ -21,27 +21,23 @@ public class RenderHelper {
     private static final ScissorsStack STACK = new ScissorsStack();
     private static final Minecraft mc = Minecraft.getMinecraft();
 
-    public static void drawScrollingString(FontRenderer font, String text, float centerX, float centerY, float width, float height, int color) {
+    public static void drawScrollingString(FontRenderer font, String text, float x, float y, float width, float height, int color) {
         int textWidth = font.getStringWidth(text);
-        float drawY = centerY - (font.FONT_HEIGHT / 2F);
-
-        float boxX = centerX - (width / 2F);
-        float boxY = centerY - (height / 2F);
-        int clipX = MathHelper.floor_float(boxX);
-        int clipY = MathHelper.floor_float(boxY);
+        int clipX = MathHelper.floor_float(x);
+        int clipY = MathHelper.floor_float(y);
         int clipW = MathHelper.ceiling_float_int(width);
         int clipH = MathHelper.ceiling_float_int(height);
+        float drawY = y + (height - font.FONT_HEIGHT) / 2F;
 
         if (textWidth > width) {
             float scrollOffset = getScrollOffset(width, textWidth);
-            float alignedX = boxX + 2 - scrollOffset;
+            float drawX = x - scrollOffset;
 
             pushScissors(clipX, clipY, clipW, clipH);
-            font.drawStringWithShadow(text, (int) alignedX, (int) drawY, color);
+            font.drawStringWithShadow(text, (int) drawX + 2, (int) drawY, color);
             popScissors();
         } else {
-            float drawX = centerX - (textWidth / 2F);
-            font.drawStringWithShadow(text, (int) drawX, (int) drawY, color);
+            font.drawStringWithShadow(text, (int) x + 2, (int) drawY, color);
         }
     }
 
@@ -81,7 +77,7 @@ public class RenderHelper {
 
     private static float getScrollOffset(float width, int textWidth) {
         float scrollRange = textWidth - width + 4F;
-        float scrollSpeed = 20F;
+        float scrollSpeed = 5F;
 
         long now = System.currentTimeMillis();
         float totalScrollTime = scrollRange / scrollSpeed;

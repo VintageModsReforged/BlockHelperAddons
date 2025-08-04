@@ -8,7 +8,7 @@ public class ColorUtils {
     public static final int GRAY = rgb(128, 128, 128);
     public static final int DARK_GRAY = rgb(64, 64, 64);
     public static final int BLACK = -16777216;
-    public static final int PROGRESS = rgb(1, 128, 128);
+    public static final int PROGRESS = -16733185;
     public static final int SPEED = -295680;
     public static final int RED = rgb(255, 0, 0);
     public static final int PINK = rgb(255, 175, 175);

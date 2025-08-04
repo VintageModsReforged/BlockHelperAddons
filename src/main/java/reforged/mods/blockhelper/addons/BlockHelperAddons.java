@@ -24,11 +24,13 @@ public class BlockHelperAddons implements ILangProvider {
 
     public Configuration CONFIG;
     public static String[] LANGS;
+    public static int BAR_WIDTH;
 
     public BlockHelperAddons() {
         CONFIG = ConfigHelper.getConfigFor("BlockHelperAddons");
         CONFIG.load();
         LANGS = ConfigHelper.getLocalizations(CONFIG, new String[] {"en_US", "ru_RU"}, "BlockHelperAddons");
+        BAR_WIDTH = ConfigHelper.getInt(CONFIG, "general", "barWidth", 135, Integer.MAX_VALUE, 135, "Increase this if you don't like scrolling text.");
         if (CONFIG != null) {
             if (CONFIG.hasChanged()) CONFIG.save();
         }

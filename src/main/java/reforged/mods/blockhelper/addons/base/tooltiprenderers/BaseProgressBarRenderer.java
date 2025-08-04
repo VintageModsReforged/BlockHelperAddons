@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Dimension;
+import reforged.mods.blockhelper.addons.BlockHelperAddons;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
 import reforged.mods.blockhelper.addons.utils.RenderHelper;
 
@@ -22,7 +23,6 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
     private final Map<List<String>, Tooltip> subTooltips = new HashMap<List<String>, Tooltip>();
 
     int offset = 4;
-    int barWidth = 135;
 
     @Override
     public Dimension getSize(String[] strings, ICommonAccessor accessor) {
@@ -40,10 +40,12 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
             this.subTooltips.put(key, tooltip);
         }
 
+        int width = BlockHelperAddons.BAR_WIDTH;
+
         boolean isStringOnly = strings.length > 4 && "1".equals(strings[4]);
         int height = isStringOnly ? 10 : 11;
 
-        return new Dimension(barWidth + offset, height);
+        return new Dimension(width + offset, height);
     }
 
     /**
@@ -71,22 +73,22 @@ public class BaseProgressBarRenderer implements ITooltipRenderer {
         boolean centered = "1".equals(strings[5]);
         String fluidStringId = strings[6];
 
-        int maxLineWidth = barWidth;
+        int maxLineWidth = BlockHelperAddons.BAR_WIDTH;
         int barHeight = 11;
         int textWidth = font.getStringWidth(text);
-        int textX = x;
 
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
         if (!isStringOnly) {
             RenderHelper.INSTANCE.render(current, max, x, y, maxLineWidth, barHeight + 1, color, fluidStringId);
-            textX += (maxLineWidth - textWidth) / 2 + 1;
-        } else if (centered) {
-            textX += (maxLineWidth - textWidth) / 2 + 1;
         }
 
-        float centerY = y + 2 + (float) font.FONT_HEIGHT / 2;
-        RenderHelper.drawScrollingString(font, text, textX + textWidth / 2F, centerY, maxLineWidth - 1, font.FONT_HEIGHT * 1.5F, ColorUtils.WHITE);
+        float boxX = x + 2;
+        float boxWidth = maxLineWidth - 4;
+        float boxHeight = font.FONT_HEIGHT * 1.5F;
+        float drawOffsetX = centered ? (boxWidth - textWidth) / 2f : 0f;
+
+        RenderHelper.drawScrollingString(font, text, boxX + drawOffsetX, y, boxWidth - drawOffsetX, boxHeight, ColorUtils.WHITE);
     }
 }
