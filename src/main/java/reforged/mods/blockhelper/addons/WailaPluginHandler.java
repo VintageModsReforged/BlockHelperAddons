@@ -6,7 +6,6 @@ import ic2.core.block.BlockCrop;
 import ic2.core.block.TileEntityCrop;
 import mcp.mobius.waila.api.IRegistrar;
 import mcp.mobius.waila.api.IWailaPlugin;
-import mcp.mobius.waila.api.impl.PluginConfig;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.base.WailaTooltipRenderer;

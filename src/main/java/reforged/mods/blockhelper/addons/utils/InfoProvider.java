@@ -18,21 +18,24 @@ import reforged.mods.blockhelper.addons.utils.interfaces.IInfoProvider;
 import reforged.mods.blockhelper.addons.utils.interfaces.IWailaElementBuilder;
 import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
+import java.util.List;
+import java.util.Locale;
+
 public abstract class InfoProvider implements IInfoProvider {
 
-    public IFilter READER = new IFilter() {
+    public static IFilter READER = new IFilter() {
         @Override
         public boolean matches(ItemStack stack) {
             return stack != null && stack.getItem() instanceof ItemToolMeter;
         }
     };
-    public IFilter ANALYZER = new IFilter() {
+    public static IFilter ANALYZER = new IFilter() {
         @Override
         public boolean matches(ItemStack stack) {
             return stack != null && (stack.getItem() instanceof ItemCropnalyzer || Utils.instanceOf(stack.getItem(), "dev.vintage.cropnalyzer.item.ItemAdvancedAnalyzer"));
         }
     };
-    public IFilter TREETAP = new IFilter() {
+    public static IFilter TREETAP = new IFilter() {
         @Override
         public boolean matches(ItemStack stack) {
             return stack != null && (stack.getItem() instanceof ItemTreetap || stack.getItem() instanceof ItemTreetapElectric);
@@ -59,8 +62,21 @@ public abstract class InfoProvider implements IInfoProvider {
             InventoryPlayer inventoryPlayer = player.inventory;
             for (int i = 0; i < 9; i++) {
                 ItemStack stack = inventoryPlayer.getStackInSlot(i);
-                if (filter.matches(stack)) {
-                    return true;
+                if (stack != null) {
+                    if (filter.matches(stack)) {
+                        return true;
+                    }
+                }
+            }
+            ItemStack armorStack = inventoryPlayer.armorItemInSlot(3);
+            if (ToolIntegrationHelper.isHelmet(armorStack)) {
+                List<String> installed = ToolIntegrationHelper.getInstalledTools(armorStack);
+                for (String tool : installed) {
+                    ToolIntegrationHelper.Tools stack = ToolIntegrationHelper.Tools.valueOf(tool.toUpperCase(Locale.ROOT));
+                    ItemStack toolStack = stack.toolInstance.get();
+                    if (toolStack != null && filter.matches(toolStack)) {
+                        return true;
+                    }
                 }
             }
         }

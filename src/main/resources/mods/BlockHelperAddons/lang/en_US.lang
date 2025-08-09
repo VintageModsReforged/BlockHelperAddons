@@ -124,3 +124,7 @@ info.tier.uxv = UXV
 info.tier.max = MAX
 
 info.bar = [%s]
+
+info.tooltip.tools.installed = Installed Tools:
+message.chat.extracted = Extracted: %s
+message.chat.extracted.none = No tools installed inside this helmet!

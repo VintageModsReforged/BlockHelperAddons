@@ -124,3 +124,6 @@ info.tier.uxv = UXV
 info.tier.max = MAX
 
 info.bar = [%s]
+
+message.chat.extracted = Извлечён: %s
+message.chat.extracted.none = В этом шлеме нет предметов для извлечения!

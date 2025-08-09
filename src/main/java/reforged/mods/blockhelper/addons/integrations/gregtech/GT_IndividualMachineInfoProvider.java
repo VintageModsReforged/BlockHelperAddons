@@ -6,9 +6,8 @@ import gregtechmod.common.tileentities.*;
 import mods.vintage.core.platform.lang.FormattedTranslator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.blockhelper.addons.utils.ColorUtils;
-import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
 public class GT_IndividualMachineInfoProvider extends InfoProvider {
 

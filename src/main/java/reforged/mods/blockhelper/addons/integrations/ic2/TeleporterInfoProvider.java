@@ -5,8 +5,8 @@ import mods.vintage.core.platform.lang.FormattedTranslator;
 import mods.vintage.core.platform.lang.Translator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
+import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
 public class TeleporterInfoProvider extends InfoProvider {
 
