@@ -36,7 +36,7 @@ public class WrenchableInfoProvider extends TooltipHelper implements IDataProvid
                     if (heldStack != null) {
                         if (heldStack.getItem() instanceof ItemToolWrench) {
                             int actualDrop = ((ItemToolWrench) heldStack.getItem()).overrideWrenchSuccessRate(heldStack) ? 100 : (int) (dropRate * 100);
-                            text(strings, Translator.WHITE.format("info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")), true);
+                            text(strings, Translator.GOLD.format("info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")), true);
 
                         } else {
                             text(strings, Translator.GOLD.format("info.wrenchable"), true);

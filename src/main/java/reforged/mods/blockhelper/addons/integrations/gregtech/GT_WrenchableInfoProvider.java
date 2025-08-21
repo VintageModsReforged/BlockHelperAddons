@@ -30,11 +30,11 @@ public class GT_WrenchableInfoProvider extends TooltipHelper implements IDataPro
             if (heldStack != null) {
                 if (heldStack.getItem() instanceof GT_Wrench_Item) {
                     actualDrop = 100;
-                    text(strings, Translator.WHITE.format("info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")), true);
+                    text(strings, Translator.GOLD.format("info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")), true);
                 } else if (heldStack.getItem() instanceof ItemToolWrench) {
                     float dropRate = wrenchable.getWrenchDropRate();
                     actualDrop = ((ItemToolWrench) heldStack.getItem()).overrideWrenchSuccessRate(heldStack) ? 100 : (int) (dropRate * 100);
-                    text(strings, Translator.WHITE.format("info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")), true);
+                    text(strings, Translator.GOLD.format("info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")), true);
                 } else {
                     text(strings, Translator.GOLD.format("info.wrenchable"), true);
                 }
@@ -45,7 +45,7 @@ public class GT_WrenchableInfoProvider extends TooltipHelper implements IDataPro
             if (heldStack != null) {
                 if (heldStack.getItem() instanceof GT_Wrench_Item) {
                     actualDrop = 100;
-                    text(strings, Translator.WHITE.format("info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")), true);
+                    text(strings, Translator.GOLD.format("info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")), true);
                 } else if (heldStack.getItem() instanceof ItemToolWrench) {
                     text(strings, Translator.RED.format("info.gt.wrenchable.warning"), true);
                 } else {
