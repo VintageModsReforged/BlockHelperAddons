@@ -4,6 +4,7 @@ import ic2.core.item.tool.ItemCropnalyzer;
 import ic2.core.item.tool.ItemToolMeter;
 import ic2.core.item.tool.ItemTreetap;
 import ic2.core.item.tool.ItemTreetapElectric;
+import mods.vintage.core.helpers.ElectricHelper;
 import mods.vintage.core.platform.lang.Translator;
 import mods.vintage.core.platform.lang.component.MutableComponent;
 import mods.vintage.core.utils.Utils;
@@ -140,7 +141,7 @@ public abstract class InfoProvider implements IInfoProvider {
     }
 
     public String tier(int tier) {
-        return translate("info.energy.tier", Helper.getTierForDisplay(tier));
+        return translate("info.energy.tier", ElectricHelper.getTierForDisplay(tier));
     }
 
     public String maxIn(int maxIn) {

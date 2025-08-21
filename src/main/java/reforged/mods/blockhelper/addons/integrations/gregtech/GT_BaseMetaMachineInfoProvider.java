@@ -4,11 +4,11 @@ import gregtechmod.api.interfaces.IGregTechTileEntity;
 import gregtechmod.api.metatileentity.MetaTileEntity;
 import gregtechmod.common.tileentities.GT_MetaTileEntity_TesseractGenerator;
 import gregtechmod.common.tileentities.GT_MetaTileEntity_TesseractTerminal;
+import mods.vintage.core.helpers.ElectricHelper;
 import mods.vintage.core.platform.lang.Translator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
-import reforged.mods.blockhelper.addons.utils.Helper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
@@ -28,7 +28,7 @@ public class GT_BaseMetaMachineInfoProvider extends InfoProvider {
                 }
                 int maxInput = baseMetaTileEntity.getInputVoltage();
                 if (maxInput > 0) {
-                    text(helper, tier(Helper.getTierFromEU(maxInput)));
+                    text(helper, tier(ElectricHelper.getTierFromEU(maxInput)));
                     text(helper, maxIn(maxInput));
                 }
                 int maxOut = baseMetaTileEntity.getOutputVoltage();

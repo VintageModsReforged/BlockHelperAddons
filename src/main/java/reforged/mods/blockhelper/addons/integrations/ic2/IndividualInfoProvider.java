@@ -2,13 +2,13 @@ package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import ic2.api.item.Items;
 import ic2.core.block.machine.tileentity.*;
+import mods.vintage.core.helpers.ElectricHelper;
 import mods.vintage.core.platform.lang.Translator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
 import reforged.mods.blockhelper.addons.utils.Formatter;
-import reforged.mods.blockhelper.addons.utils.Helper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
@@ -89,11 +89,11 @@ public class IndividualInfoProvider extends InfoProvider {
         } else if (blockEntity instanceof TileEntityCropmatron) {
             TileEntityCropmatron cropmatron = (TileEntityCropmatron) blockEntity;
             bar(helper, cropmatron.energy, cropmatron.maxEnergy, Translator.WHITE.format("info.energy", Formatter.formatNumber(cropmatron.energy, 2), Formatter.formatNumber(cropmatron.maxEnergy, 2)), ColorUtils.RED);
-            text(helper, tier(Helper.getTierFromEU(TileEntityCropmatron.maxInput)));
+            text(helper, tier(ElectricHelper.getTierFromEU(TileEntityCropmatron.maxInput)));
             text(helper, maxIn(TileEntityCropmatron.maxInput));
         } else if (blockEntity instanceof TileEntityTesla) {
             TileEntityTesla tesla = (TileEntityTesla) blockEntity;
-            text(helper, tier(Helper.getTierFromEU(tesla.maxInput)));
+            text(helper, tier(ElectricHelper.getTierFromEU(tesla.maxInput)));
             text(helper, maxIn(tesla.maxInput));
         }
         if (blockEntity instanceof TileEntityElectrolyzer) {

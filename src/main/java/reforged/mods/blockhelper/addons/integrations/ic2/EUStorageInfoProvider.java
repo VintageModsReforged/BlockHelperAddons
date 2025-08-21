@@ -6,13 +6,13 @@ import ic2.core.block.generator.tileentity.TileEntityGeoGenerator;
 import ic2.core.block.machine.tileentity.TileEntityElectricMachine;
 import ic2.core.block.machine.tileentity.TileEntityMatter;
 import ic2.core.block.wiring.TileEntityElectricBlock;
+import mods.vintage.core.helpers.ElectricHelper;
 import mods.vintage.core.platform.lang.Translator;
 import mods.vintage.core.utils.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
 import reforged.mods.blockhelper.addons.utils.Formatter;
-import reforged.mods.blockhelper.addons.utils.Helper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
@@ -31,7 +31,7 @@ public class EUStorageInfoProvider extends InfoProvider {
                 energy = machine.maxEnergy;
             }
             bar(helper, energy, machine.maxEnergy, Translator.WHITE.format("info.energy", Formatter.formatNumber(energy, 2), Formatter.formatNumber(machine.maxEnergy, 2)), ColorUtils.RED);
-            text(helper, tier(Helper.getTierFromEU(machine.maxInput)));
+            text(helper, tier(ElectricHelper.getTierFromEU(machine.maxInput)));
             text(helper, maxIn(machine.maxInput));
         } else if (blockEntity instanceof TileEntityElectricBlock) {
             TileEntityElectricBlock storage = (TileEntityElectricBlock) blockEntity;
@@ -40,7 +40,7 @@ public class EUStorageInfoProvider extends InfoProvider {
                 energy = storage.getCapacity();
             }
             bar(helper, energy, storage.getCapacity(), Translator.WHITE.format("info.energy", Formatter.formatNumber(energy, 2), Formatter.formatNumber(storage.getCapacity(), 2)), ColorUtils.RED);
-            text(helper, tier(Helper.getTierFromEU(storage.getOutput())));
+            text(helper, tier(ElectricHelper.getTierFromEU(storage.getOutput())));
             text(helper, maxIn(storage.getOutput()));
             text(helper, Translator.WHITE.format("info.storage.output", storage.getOutput()));
         } else if (blockEntity instanceof TileEntityBaseGenerator) {
