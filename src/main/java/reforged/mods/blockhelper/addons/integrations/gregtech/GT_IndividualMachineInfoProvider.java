@@ -3,7 +3,7 @@ package reforged.mods.blockhelper.addons.integrations.gregtech;
 import gregtechmod.api.interfaces.IGregTechTileEntity;
 import gregtechmod.api.metatileentity.MetaTileEntity;
 import gregtechmod.common.tileentities.*;
-import mods.vintage.core.platform.lang.FormattedTranslator;
+import mods.vintage.core.platform.lang.Translator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
@@ -22,7 +22,7 @@ public class GT_IndividualMachineInfoProvider extends InfoProvider {
                 if (metaTile instanceof GT_MetaTileEntity_BlastFurnace) {
                     GT_MetaTileEntity_BlastFurnace blast = (GT_MetaTileEntity_BlastFurnace) metaTile;
                     if (blast.mMachine) {
-                        text(helper, FormattedTranslator.DARK_GREEN.format("info.heat") + " " + blast.mHeatCapacity + " K");
+                        text(helper, Translator.DARK_GREEN.format("info.heat") + " " + blast.mHeatCapacity + " K");
                     } else {
                         addStructureStatus(helper);
                     }
@@ -47,22 +47,22 @@ public class GT_IndividualMachineInfoProvider extends InfoProvider {
             if (baseTile instanceof GT_TileEntity_Matterfabricator) {
                 GT_TileEntity_Matterfabricator matter = (GT_TileEntity_Matterfabricator) baseTile;
                 int progress = (int) Math.max(0L, (long) matter.getProgresstime() / Math.max(1L, (long) matter.maxProgresstime() / 100L));
-                text(helper, FormattedTranslator.LIGHT_PURPLE.format("info.progress", progress));
+                text(helper, Translator.LIGHT_PURPLE.format("info.progress", progress));
             } else if (baseTile instanceof GT_TileEntity_PlayerDetector) {
                 GT_TileEntity_PlayerDetector detector = (GT_TileEntity_PlayerDetector) baseTile;
                 byte mode = detector.mMode;
                 if (mode == 0) {
-                    text(helper, FormattedTranslator.GREEN.format("info.gt.detector.players.all"));
+                    text(helper, Translator.GREEN.format("info.gt.detector.players.all"));
                 } else if (mode == 1) {
-                    text(helper, FormattedTranslator.YELLOW.format("info.gt.detector.players.you"));
+                    text(helper, Translator.YELLOW.format("info.gt.detector.players.you"));
                 } else if (mode == 2) {
-                    text(helper, FormattedTranslator.AQUA.format("info.gt.detector.players.other"));
+                    text(helper, Translator.AQUA.format("info.gt.detector.players.other"));
                 }
             }
         }
     }
 
     public void addStructureStatus(IWailaHelper helper) {
-        text(helper, FormattedTranslator.RED.format("info.gt.invalid"));
+        text(helper, Translator.RED.format("info.gt.invalid"));
     }
 }

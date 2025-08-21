@@ -1,7 +1,6 @@
 package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import ic2.core.block.personal.IPersonalBlock;
-import mods.vintage.core.platform.lang.FormattedTranslator;
 import mods.vintage.core.platform.lang.Translator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -17,10 +16,10 @@ public class PersonalInfoProvider extends InfoProvider {
         if (blockEntity instanceof IPersonalBlock) {
             IPersonalBlock personalBlock = (IPersonalBlock) blockEntity;
             boolean canAccess = personalBlock.permitsAccess(player) || personalBlock.permitsAccess(player.username);
-            text(helper, translate(FormattedTranslator.GOLD, "info.personal.access", Translator.formattedBoolean(canAccess)));
+            text(helper, translate(Translator.GOLD, "info.personal.access", status(canAccess)));
 
             if (!"null".equals(personalBlock.getUsername())) {
-                text(helper, translate(FormattedTranslator.LIGHT_PURPLE, "info.personal.owner", FormattedTranslator.AQUA.literal(personalBlock.getUsername())));
+                text(helper, translate(Translator.LIGHT_PURPLE, "info.personal.owner", Translator.AQUA.literal(personalBlock.getUsername())));
             }
         }
     }

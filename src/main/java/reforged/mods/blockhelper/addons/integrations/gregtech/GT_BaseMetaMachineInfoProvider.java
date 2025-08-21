@@ -4,7 +4,7 @@ import gregtechmod.api.interfaces.IGregTechTileEntity;
 import gregtechmod.api.metatileentity.MetaTileEntity;
 import gregtechmod.common.tileentities.GT_MetaTileEntity_TesseractGenerator;
 import gregtechmod.common.tileentities.GT_MetaTileEntity_TesseractTerminal;
-import mods.vintage.core.platform.lang.FormattedTranslator;
+import mods.vintage.core.platform.lang.Translator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
@@ -50,12 +50,12 @@ public class GT_BaseMetaMachineInfoProvider extends InfoProvider {
                 int scaled = (int) (((float) progress / maxProgress) * 100);
 
                 if (progress > 0)
-                    bar(helper, progress, maxProgress, FormattedTranslator.WHITE.format("info.progress", scaled), ColorUtils.PROGRESS);
+                    bar(helper, progress, maxProgress, Translator.WHITE.format("info.progress", scaled), ColorUtils.PROGRESS);
             }
 
             String possibleUpgrades = getPossibleUpgrades(baseMetaTileEntity);
             if (!possibleUpgrades.isEmpty()) {
-                text(helper, FormattedTranslator.GREEN.format("info.gt.possible_upgrades") + " " + literal(possibleUpgrades));
+                text(helper, Translator.GREEN.format("info.gt.possible_upgrades") + " " + literal(possibleUpgrades));
             }
             addUpgradesInfo(helper, baseMetaTileEntity);
         }

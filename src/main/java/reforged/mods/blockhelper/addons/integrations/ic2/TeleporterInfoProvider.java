@@ -1,7 +1,6 @@
 package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import ic2.core.block.machine.tileentity.TileEntityTeleporter;
-import mods.vintage.core.platform.lang.FormattedTranslator;
 import mods.vintage.core.platform.lang.Translator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -17,7 +16,7 @@ public class TeleporterInfoProvider extends InfoProvider {
         if (blockEntity instanceof TileEntityTeleporter) {
             TileEntityTeleporter tp = (TileEntityTeleporter) blockEntity;
             boolean hasTarget = tp.targetSet;
-            text(helper, FormattedTranslator.GOLD.format("info.teleporter.target.set", Translator.formattedBoolean(hasTarget)));
+            text(helper, Translator.GOLD.format("info.teleporter.target.set", status(hasTarget)));
             text(helper, translate("info.teleporter.target", tp.targetX, tp.targetY, tp.targetZ));
         }
     }

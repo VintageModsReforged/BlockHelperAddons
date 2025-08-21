@@ -3,8 +3,8 @@ package reforged.mods.blockhelper.addons.integrations.ic2;
 import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
 import ic2.core.block.generator.tileentity.*;
-import mods.vintage.core.helpers.Utils;
-import mods.vintage.core.platform.lang.FormattedTranslator;
+import mods.vintage.core.platform.lang.Translator;
+import mods.vintage.core.utils.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
@@ -50,7 +50,7 @@ public class GeneratorInfoProvider extends InfoProvider {
             int heat = reactor.heat;
             int maxHeat = reactor.maxHeat;
             int production = reactor.getOutput() * 5;
-            text(helper, FormattedTranslator.WHITE.format("info.generator.output", production));
+            text(helper, Translator.WHITE.format("info.generator.output", production));
             bar(helper, heat, maxHeat, translate("info.reactor.heat.long", heat, maxHeat), getReactorColor(heat, maxHeat));
 
         }

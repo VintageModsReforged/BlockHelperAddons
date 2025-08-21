@@ -4,10 +4,9 @@ import ic2.core.item.tool.ItemCropnalyzer;
 import ic2.core.item.tool.ItemToolMeter;
 import ic2.core.item.tool.ItemTreetap;
 import ic2.core.item.tool.ItemTreetapElectric;
-import mods.vintage.core.helpers.Utils;
-import mods.vintage.core.platform.lang.FormattedTranslator;
-import mods.vintage.core.platform.lang.components.ChatComponentTranslation;
-import mods.vintage.core.platform.lang.components.IChatComponent;
+import mods.vintage.core.platform.lang.Translator;
+import mods.vintage.core.platform.lang.component.MutableComponent;
+import mods.vintage.core.utils.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
@@ -84,7 +83,7 @@ public abstract class InfoProvider implements IInfoProvider {
     }
 
     public String status(boolean status) {
-        return status ? FormattedTranslator.GREEN.format("" + true) : FormattedTranslator.RED.format("" + false);
+        return Translator.RESET.formattedBoolean(status);
     }
 
     public void text(IWailaHelper helper, String text, boolean centered) {
@@ -113,43 +112,43 @@ public abstract class InfoProvider implements IInfoProvider {
     }
 
     public String translate(String translatable) {
-        return FormattedTranslator.WHITE.format(translatable);
+        return Translator.WHITE.format(translatable);
     }
 
     public String translate(String translatable, Object... args) {
-        return FormattedTranslator.WHITE.format(translatable, args);
+        return Translator.WHITE.format(translatable, args);
     }
 
     public String literal(String literal) {
-        return FormattedTranslator.WHITE.literal(literal);
+        return Translator.WHITE.literal(literal);
     }
 
-    public String translate(FormattedTranslator formatter, String translatable) {
+    public String translate(Translator formatter, String translatable) {
         return formatter.format(translatable);
     }
 
-    public String translate(FormattedTranslator formatter, String translatable, Object... args) {
+    public String translate(Translator formatter, String translatable, Object... args) {
         return formatter.format(translatable, args);
     }
 
-    public String literal(FormattedTranslator formatter, String translatable) {
+    public String literal(Translator formatter, String translatable) {
         return formatter.literal(translatable);
     }
 
-    public String percent(IChatComponent percentageComp) {
-        return percentageComp.appendText(FormattedTranslator.WHITE.literal("%")).getFormattedText();
+    public String percent(MutableComponent percentageComp) {
+        return percentageComp.append(Translator.WHITE.literal("%")).getFormattedString();
     }
 
     public String tier(int tier) {
-        return new ChatComponentTranslation("info.energy.tier", Helper.getTierForDisplay(tier)).getFormattedText();
+        return translate("info.energy.tier", Helper.getTierForDisplay(tier));
     }
 
     public String maxIn(int maxIn) {
-        return new ChatComponentTranslation("info.energy.input.max", maxIn).getFormattedText();
+        return translate("info.energy.input.max", maxIn);
     }
 
     public String usage(int usage) {
-        return new ChatComponentTranslation("info.energy.usage", usage).getFormattedText();
+        return translate("info.energy.usage", usage);
     }
 
     public void add(IWailaHelper helper, IWailaElementBuilder element) {

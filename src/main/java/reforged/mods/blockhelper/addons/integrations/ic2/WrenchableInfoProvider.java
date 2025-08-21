@@ -4,7 +4,7 @@ import cpw.mods.fml.common.Loader;
 import ic2.api.tile.IWrenchable;
 import ic2.core.item.tool.ItemToolWrench;
 import mcp.mobius.waila.api.*;
-import mods.vintage.core.platform.lang.FormattedTranslator;
+import mods.vintage.core.platform.lang.Translator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -36,13 +36,13 @@ public class WrenchableInfoProvider extends TooltipHelper implements IDataProvid
                     if (heldStack != null) {
                         if (heldStack.getItem() instanceof ItemToolWrench) {
                             int actualDrop = ((ItemToolWrench) heldStack.getItem()).overrideWrenchSuccessRate(heldStack) ? 100 : (int) (dropRate * 100);
-                            text(strings, FormattedTranslator.WHITE.format("info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")), true);
+                            text(strings, Translator.WHITE.format("info.wrenchable.rate", Helper.getTextColor(actualDrop).literal(actualDrop + "")), true);
 
                         } else {
-                            text(strings, FormattedTranslator.GOLD.format("info.wrenchable"), true);
+                            text(strings, Translator.GOLD.format("info.wrenchable"), true);
                         }
                     } else {
-                        text(strings, FormattedTranslator.GOLD.format("info.wrenchable"), true);
+                        text(strings, Translator.GOLD.format("info.wrenchable"), true);
                     }
                 }
             }

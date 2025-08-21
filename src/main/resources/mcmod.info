@@ -1,7 +1,7 @@
 [
   {
     "modid": "BlockHelperAddons",
-    "name": "Block Helper Addons",
+    "name": "Block Helper: Addons",
     "description": "Block Helper Additional Support for IC2 related mods",
     "version": "${version}",
     "authors": ["CrossVas"]

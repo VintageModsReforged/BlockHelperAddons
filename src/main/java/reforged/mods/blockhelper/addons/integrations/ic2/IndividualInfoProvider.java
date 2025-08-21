@@ -2,7 +2,7 @@ package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import ic2.api.item.Items;
 import ic2.core.block.machine.tileentity.*;
-import mods.vintage.core.platform.lang.FormattedTranslator;
+import mods.vintage.core.platform.lang.Translator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -42,7 +42,7 @@ public class IndividualInfoProvider extends InfoProvider {
                 int operationsPerTick = induction.heat / 30;
                 int scaledOp = (int) Math.min(6.0E7F, (float) progress / operationsPerTick);
                 int scaledMaxOp = (int) Math.min(6.0E7F, (float) 4000 / operationsPerTick);
-                bar(helper, scaledOp, scaledMaxOp, FormattedTranslator.WHITE.format("info.progress.full", scaledOp, scaledMaxOp).concat("t"), ColorUtils.PROGRESS);
+                bar(helper, scaledOp, scaledMaxOp, Translator.WHITE.format("info.progress.full", scaledOp, scaledMaxOp).concat("t"), ColorUtils.PROGRESS);
             }
         } else if (blockEntity instanceof TileEntityPump) {
             TileEntityPump pump = (TileEntityPump) blockEntity;
@@ -80,15 +80,15 @@ public class IndividualInfoProvider extends InfoProvider {
             } catch (Throwable ignored) {}
             text(helper, usage(usage));
             text(helper, translate(getMiningMode(miner)));
-            text(helper, FormattedTranslator.GOLD.format("info.miner.level", getOperationHeight(miner)));
+            text(helper, Translator.GOLD.format("info.miner.level", getOperationHeight(miner)));
             double displayProgress = ((double) miner.progress / progress) * 100.0;
             DecimalFormat format = new DecimalFormat("##.##", new DecimalFormatSymbols(Locale.ROOT));
             if (displayProgress > 0) {
-                text(helper, FormattedTranslator.DARK_GREEN.format("info.progress", format.format(displayProgress)));
+                text(helper, Translator.DARK_GREEN.format("info.progress", format.format(displayProgress)));
             }
         } else if (blockEntity instanceof TileEntityCropmatron) {
             TileEntityCropmatron cropmatron = (TileEntityCropmatron) blockEntity;
-            bar(helper, cropmatron.energy, cropmatron.maxEnergy, FormattedTranslator.WHITE.format("info.energy", Formatter.formatNumber(cropmatron.energy, 2), Formatter.formatNumber(cropmatron.maxEnergy, 2)), ColorUtils.RED);
+            bar(helper, cropmatron.energy, cropmatron.maxEnergy, Translator.WHITE.format("info.energy", Formatter.formatNumber(cropmatron.energy, 2), Formatter.formatNumber(cropmatron.maxEnergy, 2)), ColorUtils.RED);
             text(helper, tier(Helper.getTierFromEU(TileEntityCropmatron.maxInput)));
             text(helper, maxIn(TileEntityCropmatron.maxInput));
         } else if (blockEntity instanceof TileEntityTesla) {
@@ -99,7 +99,7 @@ public class IndividualInfoProvider extends InfoProvider {
         if (blockEntity instanceof TileEntityElectrolyzer) {
             TileEntityElectrolyzer electrolyzer = (TileEntityElectrolyzer) blockEntity;
             if (electrolyzer.energy > 0)
-                bar(helper, electrolyzer.energy, 20000, FormattedTranslator.WHITE.format("info.progress.full", electrolyzer.energy, 20000).concat(" EU"), ColorUtils.RED);
+                bar(helper, electrolyzer.energy, 20000, Translator.WHITE.format("info.progress.full", electrolyzer.energy, 20000).concat(" EU"), ColorUtils.RED);
         }
     }
 
@@ -115,7 +115,7 @@ public class IndividualInfoProvider extends InfoProvider {
                 return "info.miner.mining";
             }
         }
-        return FormattedTranslator.RED.literal("ERROR, please report!");
+        return Translator.RED.literal("ERROR, please report!");
     }
 
     private int getOperationHeight(TileEntityMiner miner) {
