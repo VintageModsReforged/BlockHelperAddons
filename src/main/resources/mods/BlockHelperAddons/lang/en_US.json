@@ -3,6 +3,7 @@
   "info.wrenchable.rate": "%s%% Drop Rate",
 
   "info.energy": "Energy: %s/%s EU",
+  "info.energy.infinite": "Energy: Infinite EU",
   "info.energy.tier.0": "Tier: %s",
   "info.energy.input.max": "Max Input: %s EU/t",
   "info.energy.usage": "Usage: %s EU/t",

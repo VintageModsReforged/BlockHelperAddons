@@ -24,6 +24,7 @@ public class EUStorageInfoProvider extends InfoProvider {
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         int energy;
         if (Utils.instanceOf(blockEntity, "reforged.ic2.addons.asp.tiles.TileEntityAdvancedSolarPanel")) return;
+        if (Utils.instanceOf(blockEntity, "reforged.ic2.addons.asp.tiles.TileEntityQuantumGenerator")) return;
         if (blockEntity instanceof TileEntityElectricMachine && !(blockEntity instanceof TileEntityMatter)) {
             TileEntityElectricMachine machine = (TileEntityElectricMachine) blockEntity;
             energy = machine.energy;
