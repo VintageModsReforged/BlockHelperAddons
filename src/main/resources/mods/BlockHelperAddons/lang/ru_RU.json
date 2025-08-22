@@ -3,7 +3,7 @@
   "info.wrenchable.rate": "%s%% шанс выпадения",
 
   "info.energy": "Энергия: %s/%s EU",
-  "info.energy.tier": "Напряжение: %s",
+  "info.energy.tier.0": "Напряжение: %s",
   "info.energy.input.max": "Макс. вход: %s EU/t",
   "info.energy.usage": "Потребление: %s EU/t",
   "info.generator.output": "Выработка: %s EU/t",

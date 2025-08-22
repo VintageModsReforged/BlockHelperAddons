@@ -141,7 +141,7 @@ public abstract class InfoProvider implements IInfoProvider {
     }
 
     public String tier(int tier) {
-        return translate("info.energy.tier", ElectricHelper.getTierForDisplay(tier));
+        return translate("info.energy.tier.0", ElectricHelper.getTierForDisplay(tier));
     }
 
     public String maxIn(int maxIn) {
