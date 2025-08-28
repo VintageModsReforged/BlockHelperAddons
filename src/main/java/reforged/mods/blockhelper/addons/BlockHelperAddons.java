@@ -23,18 +23,10 @@ import java.util.List;
 import java.util.Locale;
 
 @LocalizationProvider
-@Mod(modid = BlockHelperAddons.ID, name = BlockHelperAddons.NAME, useMetadata = true, dependencies =
-        "required-after:VintageCore;" +
-                "required-after:mod_BlockHelper;" +
-                "required-after:IC2;" +
-                "after:AdvancedPowerManagement;" +
-                "after:ChargePads;" +
-                "after:GregTech_Addon;"
-)
+@Mod(modid = BlockHelperAddons.ID, useMetadata = true)
 public class BlockHelperAddons {
 
     public static final String ID = "BlockHelperAddons";
-    public static final String NAME = "Block Helper: Addons";
 
     public Configuration CONFIG;
     @LocalizationProvider.List(modId = ID)

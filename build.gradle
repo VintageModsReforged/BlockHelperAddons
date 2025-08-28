@@ -26,12 +26,12 @@ compileJava {
 def forgeVersion = project.minecraft_forge
 def minecraftVersion = project.minecraft
 archivesBaseName = project.modid
-version = project.mod_version
+version = project.modVersion
 
 volde {
 	runs {
 		client {
-			programArg "quaternary"
+			programArg "Dev"
 		}
 	}
 }
@@ -58,19 +58,20 @@ dependencies {
 	modImplementation files("libs/BlockHelper-1.5.x-2.0.0-pre4-dev.jar")
 }
 
+def props = ['modName', 'modid', 'modVersion', 'modDescription', 'modAuthors', 'modDeps', 'minecraft', 'url']
 processResources {
-	inputs.property 'version', version
-	filesMatching('mcmod.info') {
-		expand version: version
+	filesMatching("mcmod.info") {
+		expand(project.properties.subMap(props))
 	}
 }
 
-sourceSets {
-	main {
-		resources {
-			srcDirs 'src/main/java'
-		}
-	}
+task sourcesJar(type: Jar) {
+	archiveClassifier.set("sources")
+	from sourceSets.main.allSource
+}
+
+artifacts {
+	archives sourcesJar
 }
 
 jar {
