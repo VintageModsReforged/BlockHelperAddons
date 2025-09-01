@@ -4,6 +4,17 @@ import mcp.mobius.waila.api.ITaggedList;
 import mcp.mobius.waila.api.SpecialChars;
 import reforged.mods.blockhelper.addons.utils.interfaces.ITooltipHelper;
 
+/**
+ * Tooltip Builder
+ * param 0 - current
+ * param 1 - max
+ * param 2 - color
+ * param 3 - text
+ * param 4 - string only, 0 - false, 1 - true
+ * param 5 - centered, 0 - false, 1 - true
+ * param 6 - fluid id: 0 for nothing
+ * */
+
 public class TooltipHelper implements ITooltipHelper {
 
     @Override

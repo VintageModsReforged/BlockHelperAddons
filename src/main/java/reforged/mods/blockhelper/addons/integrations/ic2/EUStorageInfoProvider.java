@@ -7,13 +7,13 @@ import ic2.core.block.machine.tileentity.TileEntityElecMachine;
 import ic2.core.block.machine.tileentity.TileEntityElectricMachine;
 import ic2.core.block.machine.tileentity.TileEntityMatter;
 import ic2.core.block.wiring.TileEntityElectricBlock;
-import mods.vintage.core.helpers.Utils;
-import mods.vintage.core.platform.lang.FormattedTranslator;
+import mods.vintage.core.helpers.ElectricHelper;
+import mods.vintage.core.platform.lang.Translator;
+import mods.vintage.core.utils.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
 import reforged.mods.blockhelper.addons.utils.Formatter;
-import reforged.mods.blockhelper.addons.utils.Helper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
@@ -23,22 +23,23 @@ public class EUStorageInfoProvider extends InfoProvider {
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         int energy;
         if (Utils.instanceOf(blockEntity, "reforged.ic2.addons.asp.tiles.TileEntityAdvancedSolarPanel")) return;
+        if (Utils.instanceOf(blockEntity, "reforged.ic2.addons.asp.tiles.TileEntityQuantumGenerator")) return;
         if (blockEntity instanceof TileEntityElectricMachine) {
             TileEntityElectricMachine machine = (TileEntityElectricMachine) blockEntity;
             energy = machine.energy;
             if (energy > machine.maxEnergy) {
                 energy = machine.maxEnergy;
             }
-            bar(helper, energy, machine.maxEnergy, FormattedTranslator.WHITE.format("info.energy", Formatter.formatNumber(energy, 2), Formatter.formatNumber(machine.maxEnergy, 2)), ColorUtils.RED);
-            text(helper, tier(Helper.getTierFromEU(machine.maxInput)));
+            bar(helper, energy, machine.maxEnergy, Translator.WHITE.format("info.energy", Formatter.formatNumber(energy, 2), Formatter.formatNumber(machine.maxEnergy, 2)), ColorUtils.RED);
+            text(helper, tier(ElectricHelper.getTierFromEU(machine.maxInput)));
             text(helper, maxIn(machine.maxInput));
             int energyConsume = machine.energyConsume;
-            text(helper, FormattedTranslator.WHITE.format("info.energy.usage", energyConsume));
+            text(helper, Translator.WHITE.format("info.energy.usage", energyConsume));
             float progress = machine.progress;
             int maxProgress = machine.operationLength;
             if (progress > 0) {
                 int scaled = (int) ((progress / maxProgress) * 100);
-                bar(helper, (int) progress, maxProgress, FormattedTranslator.WHITE.format("info.progress", scaled), ColorUtils.PROGRESS);
+                bar(helper, (int) progress, maxProgress, Translator.WHITE.format("info.progress", scaled), ColorUtils.PROGRESS);
             }
         } else if (blockEntity instanceof TileEntityElectricBlock) {
             TileEntityElectricBlock storage = (TileEntityElectricBlock) blockEntity;
@@ -46,15 +47,15 @@ public class EUStorageInfoProvider extends InfoProvider {
             if (energy > storage.getCapacity()) {
                 energy = storage.getCapacity();
             }
-            bar(helper, energy, storage.getCapacity(), FormattedTranslator.WHITE.format("info.energy", Formatter.formatNumber(energy, 2), Formatter.formatNumber(storage.getCapacity(), 2)), ColorUtils.RED);
-            text(helper, tier(Helper.getTierFromEU(storage.getOutput())));
+            bar(helper, energy, storage.getCapacity(), Translator.WHITE.format("info.energy", Formatter.formatNumber(energy, 2), Formatter.formatNumber(storage.getCapacity(), 2)), ColorUtils.RED);
+            text(helper, tier(ElectricHelper.getTierFromEU(storage.getOutput())));
             text(helper, maxIn(storage.getOutput()));
-            text(helper, FormattedTranslator.WHITE.format("info.storage.output", storage.getOutput()));
+            text(helper, Translator.WHITE.format("info.storage.output", storage.getOutput()));
         } else if (blockEntity instanceof TileEntityBaseGenerator) {
             TileEntityBaseGenerator generator = (TileEntityBaseGenerator) blockEntity;
             if (generator.storage >= 0) { // exclude negative values, blame windmill
                 energy = Math.min(generator.storage, generator.maxStorage);
-                bar(helper, energy, generator.maxStorage, FormattedTranslator.WHITE.format("info.energy", Formatter.formatNumber(energy, 2), Formatter.formatNumber(generator.maxStorage, 2)), ColorUtils.RED);
+                bar(helper, energy, generator.maxStorage, Translator.WHITE.format("info.energy", Formatter.formatNumber(energy, 2), Formatter.formatNumber(generator.maxStorage, 2)), ColorUtils.RED);
             }
             int maxFuel = 0;
             if (generator instanceof TileEntityGenerator) {
@@ -64,13 +65,13 @@ public class EUStorageInfoProvider extends InfoProvider {
                 maxFuel = geo.maxLava;
             }
             if (generator.fuel > 0) {
-                bar(helper, generator.fuel, maxFuel, FormattedTranslator.WHITE.format("info.fuel", generator.fuel, maxFuel), ColorUtils.DARK_GRAY);
+                bar(helper, generator.fuel, maxFuel, Translator.WHITE.format("info.fuel", generator.fuel, maxFuel), ColorUtils.DARK_GRAY);
             }
         } else if (blockEntity instanceof TileEntityElecMachine) {
             TileEntityElecMachine machine = (TileEntityElecMachine) blockEntity;
             if (!(machine instanceof TileEntityMatter))
-                bar(helper, machine.energy, machine.maxEnergy, FormattedTranslator.WHITE.format("info.energy", Formatter.formatNumber(machine.energy, 2), Formatter.formatNumber(machine.maxEnergy, 2)), ColorUtils.RED);
-            text(helper, tier(Helper.getTierFromEU(machine.getMaxSafeInput())));
+                bar(helper, machine.energy, machine.maxEnergy, Translator.WHITE.format("info.energy", Formatter.formatNumber(machine.energy, 2), Formatter.formatNumber(machine.maxEnergy, 2)), ColorUtils.RED);
+            text(helper, tier(ElectricHelper.getTierFromEU(machine.getMaxSafeInput())));
             text(helper, maxIn(machine.getMaxSafeInput()));
         }
     }

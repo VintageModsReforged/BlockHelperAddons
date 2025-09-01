@@ -1,7 +1,7 @@
 package reforged.mods.blockhelper.addons.base;
 
 import cpw.mods.fml.common.Loader;
-import mods.vintage.core.platform.lang.components.ChatComponentTranslation;
+import mods.vintage.core.platform.lang.component.MutableComponent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
@@ -104,9 +104,9 @@ public class WailaCommonHandler {
 
     public void loadTankInfo(IWailaHelper helper, LiquidStack fluidStack, int capacity) {
         helper.add(new CommonFluidElement(fluidStack.amount, capacity,
-                new ChatComponentTranslation("probe.info.fluid", fluidStack.asItemStack().getDisplayName(),
+                MutableComponent.translatable("probe.info.fluid", fluidStack.asItemStack().getDisplayName(),
                         Formatter.formatNumber(fluidStack.amount, String.valueOf(fluidStack.amount).length() - 1),
-                        Formatter.formatNumber(capacity, String.valueOf(capacity).length() - 1)).getFormattedText(),
+                        Formatter.formatNumber(capacity, String.valueOf(capacity).length() - 1)).getFormattedString(),
                 fluidStack.itemID));
     }
 }

@@ -1,7 +1,7 @@
 package reforged.mods.blockhelper.addons.integrations.ic2;
 
 import ic2.core.block.TileEntityBarrel;
-import mods.vintage.core.platform.lang.FormattedTranslator;
+import mods.vintage.core.platform.lang.Translator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
@@ -48,12 +48,12 @@ public class BarrelInfoProvider extends InfoProvider {
                     current = age / maxValue * 100.0;
 
                     text(helper, translate(getBrewType(brewType)));
-                    textCentered(helper, FormattedTranslator.YELLOW.format("info.barrel.storage"));
+                    textCentered(helper, Translator.YELLOW.format("info.barrel.storage"));
                     bar(helper, wheatAmount, 64, translate("info.barrel.storage.wheat", wheatAmount), ColorUtils.YELLOW);
                     bar(helper, hopsAmount, 64, translate("info.barrel.storage.hops", hopsAmount), ColorUtils.GREEN);
                     bar(helper, fluidAmount, 32, translate("info.crop.info.water", fluidAmount, 32), ColorUtils.rgb(93, 105, 255));
 
-                    textCentered(helper, FormattedTranslator.YELLOW.format("info.barrel.status.brew"));
+                    textCentered(helper, Translator.YELLOW.format("info.barrel.status.brew"));
                     text(helper, translate("info.barrel.beer.quality." + brewQuality));
                     text(helper, translate("info.barrel.beer.alc." + alcoholLevel));
                     text(helper, translate("info.barrel.beer.solid." + solidRatio));
@@ -63,7 +63,7 @@ public class BarrelInfoProvider extends InfoProvider {
                     maxValue = barrel.timeNedForRum(fluidAmount);
                     age = (int) Math.min(barrel.age, maxValue);
                     text(helper, translate(getBrewType(brewType)));
-                    textCentered(helper, FormattedTranslator.YELLOW.format("info.barrel.status.brew"));
+                    textCentered(helper, Translator.YELLOW.format("info.barrel.status.brew"));
                     bar(helper, fluidAmount, 32, translate("info.barrel.beer.sugar_cane", fluidAmount), ColorUtils.GREEN);
                     bar(helper, age, (int) maxValue, literal(format.format(Math.min(age, maxValue) * 100.0 / maxValue) + "%"), ColorUtils.PROGRESS);
                     break;

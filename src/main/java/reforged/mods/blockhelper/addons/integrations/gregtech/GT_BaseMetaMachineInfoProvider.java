@@ -2,11 +2,11 @@ package reforged.mods.blockhelper.addons.integrations.gregtech;
 
 import gregtechmod.api.BaseMetaTileEntity;
 import gregtechmod.api.MetaTileEntity;
-import mods.vintage.core.platform.lang.FormattedTranslator;
+import mods.vintage.core.helpers.ElectricHelper;
+import mods.vintage.core.platform.lang.Translator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import reforged.mods.blockhelper.addons.utils.ColorUtils;
-import reforged.mods.blockhelper.addons.utils.Helper;
 import reforged.mods.blockhelper.addons.utils.InfoProvider;
 import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
@@ -24,7 +24,7 @@ public class GT_BaseMetaMachineInfoProvider extends InfoProvider {
                 }
                 int maxInput = baseMetaTileEntity.getMaxSafeInput();
                 if (maxInput > 0) {
-                    text(helper, tier(Helper.getTierFromEU(maxInput)));
+                    text(helper, tier(ElectricHelper.getTierFromEU(maxInput)));
                     text(helper, maxIn(maxInput));
                 }
                 int maxOut = baseMetaTileEntity.getMaxEnergyOutput();
@@ -34,7 +34,7 @@ public class GT_BaseMetaMachineInfoProvider extends InfoProvider {
 
                 String possibleUpgrades = getPossibleUpgrades(metaTileEntity);
                 if (!possibleUpgrades.isEmpty()) {
-                    text(helper, FormattedTranslator.GREEN.format("info.gt.possible_upgrades") + " " + literal(possibleUpgrades));
+                    text(helper, Translator.GREEN.format("info.gt.possible_upgrades") + " " + literal(possibleUpgrades));
                 }
             }
 

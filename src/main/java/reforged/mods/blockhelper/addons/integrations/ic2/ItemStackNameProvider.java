@@ -5,7 +5,7 @@ import ic2.core.Ic2Items;
 import ic2.core.block.BlockIC2Door;
 import ic2.core.block.TileEntityBarrel;
 import mcp.mobius.waila.api.*;
-import mods.vintage.core.platform.lang.FormattedTranslator;
+import mods.vintage.core.platform.lang.Translator;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,10 +30,10 @@ public class ItemStackNameProvider implements IDataProvider {
             if (blockEntity instanceof TileEntityBarrel) {
                 boolean empty = ((TileEntityBarrel) blockEntity).type == 0;
                 String name = "block.blockBarrel." + (empty ? "empty" : "full");
-                tooltip.set(0, FormattedTranslator.WHITE.format(name));
+                tooltip.set(0, Translator.WHITE.format(name));
             }
             if (block.blockID == Ic2Items.constructionFoamWall.itemID) {
-                tooltip.set(0, FormattedTranslator.WHITE.format("block.cfoam.wall"));
+                tooltip.set(0, Translator.WHITE.format("block.cfoam.wall"));
             }
         } catch (Throwable ignored) {}
     }

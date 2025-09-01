@@ -4,7 +4,6 @@ import ic2.core.block.personal.IPersonalBlock;
 import ic2.core.block.personal.TileEntityEnergyOMat;
 import ic2.core.block.personal.TileEntityPersonalChest;
 import ic2.core.block.personal.TileEntityTradeOMat;
-import mods.vintage.core.platform.lang.FormattedTranslator;
 import mods.vintage.core.platform.lang.Translator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -19,7 +18,7 @@ public class PersonalInfoProvider extends InfoProvider {
     public void addInfo(IWailaHelper helper, TileEntity blockEntity, EntityPlayer player) {
         if (blockEntity instanceof IPersonalBlock) {
             boolean canAccess = ((IPersonalBlock) blockEntity).canAccess(player);
-            text(helper, translate(FormattedTranslator.GOLD, "info.personal.access", Translator.formattedBoolean(canAccess)));
+            text(helper, translate(Translator.GOLD, "info.personal.access", Translator.RESET.formattedBoolean(canAccess)));
         }
         String owner = "";
         if (blockEntity instanceof TileEntityPersonalChest) {
@@ -30,7 +29,7 @@ public class PersonalInfoProvider extends InfoProvider {
             owner = ((TileEntityEnergyOMat) blockEntity).owner;
         }
         if (!"".equals(owner)) {
-            text(helper, translate(FormattedTranslator.LIGHT_PURPLE, "info.personal.owner", FormattedTranslator.AQUA.literal(owner)));
+            text(helper, translate(Translator.LIGHT_PURPLE, "info.personal.owner", Translator.AQUA.literal(owner)));
         }
     }
 }

@@ -4,9 +4,9 @@ import ic2.core.item.tool.ItemCropnalyzer;
 import ic2.core.item.tool.ItemToolMeter;
 import ic2.core.item.tool.ItemTreetap;
 import ic2.core.item.tool.ItemTreetapElectric;
-import mods.vintage.core.platform.lang.FormattedTranslator;
-import mods.vintage.core.platform.lang.components.ChatComponentTranslation;
-import mods.vintage.core.platform.lang.components.IChatComponent;
+import mods.vintage.core.helpers.ElectricHelper;
+import mods.vintage.core.platform.lang.Translator;
+import mods.vintage.core.platform.lang.component.MutableComponent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,21 +17,24 @@ import reforged.mods.blockhelper.addons.utils.interfaces.IInfoProvider;
 import reforged.mods.blockhelper.addons.utils.interfaces.IWailaElementBuilder;
 import reforged.mods.blockhelper.addons.utils.interfaces.IWailaHelper;
 
+import java.util.List;
+import java.util.Locale;
+
 public abstract class InfoProvider implements IInfoProvider {
 
-    public IFilter READER = new IFilter() {
+    public static IFilter READER = new IFilter() {
         @Override
         public boolean matches(ItemStack stack) {
             return stack != null && stack.getItem() instanceof ItemToolMeter;
         }
     };
-    public IFilter ANALYZER = new IFilter() {
+    public static IFilter ANALYZER = new IFilter() {
         @Override
         public boolean matches(ItemStack stack) {
             return stack != null && stack.getItem() instanceof ItemCropnalyzer;
         }
     };
-    public IFilter TREETAP = new IFilter() {
+    public static IFilter TREETAP = new IFilter() {
         @Override
         public boolean matches(ItemStack stack) {
             return stack != null && (stack.getItem() instanceof ItemTreetap || stack.getItem() instanceof ItemTreetapElectric);
@@ -58,8 +61,21 @@ public abstract class InfoProvider implements IInfoProvider {
             InventoryPlayer inventoryPlayer = player.inventory;
             for (int i = 0; i < 9; i++) {
                 ItemStack stack = inventoryPlayer.getStackInSlot(i);
-                if (filter.matches(stack)) {
-                    return true;
+                if (stack != null) {
+                    if (filter.matches(stack)) {
+                        return true;
+                    }
+                }
+            }
+            ItemStack armorStack = inventoryPlayer.armorItemInSlot(3);
+            if (ToolIntegrationHelper.isHelmet(armorStack)) {
+                List<String> installed = ToolIntegrationHelper.getInstalledTools(armorStack);
+                for (String tool : installed) {
+                    ToolIntegrationHelper.Tools stack = ToolIntegrationHelper.Tools.valueOf(tool.toUpperCase(Locale.ROOT));
+                    ItemStack toolStack = stack.toolInstance.get();
+                    if (toolStack != null && filter.matches(toolStack)) {
+                        return true;
+                    }
                 }
             }
         }
@@ -67,7 +83,7 @@ public abstract class InfoProvider implements IInfoProvider {
     }
 
     public String status(boolean status) {
-        return status ? FormattedTranslator.GREEN.format("" + true) : FormattedTranslator.RED.format("" + false);
+        return status ? Translator.GREEN.format("" + true) : Translator.RED.format("" + false);
     }
 
     public void text(IWailaHelper helper, String text, boolean centered) {
@@ -96,43 +112,43 @@ public abstract class InfoProvider implements IInfoProvider {
     }
 
     public String translate(String translatable) {
-        return FormattedTranslator.WHITE.format(translatable);
+        return Translator.WHITE.format(translatable);
     }
 
     public String translate(String translatable, Object... args) {
-        return FormattedTranslator.WHITE.format(translatable, args);
+        return Translator.WHITE.format(translatable, args);
     }
 
     public String literal(String literal) {
-        return FormattedTranslator.WHITE.literal(literal);
+        return Translator.WHITE.literal(literal);
     }
 
-    public String translate(FormattedTranslator formatter, String translatable) {
+    public String translate(Translator formatter, String translatable) {
         return formatter.format(translatable);
     }
 
-    public String translate(FormattedTranslator formatter, String translatable, Object... args) {
+    public String translate(Translator formatter, String translatable, Object... args) {
         return formatter.format(translatable, args);
     }
 
-    public String literal(FormattedTranslator formatter, String translatable) {
+    public String literal(Translator formatter, String translatable) {
         return formatter.literal(translatable);
     }
 
-    public String percent(IChatComponent percentageComp) {
-        return percentageComp.appendText(FormattedTranslator.WHITE.literal("%")).getFormattedText();
+    public String percent(MutableComponent percentageComp) {
+        return percentageComp.append(Translator.WHITE.literal("%")).getFormattedString();
     }
 
     public String tier(int tier) {
-        return new ChatComponentTranslation("info.energy.tier", Helper.getTierForDisplay(tier)).getFormattedText();
+        return translate("info.energy.tier", ElectricHelper.getTierForDisplay(tier));
     }
 
     public String maxIn(int maxIn) {
-        return new ChatComponentTranslation("info.energy.input.max", maxIn).getFormattedText();
+        return translate("info.energy.input.max", maxIn);
     }
 
     public String usage(int usage) {
-        return new ChatComponentTranslation("info.energy.usage", usage).getFormattedText();
+        return translate("info.energy.usage", usage);
     }
 
     public void add(IWailaHelper helper, IWailaElementBuilder element) {
